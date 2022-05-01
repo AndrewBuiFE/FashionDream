@@ -2,14 +2,14 @@ import {StyleSheet} from 'react-native';
 import {AppColors} from '../../../general/constants/AppStyle';
 import {DeviceConstants} from '../../../general/constants/Global';
 const styles = StyleSheet.create({
-  loginContainer: {
+  signupContainer: {
     height: DeviceConstants.screenHeight,
     flexDirection: 'column',
     alignItems: 'center',
     backgroundColor: AppColors.primaryColor,
   },
   inputSection: {
-    height: 136,
+    height: 208,
     width: DeviceConstants.screenWidth - 16 * 2,
     marginHorizontal: 16,
     marginTop: 73,

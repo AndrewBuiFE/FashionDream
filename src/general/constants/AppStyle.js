@@ -2,7 +2,9 @@ export const AppColors = {
   primaryColor: 'black',
   buttonColor: '#EF3651',
   titleColor: '#F6F6F6',
-  textInputColor: '#1E1F28',
+  textInputColor: '#2A2C36',
+  tabBarNormalColor: 'red',
+  tabBarFocusedColor: 'blue',
 };
 export const AppDimensions = {
   NavigationBar: {

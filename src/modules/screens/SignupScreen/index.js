@@ -13,18 +13,22 @@ import AppHeader from '../../components/AppHeader';
 import GlobalButton from '../../components/GlobalButton';
 import styles from './styles';
 
-export default function LoginScreen(props) {
+export default function SignupScreen(props) {
   return (
     <SafeAreaView>
-      <AppHeader backgroundColor="black" title="Login">
+      <AppHeader backgroundColor="black" title="Sign up">
         <></>
         <></>
       </AppHeader>
       <ScrollView>
-        <View style={styles.loginContainer}>
+        <View style={styles.signupContainer}>
           <View style={styles.inputSection}>
             <TextInput
-              style={styles.textInput}
+              style={[styles.textInput]}
+              placeholder="Name"
+              placeholderTextColor="#ABB4BD"></TextInput>
+            <TextInput
+              style={[styles.textInput, {marginTop: 8}]}
               placeholder="Email"
               placeholderTextColor="#ABB4BD"></TextInput>
             <TextInput
@@ -34,17 +38,17 @@ export default function LoginScreen(props) {
               secureTextEntry={true}></TextInput>
           </View>
           <View style={styles.forgotSuggestion}>
-            <Text style={styles.text}>Forgot your password?</Text>
+            <Text style={styles.text}>Already have an account?</Text>
             <TouchableOpacity
               onPress={() => {
-                props.navigation.navigate('ForgotScreen');
+                props.navigation.navigate('LoginScreen');
               }}>
               <Image source={AppIcons.arrow_right} />
             </TouchableOpacity>
           </View>
-          <GlobalButton action="LOGIN" marginTop={30} />
-          <View style={{marginTop: 194}}>
-            <Text style={styles.text}>Or login with social account</Text>
+          <GlobalButton action="SIGN UP" marginTop={30} />
+          <View style={{marginTop: 126}}>
+            <Text style={styles.text}>Or sign up with social account</Text>
           </View>
           <View style={styles.socialSection}>
             <View style={[styles.socialContainer, {marginRight: 8}]}>
