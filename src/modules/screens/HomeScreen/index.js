@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {AppImages} from '../../../general/constants/AppResource';
+import {ScreenNames} from '../../../general/constants/ScreenNames';
 import AppHeader from '../../components/AppHeader';
 import ProductCell from './components/ProductCell';
 import styles from './styles';
@@ -38,7 +39,7 @@ const renderItem = ({item, section}) => {
     </View>
   );
 };
-const renderHeader = () => {
+const renderHeader = props => {
   return (
     <View>
       <View style={styles.theme}>
@@ -54,7 +55,11 @@ const renderHeader = () => {
         </View>
         <View style={styles.otherTheme}>
           <View style={styles.leftTheme}>
-            <View style={styles.summerSale}>
+            <TouchableOpacity
+              style={styles.summerSale}
+              onPress={() => {
+                props.navigation.navigate(ScreenNames.shopTab);
+              }}>
               <Text
                 style={[
                   styles.themeTitle,
@@ -62,7 +67,7 @@ const renderHeader = () => {
                 ]}>
                 Summer sale
               </Text>
-            </View>
+            </TouchableOpacity>
             <View style={styles.blackTheme}>
               <Image source={AppImages.black} style={{width: '100%'}} />
               <Text
@@ -116,6 +121,7 @@ const renderSectionHeader = ({section}) => {
   );
 };
 function HomeScreen(props) {
+  const Header = renderHeader(props);
   return (
     <SafeAreaProvider>
       <View style={styles.homeContainer}>
@@ -128,7 +134,7 @@ function HomeScreen(props) {
           sections={DATA}
           showsVerticalScrollIndicator={false}
           renderSectionHeader={renderSectionHeader}
-          ListHeaderComponent={renderHeader}
+          ListHeaderComponent={Header}
           renderItem={renderItem}
         />
       </View>

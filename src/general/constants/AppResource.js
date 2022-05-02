@@ -14,6 +14,8 @@ export const AppIcons = {
   heart_active: require('../../../src/assets/icons/heart_active.png'),
   heart_small: require('../../../src/assets/icons/heart_small.png'),
   star: require('../../../src/assets/icons/star.png'),
+  search: require('../../../src/assets/icons/search.png'),
+  left_arrow: require('../../../src/assets/icons/left_arrow.png'),
 };
 export const AppImages = {
   big_banner: require('../../../src/assets/images/big_banner.png'),

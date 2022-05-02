@@ -5,11 +5,11 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {AppIcons} from '../../general/constants/AppResource';
 import {AppColors, AppDimensions} from '../../general/constants/AppStyle';
 import {ScreenNames} from '../../general/constants/ScreenNames';
-import CategoryScreen from '../screens/CategoryScreen';
 import ForgotScreen from '../screens/ForgotScreen';
 import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
+import NestedCategory from './NestedCategory';
 TabNavigator.propTypes = {};
 const Tab = createBottomTabNavigator();
 const TabBarIcons = {
@@ -77,7 +77,7 @@ function TabNavigator(props) {
       />
       <Tab.Screen
         name={ScreenNames.shopTab}
-        component={CategoryScreen}
+        component={NestedCategory}
         options={{title: 'Shop'}}
       />
       <Tab.Screen

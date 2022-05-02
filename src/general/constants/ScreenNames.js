@@ -9,4 +9,6 @@ export const ScreenNames = {
   favoriteTab: 'FavoriteTab',
   profileTab: 'ProfileTab',
   mainTab: 'MainTab',
+  categoryScreen: 'CategoryScreen',
+  allCategory: 'AllCategory',
 };

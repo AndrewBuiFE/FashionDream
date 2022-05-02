@@ -5,6 +5,8 @@ import {
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {ScreenNames} from '../../general/constants/ScreenNames';
+import CategoryScreen from '../screens/CategoryScreen';
+import AllCategory from '../screens/CategoryScreen/AllCategory';
 import ForgotScreen from '../screens/ForgotScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
@@ -37,6 +39,16 @@ function AppNavigator(props) {
           <Stack.Screen
             name={ScreenNames.forgotScreen}
             component={ForgotScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name={ScreenNames.categoryScreen}
+            component={CategoryScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name={ScreenNames.allCategory}
+            component={AllCategory}
             options={{headerShown: false}}
           />
         </Stack.Group>
