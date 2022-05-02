@@ -5,22 +5,24 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {AppIcons} from '../../general/constants/AppResource';
 import {AppColors, AppDimensions} from '../../general/constants/AppStyle';
 import {ScreenNames} from '../../general/constants/ScreenNames';
+import CategoryScreen from '../screens/CategoryScreen';
 import ForgotScreen from '../screens/ForgotScreen';
+import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 TabNavigator.propTypes = {};
 const Tab = createBottomTabNavigator();
 const TabBarIcons = {
-  HomeTab: {icon: AppIcons.home},
-  ShopTab: {icon: AppIcons.shopping_cart},
+  HomeTab: {icon: [AppIcons.home, AppIcons.home_active]},
+  ShopTab: {icon: [AppIcons.shopping_cart, AppIcons.shopping_cart_active]},
   BagTab: {
-    icon: AppIcons.bag,
+    icon: [AppIcons.bag, AppIcons.bag_active],
   },
   FavoriteTab: {
-    icon: AppIcons.heart,
+    icon: [AppIcons.heart, AppIcons.heart_active],
   },
   ProfileTab: {
-    icon: AppIcons.profile,
+    icon: [AppIcons.profile, AppIcons.profile_active],
   },
 };
 function TabNavigator(props) {
@@ -30,7 +32,7 @@ function TabNavigator(props) {
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
           const iconSource = focused
-            ? TabBarIcons[route.name].icon[0]
+            ? TabBarIcons[route.name].icon[1]
             : TabBarIcons[route.name].icon[0];
           const tintColor = focused
             ? AppColors.tabBarFocusedColor
@@ -44,7 +46,7 @@ function TabNavigator(props) {
           );
         },
         tabBarStyle: {
-          // backgroundColor: 'black',
+          backgroundColor: 'black',
           height: 70 + insets.bottom,
           borderTopWidth: 0,
           borderTopLeftRadius: 12,
@@ -58,8 +60,10 @@ function TabNavigator(props) {
           lineHeight: 10,
           color: '#ABB4BD',
         },
+        tabBarIconStyle: {
+          top: 4,
+        },
         tabBarItemStyle: {
-          // backgroundColor: 'yellow',
           height: 70,
         },
         tabBarInactiveTintColor: AppColors.tabBarNormalColor,
@@ -68,12 +72,12 @@ function TabNavigator(props) {
       initialRouteName={ScreenNames.homeTab}>
       <Tab.Screen
         name={ScreenNames.homeTab}
-        component={LoginScreen}
+        component={HomeScreen}
         options={{title: 'Home'}}
       />
       <Tab.Screen
         name={ScreenNames.shopTab}
-        component={SignupScreen}
+        component={CategoryScreen}
         options={{title: 'Shop'}}
       />
       <Tab.Screen
