@@ -2,6 +2,7 @@ import React from 'react';
 import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {AppIcons} from '../../../../general/constants/AppResource';
+import {ScreenNames} from '../../../../general/constants/ScreenNames';
 import AppHeaderNormal from '../../../components/AppHeaderNormal';
 import GlobalButton from '../../../components/GlobalButton';
 import styles from './styles';
@@ -20,14 +21,20 @@ const DATA = [
   {id: 10, title: 'Skirts'},
   {id: 11, title: 'Dresses'},
 ];
-const CategoryItem = ({item}) => (
-  <TouchableOpacity style={styles.categoryItem}>
+const CategoryItem = ({item, navigation}) => (
+  <TouchableOpacity
+    style={styles.categoryItem}
+    onPress={() => {
+      navigation.navigate(ScreenNames.catalogScreen, {category: item.title});
+    }}>
     <Text style={styles.title}>{item.title}</Text>
   </TouchableOpacity>
 );
 const Divider = () => <View style={styles.divider}></View>;
 function AllCategory(props) {
-  const renderItem = ({item}) => <CategoryItem item={item} />;
+  const renderItem = ({item}) => (
+    <CategoryItem item={item} navigation={props.navigation} />
+  );
   return (
     <SafeAreaProvider>
       <View style={styles.categoryContainer}>

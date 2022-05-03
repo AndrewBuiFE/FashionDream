@@ -9,7 +9,6 @@ CategoryScreen.propTypes = {};
 CategoryScreen.defaultProps = {};
 
 function CategoryScreen(props) {
-  console.log(props.route);
   return (
     <SafeAreaProvider>
       <View style={styles.categoryContainer}>

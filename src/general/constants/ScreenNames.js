@@ -11,4 +11,5 @@ export const ScreenNames = {
   mainTab: 'MainTab',
   categoryScreen: 'CategoryScreen',
   allCategory: 'AllCategory',
+  catalogScreen: 'CatalogScreen',
 };
