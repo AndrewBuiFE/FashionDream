@@ -13,7 +13,13 @@ export const AppIcons = {
   bag_active: require('../../../src/assets/icons/bag_active.png'),
   heart_active: require('../../../src/assets/icons/heart_active.png'),
   heart_small: require('../../../src/assets/icons/heart_small.png'),
+  heart_small_active: require('../../../src/assets/icons/heart_small_active.png'),
   star: require('../../../src/assets/icons/star.png'),
+  search: require('../../../src/assets/icons/search.png'),
+  left_arrow: require('../../../src/assets/icons/left_arrow.png'),
+  filter: require('../../../src/assets/icons/filter.png'),
+  layout: require('../../../src/assets/icons/layout.png'),
+  sorting_arrow: require('../../../src/assets/icons/sorting_arrow.png'),
 };
 export const AppImages = {
   big_banner: require('../../../src/assets/images/big_banner.png'),
