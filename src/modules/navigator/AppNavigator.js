@@ -19,7 +19,7 @@ function AppNavigator(props) {
   return (
     <NavigationContainer ref={appNavigation}>
       <Stack.Navigator
-        initialRouteName={ScreenNames.mainTab}
+        initialRouteName={ScreenNames.catalogScreen}
         screenOptions={{
           headerShown: false,
         }}>
