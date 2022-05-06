@@ -5,19 +5,21 @@ import {AppColors} from '../../../general/constants/AppStyle';
 import {DeviceConstants} from '../../../general/constants/Global';
 import styles from './styles';
 GlobalButton.propTypes = {
-  action: PropTypes.string,
+  actionText: PropTypes.string,
   backgroundColor: PropTypes.string,
   marginTop: PropTypes.number,
   width: PropTypes.number,
+  action: PropTypes.func,
 };
 GlobalButton.defaultProps = {
-  action: '',
+  actionText: '',
   backgroundColor: AppColors.buttonColor,
   marginTop: 0,
   width: DeviceConstants.screenWidth - 16 * 2,
+  action: () => {},
 };
 function GlobalButton(props) {
-  const {action, backgroundColor, marginTop, width} = props;
+  const {actionText, backgroundColor, marginTop, width, action} = props;
   return (
     <TouchableOpacity
       style={[
@@ -27,8 +29,9 @@ function GlobalButton(props) {
           marginTop: marginTop,
           width: width,
         },
-      ]}>
-      <Text style={styles.actionTitle}>{action}</Text>
+      ]}
+      onPress={action}>
+      <Text style={styles.actionTitle}>{actionText}</Text>
     </TouchableOpacity>
   );
 }
