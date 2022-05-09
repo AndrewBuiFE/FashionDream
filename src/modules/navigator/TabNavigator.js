@@ -5,6 +5,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {AppIcons} from '../../general/constants/AppResource';
 import {AppColors, AppDimensions} from '../../general/constants/AppStyle';
 import {ScreenNames} from '../../general/constants/ScreenNames';
+import {isAndroid} from '../../general/helpers/Utils';
 import CartScreen from '../screens/CartScreen/index';
 import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
@@ -45,6 +46,7 @@ function TabNavigator(props) {
             />
           );
         },
+        tabBarHideOnKeyboard: isAndroid() ? true : false,
         tabBarStyle: {
           backgroundColor: 'black',
           height: 70 + insets.bottom,
@@ -69,7 +71,7 @@ function TabNavigator(props) {
         tabBarInactiveTintColor: AppColors.tabBarNormalColor,
         tabBarActiveTintColor: AppColors.tabBarFocusedColor,
       })}
-      initialRouteName={ScreenNames.homeTab}>
+      initialRouteName={ScreenNames.bagTab}>
       <Tab.Screen
         name={ScreenNames.homeTab}
         component={HomeScreen}

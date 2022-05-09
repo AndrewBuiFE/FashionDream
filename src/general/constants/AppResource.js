@@ -20,6 +20,12 @@ export const AppIcons = {
   filter: require('../../../src/assets/icons/filter.png'),
   layout: require('../../../src/assets/icons/layout.png'),
   sorting_arrow: require('../../../src/assets/icons/sorting_arrow.png'),
+  more: require('../../../src/assets/icons/more.png'),
+  add: require('../../../src/assets/icons/add.png'),
+  add_inactive: require('../../../src/assets/icons/add_inactive.png'),
+  remove: require('../../../src/assets/icons/remove.png'),
+  checkbox_on: require('../../../src/assets/icons/checkbox_on.png'),
+  checkbox_inactive: require('../../../src/assets/icons/checkbox_inactive.png'),
 };
 export const AppImages = {
   big_banner: require('../../../src/assets/images/big_banner.png'),
@@ -27,4 +33,7 @@ export const AppImages = {
   black: require('../../../src/assets/images/black.png'),
   main: require('../../../src/assets/images/main.png'),
   men_hat: require('../../../src/assets/images/men_hat.png'),
+  bags: require('../../../src/assets/images/bags.png'),
+  card: require('../../../src/assets/images/card.png'),
+  chip: require('../../../src/assets/images/chip.png'),
 };
