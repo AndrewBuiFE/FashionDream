@@ -10,6 +10,7 @@ import CategoryScreen from '../screens/CategoryScreen';
 import AllCategory from '../screens/CategoryScreen/AllCategory';
 import ForgotScreen from '../screens/ForgotScreen';
 import LoginScreen from '../screens/LoginScreen';
+import ProductCardScreen from '../screens/ProductCardScreen/index';
 import SignupScreen from '../screens/SignupScreen';
 import TabNavigator from './TabNavigator';
 AppNavigator.propTypes = {};
@@ -19,7 +20,7 @@ function AppNavigator(props) {
   return (
     <NavigationContainer ref={appNavigation}>
       <Stack.Navigator
-        initialRouteName={ScreenNames.catalogScreen}
+        initialRouteName={ScreenNames.mainTab}
         screenOptions={{
           headerShown: false,
         }}>
@@ -55,6 +56,11 @@ function AppNavigator(props) {
           <Stack.Screen
             name={ScreenNames.catalogScreen}
             component={CatalogScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name={ScreenNames.productCartScreen}
+            component={ProductCardScreen}
             options={{headerShown: false}}
           />
         </Stack.Group>

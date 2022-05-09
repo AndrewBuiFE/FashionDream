@@ -12,4 +12,6 @@ export const ScreenNames = {
   categoryScreen: 'CategoryScreen',
   allCategory: 'AllCategory',
   catalogScreen: 'CatalogScreen',
+  productCartScreen: 'ProductCartScreen',
+  cartScreen: 'CartScreen',
 };
