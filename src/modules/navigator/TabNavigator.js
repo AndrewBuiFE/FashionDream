@@ -5,7 +5,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {AppIcons} from '../../general/constants/AppResource';
 import {AppColors, AppDimensions} from '../../general/constants/AppStyle';
 import {ScreenNames} from '../../general/constants/ScreenNames';
-import ForgotScreen from '../screens/ForgotScreen';
+import CartScreen from '../screens/CartScreen/index';
 import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
@@ -82,7 +82,7 @@ function TabNavigator(props) {
       />
       <Tab.Screen
         name={ScreenNames.bagTab}
-        component={ForgotScreen}
+        component={CartScreen}
         options={{title: 'Bag'}}
       />
       <Tab.Screen

@@ -20,13 +20,69 @@ const DATA = [
     title: 'Sale',
     horizontal: true,
     description: 'Super summer sale',
-    data: ['Pizza', 'Burger', 'Risotto'],
+    data: [
+      {
+        starCount: 0,
+        brandName: 'Dorothy Perkins',
+        productName: 'Evening Dress',
+        price: 20,
+        discountPrice: 12,
+        image: AppImages.black,
+        description: 'dfkjdfkjdf',
+      },
+      {
+        starCount: 0,
+        brandName: 'Perkins',
+        productName: 'SDF',
+        price: 15,
+        discountPrice: 12,
+        image: AppImages.men_hat,
+        description: 'dfkjdfkjdf',
+      },
+      {
+        starCount: 0,
+        brandName: 'Dorothy',
+        productName: 'A',
+        price: 21,
+        discountPrice: 12,
+        image: AppImages.small_banner,
+        description: 'dfkjdfkjdf',
+      },
+    ],
   },
   {
     title: 'New',
     horizontal: true,
     description: 'You’ve never seen it before!',
-    data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
+    data: [
+      {
+        starCount: 0,
+        brandName: 'Dorothy Perkins',
+        productName: 'Evening Dress',
+        price: 20,
+        discountPrice: 12,
+        image: AppImages.main,
+        description: 'dfkjdfkjdf',
+      },
+      {
+        starCount: 0,
+        brandName: 'Perkins',
+        productName: 'SDF',
+        price: 15,
+        discountPrice: 12,
+        image: AppImages.big_banner,
+        description: 'dfkjdfkjdf',
+      },
+      {
+        starCount: 0,
+        brandName: 'Dorothy',
+        productName: 'A',
+        price: 21,
+        discountPrice: 12,
+        image: AppImages.black,
+        description: 'dfkjdfkjdf',
+      },
+    ],
   },
 ];
 const renderItem = ({item, section}) => {
@@ -113,7 +169,14 @@ const renderSectionHeader = ({section}) => {
         <FlatList
           horizontal
           data={section.data}
-          renderItem={({item}) => <ProductCell item={item} />}
+          renderItem={({item}) => (
+            <ProductCell
+              item={item}
+              onItemClick={() => {
+                console.log('click');
+              }}
+            />
+          )}
           showsHorizontalScrollIndicator={false}
         />
       ) : null}

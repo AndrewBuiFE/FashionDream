@@ -20,7 +20,6 @@ const DividerView = () => <View style={styles.divider}></View>;
 export default function FilterModal(props) {
   const {isVisible, onModalHidden, onMenuClick} = props;
   const [sliderValue, setSliderValue] = useState(0);
-  const [colorOnFocus, setColorFocus] = useState('transparent');
   const insets = useSafeAreaInsets();
   return (
     <ReactNativeModal

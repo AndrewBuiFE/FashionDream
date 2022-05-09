@@ -5,6 +5,7 @@ export const AppColors = {
   textInputColor: '#2A2C36',
   tabBarNormalColor: 'red',
   tabBarFocusedColor: 'blue',
+  modalColor: '#1E1F28',
 };
 export const AppDimensions = {
   NavigationBar: {

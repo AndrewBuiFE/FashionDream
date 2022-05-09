@@ -54,6 +54,7 @@ export default function ColorFilter(props) {
   console.log('Color filter');
   const [colorData, setColorData] = useState(COLORS);
   const [colorOnFocus, setColorFocus] = useState('');
+  console.log(colorData);
   const renderItem = ({item}) => {
     return (
       <ColorCell
@@ -62,6 +63,9 @@ export default function ColorFilter(props) {
         setColorFocus={setColorFocus}
         colorData={colorData}
         setColorData={setColorData}
+        callBackData={data => {
+          console.log(data);
+        }}
       />
     );
   };

@@ -1,33 +1,34 @@
+import {useNavigation} from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
-import {
-  AppIcons,
-  AppImages,
-} from '../../../../../general/constants/AppResource';
+import {AppIcons} from '../../../../../general/constants/AppResource';
+import {ScreenNames} from '../../../../../general/constants/ScreenNames';
 import Reviewing from '../Reviewing';
 import styles from './styles';
 ProductCell.propTypes = {
-  starCount: PropTypes.number,
-  brandName: PropTypes.string,
-  productName: PropTypes.string,
-  price: PropTypes.number,
-  discountPrice: PropTypes.number,
+  item: PropTypes.object,
+  onItemClick: PropTypes.func,
 };
 ProductCell.defaultProps = {
-  starCount: 0,
-  brandName: 'Dorothy Perkins',
-  productName: 'Evening Dress',
-  price: 15,
-  discountPrice: 12,
+  item: null,
+  onItemClick: () => {},
 };
 
 function ProductCell(props) {
-  const {starCount, brandName, productName, price, discountPrice} = props;
+  const {item, onItemClick} = props;
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity style={styles.productContainer}>
+    <TouchableOpacity
+      style={styles.productContainer}
+      onPress={() => {
+        onItemClick();
+        navigation.navigate(ScreenNames.productCartScreen, {
+          document: item,
+        });
+      }}>
       <View style={styles.imageSection}>
-        <Image source={AppImages.black} style={styles.image} />
+        <Image source={item.image} style={styles.image} />
         <View style={styles.discountContainer}>
           <Text style={styles.discountText}>-20%</Text>
         </View>
@@ -36,14 +37,14 @@ function ProductCell(props) {
         </View>
       </View>
       <View style={styles.infoSection}>
-        <Reviewing starCount={starCount} />
+        <Reviewing starCount={item.starCount} />
         <View style={styles.textSection}>
-          <Text style={styles.brand}>{brandName}</Text>
-          <Text style={styles.product}>{productName}</Text>
+          <Text style={styles.brand}>{item.brandName}</Text>
+          <Text style={styles.product}>{item.productName}</Text>
           <View style={styles.priceSection}>
-            <Text style={styles.price}>{price}$</Text>
+            <Text style={styles.price}>{item.price}$</Text>
             <Text style={[styles.price, {color: '#FF3E3E', marginLeft: 4}]}>
-              {discountPrice}$
+              {item.discountPrice}$
             </Text>
           </View>
         </View>

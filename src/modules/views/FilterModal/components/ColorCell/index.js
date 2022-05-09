@@ -12,7 +12,7 @@ ColorCell.defaultProps = {
 };
 
 export default function ColorCell(props) {
-  const {item, colorData, setColorData} = props;
+  const {item, colorData, setColorData, callBackData} = props;
   const [colorFocus, setColorFocus] = useState(false);
   return (
     <TouchableOpacity
@@ -23,9 +23,12 @@ export default function ColorCell(props) {
       onPress={() => {
         let tempData = colorData;
         let cell = tempData.filter(obj => obj.id == item.id);
-        cell.onFocus = !cell.onFocus;
+        console.log(cell);
+        cell[0].onFocus = !cell[0].onFocus;
+        console.log('After: ', cell);
         setColorData(tempData);
         setColorFocus(!colorFocus);
+        callBackData(tempData);
       }}>
       <View
         style={[

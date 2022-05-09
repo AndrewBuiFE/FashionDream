@@ -1,6 +1,6 @@
 import React from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { AppIcons, AppImages } from '../../../../../general/constants/AppResource';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {AppImages} from '../../../../../general/constants/AppResource';
 import styles from './styles';
 BagItem.propTypes = {};
 BagItem.defaultProps = {};
@@ -25,7 +25,7 @@ function BagItem(props) {
         </View>
         <View>
           <TouchableOpacity>
-            <Image source={AppIcons.}/>
+            {/* <Image source={AppIcons.}/> */}
           </TouchableOpacity>
         </View>
       </View>
