@@ -5,6 +5,7 @@ import {AppIcons, AppImages} from '../../../general/constants/AppResource';
 import {ScreenNames} from '../../../general/constants/ScreenNames';
 import AppHeaderNormal from '../../components/AppHeaderNormal/index';
 import GlobalButton from '../../components/GlobalButton/index';
+import InfoCell from './InfoCell/index';
 import styles from './styles';
 CheckOutScreen.propTypes = {};
 CheckOutScreen.defaultProps = {};
@@ -27,26 +28,15 @@ function CheckOutScreen(props) {
           <View style={styles.titleContainer}>
             <Text style={styles.title}>Shipping address</Text>
           </View>
-          <View style={styles.shippingContainer}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                marginTop: 18,
-              }}>
-              <Text style={styles.name}>Jane Doe</Text>
-              <TouchableOpacity
-                onPress={() => {
-                  props.navigation.navigate(ScreenNames.paymentScreen);
-                }}>
-                <Text style={styles.action}>Change</Text>
-              </TouchableOpacity>
-            </View>
-            <Text style={styles.address}>
-              3 Newbridge Court Chino Hills, CA 91709, United States
-            </Text>
-          </View>
+          <InfoCell
+            name={'Jane Doe'}
+            actionType={'Change'}
+            address={'3 Newbridge Court Chino Hills, CA 91709, United States'}
+            isShowCheck={true}
+            action={() => {
+              props.navigation.navigate(ScreenNames.shippingScreen);
+            }}
+          />
           <View style={styles.paymentContainer}>
             <View
               style={{
@@ -55,7 +45,10 @@ function CheckOutScreen(props) {
                 justifyContent: 'space-between',
               }}>
               <Text style={styles.title}>Payment</Text>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate(ScreenNames.paymentScreen);
+                }}>
                 <Text style={styles.action}>Change</Text>
               </TouchableOpacity>
             </View>

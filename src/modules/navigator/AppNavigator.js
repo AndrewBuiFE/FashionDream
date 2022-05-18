@@ -13,6 +13,7 @@ import ForgotScreen from '../screens/ForgotScreen';
 import LoginScreen from '../screens/LoginScreen';
 import PaymentScreen from '../screens/PaymentScreen/index';
 import ProductCardScreen from '../screens/ProductCardScreen/index';
+import ShippingScreen from '../screens/ShippingScreen/index';
 import SignupScreen from '../screens/SignupScreen';
 import TabNavigator from './TabNavigator';
 AppNavigator.propTypes = {};
@@ -73,6 +74,11 @@ function AppNavigator(props) {
           <Stack.Screen
             name={ScreenNames.paymentScreen}
             component={PaymentScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name={ScreenNames.shippingScreen}
+            component={ShippingScreen}
             options={{headerShown: false}}
           />
         </Stack.Group>

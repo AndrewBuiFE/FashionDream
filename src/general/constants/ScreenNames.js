@@ -16,4 +16,5 @@ export const ScreenNames = {
   cartScreen: 'CartScreen',
   checkoutScreen: 'CheckoutScreen',
   paymentScreen: 'PaymentScreen',
+  shippingScreen: 'ShippingScreen',
 };

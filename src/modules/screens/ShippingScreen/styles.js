@@ -7,9 +7,9 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.primaryColor,
   },
   contentContainer: {
-    marginTop: 10,
     marginHorizontal: 16,
-    flex: 1,
+    marginTop: 10,
+    backgroundColor: 'red',
   },
   title: {
     fontFamily: 'Metropolis',
@@ -105,18 +105,6 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 16,
     lineHeight: 16,
-    color: '#F7F7F7',
-  },
-  check: {
-    flexDirection: 'row',
-    marginTop: 25,
-  },
-  boxText: {
-    fontFamily: 'Metropolis',
-    fontWeight: '400',
-    fontSize: 14,
-    lineHeight: 21,
-    marginLeft: 13,
     color: '#F7F7F7',
   },
 });
