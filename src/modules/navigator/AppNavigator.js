@@ -8,9 +8,12 @@ import {ScreenNames} from '../../general/constants/ScreenNames';
 import CatalogScreen from '../screens/CatalogScreen';
 import CategoryScreen from '../screens/CategoryScreen';
 import AllCategory from '../screens/CategoryScreen/AllCategory';
+import CheckOutScreen from '../screens/CheckoutScreen/index';
 import ForgotScreen from '../screens/ForgotScreen';
 import LoginScreen from '../screens/LoginScreen';
+import PaymentScreen from '../screens/PaymentScreen/index';
 import ProductCardScreen from '../screens/ProductCardScreen/index';
+import ShippingScreen from '../screens/ShippingScreen/index';
 import SignupScreen from '../screens/SignupScreen';
 import TabNavigator from './TabNavigator';
 AppNavigator.propTypes = {};
@@ -61,6 +64,21 @@ function AppNavigator(props) {
           <Stack.Screen
             name={ScreenNames.productCartScreen}
             component={ProductCardScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name={ScreenNames.checkoutScreen}
+            component={CheckOutScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name={ScreenNames.paymentScreen}
+            component={PaymentScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name={ScreenNames.shippingScreen}
+            component={ShippingScreen}
             options={{headerShown: false}}
           />
         </Stack.Group>

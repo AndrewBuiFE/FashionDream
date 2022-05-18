@@ -6,6 +6,7 @@ export const AppColors = {
   tabBarNormalColor: 'red',
   tabBarFocusedColor: 'blue',
   modalColor: '#1E1F28',
+  cellColor: '#2A2C36',
 };
 export const AppDimensions = {
   NavigationBar: {
