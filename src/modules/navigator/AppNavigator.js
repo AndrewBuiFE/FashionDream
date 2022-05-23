@@ -1,10 +1,10 @@
 import {
   createNavigationContainerRef,
-  NavigationContainer,
+  NavigationContainer
 } from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import {ScreenNames} from '../../general/constants/ScreenNames';
+import { ScreenNames } from '../../general/constants/ScreenNames';
 import CatalogScreen from '../screens/CatalogScreen';
 import CategoryScreen from '../screens/CategoryScreen';
 import AllCategory from '../screens/CategoryScreen/AllCategory';
@@ -13,6 +13,7 @@ import ForgotScreen from '../screens/ForgotScreen';
 import LoginScreen from '../screens/LoginScreen';
 import PaymentScreen from '../screens/PaymentScreen/index';
 import ProductCardScreen from '../screens/ProductCardScreen/index';
+import ProfileScreen from '../screens/ProfileScreen/index';
 import ShippingScreen from '../screens/ShippingScreen/index';
 import SignupScreen from '../screens/SignupScreen';
 import TabNavigator from './TabNavigator';
@@ -79,6 +80,11 @@ function AppNavigator(props) {
           <Stack.Screen
             name={ScreenNames.shippingScreen}
             component={ShippingScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name={ScreenNames.profileScreen}
+            component={ProfileScreen}
             options={{headerShown: false}}
           />
         </Stack.Group>

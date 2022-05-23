@@ -17,6 +17,7 @@ export const AppIcons = {
   star: require('../../../src/assets/icons/star.png'),
   search: require('../../../src/assets/icons/search.png'),
   left_arrow: require('../../../src/assets/icons/left_arrow.png'),
+  right_arrow: require('../../../src/assets/icons/arrow_right.png'),
   filter: require('../../../src/assets/icons/filter.png'),
   layout: require('../../../src/assets/icons/layout.png'),
   sorting_arrow: require('../../../src/assets/icons/sorting_arrow.png'),

@@ -1,15 +1,15 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import {Image} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {AppIcons} from '../../general/constants/AppResource';
-import {AppColors, AppDimensions} from '../../general/constants/AppStyle';
-import {ScreenNames} from '../../general/constants/ScreenNames';
-import {isAndroid} from '../../general/helpers/Utils';
+import { Image } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AppIcons } from '../../general/constants/AppResource';
+import { AppColors, AppDimensions } from '../../general/constants/AppStyle';
+import { ScreenNames } from '../../general/constants/ScreenNames';
+import { isAndroid } from '../../general/helpers/Utils';
 import CartScreen from '../screens/CartScreen/index';
 import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
-import SignupScreen from '../screens/SignupScreen';
+import ProfileScreen from '../screens/ProfileScreen/index';
 import NestedCategory from './NestedCategory';
 TabNavigator.propTypes = {};
 const Tab = createBottomTabNavigator();
@@ -94,7 +94,7 @@ function TabNavigator(props) {
       />
       <Tab.Screen
         name={ScreenNames.profileTab}
-        component={SignupScreen}
+        component={ProfileScreen}
         options={{title: 'Profile'}}
       />
     </Tab.Navigator>

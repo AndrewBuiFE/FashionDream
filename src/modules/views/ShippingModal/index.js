@@ -4,14 +4,13 @@ import ReactNativeModal from 'react-native-modal';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import GlobalButton from '../../components/GlobalButton/index';
 import Modalheader from '../../components/ModalHeader/index';
-import CheckBox from '../../screens/PaymentScreen/CheckBox/index';
 import InputSection from '../../screens/PaymentScreen/InputSection/index';
 import styles from './styles';
-AddCardModal.propTypes = {};
-AddCardModal.defaultProps = {};
+ShippingModal.propTypes = {};
+ShippingModal.defaultProps = {};
 var menuIndex = -1;
 var isCheck = true;
-export default function AddCardModal(props) {
+export default function ShippingModal(props) {
   const {isVisible, onModalHidden, onMenuClick} = props;
   const insets = useSafeAreaInsets();
   return (
@@ -40,25 +39,21 @@ export default function AddCardModal(props) {
       <View style={[styles.addCardContainer, {bottom: insets.bottom}]}>
         <Modalheader />
         <View style={styles.titleSection}>
-          <Text style={styles.titleText}>Add new card</Text>
+          <Text style={styles.titleText}>Adding shipping addresses</Text>
         </View>
         <View style={styles.inputContainer}>
           <TextInput
-            placeholder="Name on card"
+            placeholder="Full name"
             placeholderTextColor={'#ABB4BD'}
             style={styles.textInput}
           />
         </View>
-        <InputSection title={'Card number'} content={'5546 8205 3693 3947'} />
-        <InputSection title={'Expire date'} content={'05/22'} />
-        <InputSection title={'CVV'} content={'567'} />
-        <CheckBox
-          isCheck={true}
-          message={'Set as default payment method'}
-          marginLeft={16}
-          marginTop={20}
-        />
-        <GlobalButton actionText="ADD CARD" marginTop={25} />
+        <InputSection title={'Address'} content={'3 Newbridge Court'} />
+        <InputSection title={'City'} content={'Chino Hills'} />
+        <InputSection title={'State/Province/Region'} content={'California'} />
+        <InputSection title={'Zip code (Postal Code)'} content={'91709'} />
+        <InputSection title={'Country'} content={'United States'} />
+        <GlobalButton actionText="SAVE ADDRESS" marginTop={40} />
       </View>
     </ReactNativeModal>
   );
