@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
-import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import {
   SafeAreaProvider,
-  useSafeAreaInsets,
+  useSafeAreaInsets
 } from 'react-native-safe-area-context';
-import {AppIcons} from '../../../general/constants/AppResource';
+import { AppIcons } from '../../../general/constants/AppResource';
+import AddButton from '../../components/AddButton/index';
 import AppHeaderNormal from '../../components/AppHeaderNormal/index';
 import AddCardModal from '../../views/AddCardModal/index';
-import AddButton from './AddButton/index';
 import Card from './Card/index';
 import CheckBox from './CheckBox/index';
 import styles from './styles';
@@ -111,7 +111,7 @@ function PaymentScreen(props) {
               }}
             />
           </View>
-          <AddButton setShowAddCard={setShowAddCard} bottom={insets.bottom} />
+          <AddButton setShowAdd={setShowAddCard} bottom={insets.bottom} />
         </View>
       </View>
     </SafeAreaProvider>

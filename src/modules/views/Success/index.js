@@ -1,11 +1,11 @@
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {Image, Text, View} from 'react-native';
+import { Image, Text, View } from 'react-native';
 import ReactNativeModal from 'react-native-modal';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {AppImages} from '../../../general/constants/AppResource';
-import {ScreenNames} from '../../../general/constants/ScreenNames';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AppImages } from '../../../general/constants/AppResource';
+import { ScreenNames } from '../../../general/constants/ScreenNames';
 import GlobalButton from '../../components/GlobalButton/index';
 import styles from './styles';
 Success.propTypes = {
@@ -31,6 +31,14 @@ export default function Success(props) {
         }
         menuIndex = -1;
       }}
+      hasBackdrop={true}
+      avoidKeyboard={true}
+      onSwipeComplete={() => {
+        if (onModalHidden) {
+          onModalHidden();
+        }
+      }}
+      swipeDirection="down"
       coverScreen={true}
       style={{margin: 0}}>
       <View style={[styles.successContainer, {bottom: insets.bottom}]}>
@@ -48,7 +56,7 @@ export default function Success(props) {
           marginTop={163}
           action={() => {
             onModalHidden();
-            navigation.navigate(ScreenNames.homeTab);
+            navigation.navigate(ScreenNames.shopTab);
           }}
         />
       </View>
