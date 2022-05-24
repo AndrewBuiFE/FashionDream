@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   buttonContainer: {
     borderRadius: 25,
@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 16,
     // shadowColor: 'rgba(239, 54, 81, 0.35)',
     // shadowOffset: {width: -2, height: 4},
     // shadowOpacity: 1,

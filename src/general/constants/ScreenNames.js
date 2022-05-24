@@ -18,4 +18,7 @@ export const ScreenNames = {
   paymentScreen: 'PaymentScreen',
   shippingScreen: 'ShippingScreen',
   profileScreen: 'ProfileScreen',
+  settingScreen: 'SettingScreen',
+  orderScreen: 'OrderScreen',
+  orderDetailScreen: 'OrderDetailScreen',
 };
