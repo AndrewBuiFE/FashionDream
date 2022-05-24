@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppIcons, AppImages } from '../../../general/constants/AppResource';
+import { ScreenNames } from '../../../general/constants/ScreenNames';
 import AppHeader from '../../components/AppHeader/index';
 import ProfileCell from './ProfileCell/index';
 import styles from './styles';
@@ -44,17 +45,17 @@ function ProfileScreen(props) {
                   <Text style = {styles.email}>matildabrown@mail.com</Text>
               </View>
         </View>
-            <ProfileCell title='My orders' suggestion='Already have 12 orders' marginTop = {28}/>
+            <ProfileCell title='My orders' suggestion='Already have 12 orders' marginTop = {28} screenName = {ScreenNames.orderScreen}/>
             <Divider/>
-            <ProfileCell title='Shipping addresses' suggestion='3 addresses'/>
+            <ProfileCell title='Shipping addresses' suggestion='3 addresses' screenName={ScreenNames.shippingScreen}/>
             <Divider/>
-            <ProfileCell title='Payment method' suggestion='Visa **34'/>
+            <ProfileCell title='Payment method' suggestion='Visa **34' screenName={ScreenNames.paymentScreen}/>
             <Divider/>
             <ProfileCell title='Promocodes' suggestion='You have special promocodes'/>
             <Divider/>
             <ProfileCell title='My reviews' suggestion='Reviews for 4 items'/>
             <Divider/>
-            <ProfileCell title='Settings' suggestion='Notifications, password'/>
+            <ProfileCell title='Settings' suggestion='Notifications, password' screenName = {ScreenNames.settingScreen}/>
       </View>
     </SafeAreaProvider>
   );

@@ -11,9 +11,12 @@ import AllCategory from '../screens/CategoryScreen/AllCategory';
 import CheckOutScreen from '../screens/CheckoutScreen/index';
 import ForgotScreen from '../screens/ForgotScreen';
 import LoginScreen from '../screens/LoginScreen';
+import OrderDetailScreen from '../screens/OrderDetailScreen/index';
+import OrderScreen from '../screens/OrderScreen/index';
 import PaymentScreen from '../screens/PaymentScreen/index';
 import ProductCardScreen from '../screens/ProductCardScreen/index';
 import ProfileScreen from '../screens/ProfileScreen/index';
+import SettingScreen from '../screens/SettingScreen/index';
 import ShippingScreen from '../screens/ShippingScreen/index';
 import SignupScreen from '../screens/SignupScreen';
 import TabNavigator from './TabNavigator';
@@ -85,6 +88,21 @@ function AppNavigator(props) {
           <Stack.Screen
             name={ScreenNames.profileScreen}
             component={ProfileScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name={ScreenNames.settingScreen}
+            component={SettingScreen}
+            options={{headerShown: false}}
+          />
+           <Stack.Screen
+            name={ScreenNames.orderScreen}
+            component={OrderScreen}
+            options={{headerShown: false}}
+          />
+           <Stack.Screen
+            name={ScreenNames.orderDetailScreen}
+            component={OrderDetailScreen}
             options={{headerShown: false}}
           />
         </Stack.Group>
