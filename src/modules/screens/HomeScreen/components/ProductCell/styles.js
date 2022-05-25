@@ -1,14 +1,13 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   productContainer: {
     flexDirection: 'column',
     width: 150,
     height: 264,
-    margin: 20,
+    marginLeft: 16,
     backgroundColor: 'black',
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
+    borderRadius: 8,
   },
   imageSection: {
     width: 148,

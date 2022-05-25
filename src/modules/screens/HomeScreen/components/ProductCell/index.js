@@ -4,7 +4,7 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { AppIcons } from '../../../../../general/constants/AppResource';
 import { ScreenNames } from '../../../../../general/constants/ScreenNames';
-import Star from '../Star';
+import Star from '../../../../components/Star/index';
 import styles from './styles';
 ProductCell.propTypes = {
   item: PropTypes.object,

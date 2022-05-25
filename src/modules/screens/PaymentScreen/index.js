@@ -7,9 +7,9 @@ import {
 import { AppIcons } from '../../../general/constants/AppResource';
 import AddButton from '../../components/AddButton/index';
 import AppHeaderNormal from '../../components/AppHeaderNormal/index';
+import CheckBox from '../../components/CheckBox/index';
 import AddCardModal from '../../views/AddCardModal/index';
 import Card from './Card/index';
-import CheckBox from './CheckBox/index';
 import styles from './styles';
 PaymentScreen.propTypes = {};
 PaymentScreen.defaultProps = {};

@@ -1,8 +1,8 @@
 import React from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {AppIcons, AppImages} from '../../../general/constants/AppResource';
-import {ScreenNames} from '../../../general/constants/ScreenNames';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { AppIcons, AppImages } from '../../../general/constants/AppResource';
+import { ScreenNames } from '../../../general/constants/ScreenNames';
 import AppHeaderNormal from '../../components/AppHeaderNormal';
 import styles from './styles';
 CategoryScreen.propTypes = {};
@@ -53,7 +53,7 @@ function CategoryScreen(props) {
           <View style={styles.categoryImage}>
             <Image
               source={AppImages.black}
-              style={{width: '100%', height: '100%'}}
+              style={styles.image}
             />
           </View>
         </TouchableOpacity>
@@ -64,7 +64,7 @@ function CategoryScreen(props) {
           <View style={styles.categoryImage}>
             <Image
               source={AppImages.black}
-              style={{width: '100%', height: '100%'}}
+              style={styles.image}
             />
           </View>
         </TouchableOpacity>
@@ -75,7 +75,7 @@ function CategoryScreen(props) {
           <View style={styles.categoryImage}>
             <Image
               source={AppImages.black}
-              style={{width: '100%', height: '100%'}}
+              style={styles.image}
             />
           </View>
         </TouchableOpacity>
@@ -86,7 +86,7 @@ function CategoryScreen(props) {
           <View style={styles.categoryImage}>
             <Image
               source={AppImages.black}
-              style={{width: '100%', height: '100%'}}
+              style={styles.image}
             />
           </View>
         </TouchableOpacity>

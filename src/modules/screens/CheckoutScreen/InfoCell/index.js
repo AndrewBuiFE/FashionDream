@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
-import CheckBox from '../../PaymentScreen/CheckBox/index';
+import { Text, TouchableOpacity, View } from 'react-native';
+import CheckBox from '../../../components/CheckBox/index';
 import styles from './styles';
 export default function InfoCell(props) {
   const {name, address, action, actionType, isShowCheck, isCheck} = props;

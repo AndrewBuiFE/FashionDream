@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppIcons } from '../../../general/constants/AppResource';
+import { ScreenNames } from '../../../general/constants/ScreenNames';
 import AppHeaderNormal from '../../components/AppHeaderNormal/index';
 import GlobalButton from '../../components/GlobalButton/index';
 import BagItem from '../CartScreen/components/BagItem/index';
@@ -82,7 +83,9 @@ function OrderDetailScreen(props) {
         </View>
       <View style = {styles.buttonArea}>
       <GlobalButton width={160} height={36} actionText='Reorder'/>
-        <GlobalButton width={160} height={36} actionText='Leave feedback'/>
+        <GlobalButton width={160} height={36} actionText='Leave feedback' action={() => {
+          props.navigation.navigate(ScreenNames.ratingScreen)
+        }}/>
       </View>
       </ScrollView>
     </SafeAreaProvider>

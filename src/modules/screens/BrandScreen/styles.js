@@ -2,25 +2,31 @@ import { StyleSheet } from 'react-native';
 import { AppColors } from '../../../general/constants/AppStyle';
 // const insets = useSafeAreaInsets();
 const styles = StyleSheet.create({
-  filterContainer: {
+  cartContainer: {
+    width: '100%',
     flex: 1,
     backgroundColor: AppColors.primaryColor,
   },
-  divider: {
-    // borderBottomColor: '#D3D3D3',
-    borderBottomWidth: 1,
+  total: {
+    marginTop: 28,
     marginHorizontal: 16,
-    // opacity: 0.1,
-  },
-  colorContainer: {
-    height: 44,
+    height: 22,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: 'red',
   },
-  button: {
-    marginTop: 20,
-    flexDirection: 'row',
-  }
+  totalText: {
+    fontFamily: 'Metropolis',
+    fontWeight: '500',
+    fontSize: 14,
+    lineHeight: 20,
+    color: '#ABB4BD',
+  },
+  priceText: {
+    fontFamily: 'Metropolis',
+    fontWeight: '400',
+    fontSize: 18,
+    lineHeight: 22,
+    color: '#F7F7F7',
+  },
 });
 export default styles;

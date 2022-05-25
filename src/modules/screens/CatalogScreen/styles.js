@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.primaryColor,
   },
   clothesTypes: {
-    marginTop: 12,
+    marginTop: 20,
     flexDirection: 'row',
   },
   typeContainer: {

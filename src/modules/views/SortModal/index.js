@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import ReactNativeModal from 'react-native-modal';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Modalheader from '../../components/ModalHeader/index';
 import styles from './styles';
 SortModal.propTypes = {
   id: PropTypes.number,
@@ -26,9 +27,18 @@ export default function SortModal(props) {
         }
         menuIndex = -1;
       }}
+      hasBackdrop={true}
+      avoidKeyboard={true}
+      onSwipeComplete={() => {
+        if (onModalHidden) {
+          onModalHidden();
+        }
+      }}
+      swipeDirection="down"
       coverScreen={true}
       style={{margin: 0}}>
       <View style={[styles.sortContainer, {bottom: insets.bottom}]}>
+      <Modalheader />
         <View style={styles.titleContainer}>
           <Text style={styles.titleText}>Sort by</Text>
         </View>

@@ -5,7 +5,7 @@ import {
   AppIcons,
   AppImages
 } from '../../../../../general/constants/AppResource';
-import Star from '../../../HomeScreen/components/Star';
+import Star from '../../../../components/Star/index';
 import styles from './styles';
 HorizonProduct.propTypes = {
   starCount: PropTypes.number,
@@ -15,7 +15,7 @@ HorizonProduct.propTypes = {
   discountPrice: PropTypes.number,
 };
 HorizonProduct.defaultProps = {
-  starCount: 0,
+  starCount: 5,
   brandName: 'Dorothy Perkins',
   productName: 'Evening Dress',
   price: 15,
@@ -23,7 +23,7 @@ HorizonProduct.defaultProps = {
 };
 
 function HorizonProduct(props) {
-  const {starCount, brandName, productName, price, discountPrice} = props;
+  const {starCount, brandName, productName, price} = props;
   const [likeStatus, setLikeStatus] = useState(false);
   return (
     <TouchableOpacity style={styles.productContainer}>
@@ -33,7 +33,10 @@ function HorizonProduct(props) {
       <View style={styles.infoSection}>
         <Text style={styles.product}>{productName}</Text>
         <Text style={styles.brand}>{brandName}</Text>
-        <Star starCount={starCount} />
+        <View style= {styles.starSection}>
+        <Star starCount={starCount} starType='small' width={starCount*14}/>
+        <Text>(3)</Text>
+        </View>
         <View style={styles.priceSection}>
           <Text style={styles.price}>{price}$</Text>
         </View>

@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { AppIcons } from '../../../general/constants/AppResource';
-import AppHeader from '../../components/AppHeader';
+import { AppIcons, AppImages } from '../../../general/constants/AppResource';
+import AppHeader from '../../components/AppHeader/index';
 import FilterModal from '../../views/FilterModal';
 import SortModal from '../../views/SortModal';
+import ProductCell from '../HomeScreen/components/ProductCell/index';
 import HorizonProduct from './components/HorizonProduct';
 import styles from './styles';
 CatalogScreen.propTypes = {
@@ -15,25 +16,59 @@ CatalogScreen.defaultProps = {
   category: '',
 };
 const DATA = [
-  {id: 1, title: 'Dress', brand: 'Perkins', price: 51},
-  {id: 2, title: 'Pullover', brand: 'Mango', price: 38},
-  {id: 3, title: 'Blouse', brand: 'Perkins', price: 150},
-  {id: 4, title: 'T-shirt', brand: 'LOST Ink', price: 10},
-  {id: 5, title: 'Shirt', brand: 'Topshop', price: 15},
+  {id: 1, title: 'Dress', brand: 'Perkins', price: 51, starCount: 2},
+  {id: 2, title: 'Pullover', brand: 'Mango', price: 38, starCount: 3},
+  {id: 3, title: 'Blouse', brand: 'Perkins', price: 150, starCount: 2},
+  {id: 4, title: 'T-shirt', brand: 'LOST Ink', price: 10, starCount: 5},
+  {id: 5, title: 'Shirt', brand: 'Topshop', price: 15, starCount: 4},
 ];
+const GRID_DATA = [
+  {
+    id: '1',
+    starCount: 0,
+    brandName: 'Dorothy Perkins',
+    productName: 'Evening Dress',
+    price: 20,
+    discountPrice: 12,
+    image: AppImages.main,
+    description: 'dfkjdfkjdf',
+  },
+  {
+    id: '2',
+    starCount: 0,
+    brandName: 'Perkins',
+    productName: 'SDF',
+    price: 15,
+    discountPrice: 12,
+    image: AppImages.big_banner,
+    description: 'dfkjdfkjdf',
+  },
+  {
+    id: '3',
+    starCount: 0,
+    brandName: 'Dorothy',
+    productName: 'A',
+    price: 21,
+    discountPrice: 12,
+    image: AppImages.black,
+    description: 'dfkjdfkjdf',
+  },
+];
+const Divider = () => <View style={{height: 20}}></View>;
 function CatalogScreen(props) {
-  // const {category} = props.route.params;
-  const category = 'Tops';
-
+  const {category} = props.route.params;
   const [isShowSortMenu, setShowSortMenu] = useState(false);
   const [isShowFilterMenu, setShowFilterMenu] = useState(false);
+  const [isGridLayout, setGridLayout] = useState(false);
   const renderItem = ({item}) => (
     <HorizonProduct
       brandName={item.brand}
       price={item.price}
       productName={item.title}
+      starCount={item.starCount}
     />
   );
+  const renderGridItem = ({item}) => <ProductCell item={item} />;
   return (
     <SafeAreaProvider>
       <View style={styles.catalogContainer}>
@@ -141,15 +176,37 @@ function CatalogScreen(props) {
             <Image source={AppIcons.sorting_arrow} style={{marginRight: 11}} />
             <Text style={styles.text}>Price: lowest to high</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.layout}>
-            <Image source={AppIcons.layout} />
+          <TouchableOpacity
+            style={styles.layout}
+            onPress={() => {
+              setGridLayout(!isGridLayout);
+            }}>
+            <Image
+              source={isGridLayout ? AppIcons.grid_layout : AppIcons.layout}
+            />
           </TouchableOpacity>
         </View>
-        <FlatList
-          data={DATA}
-          renderItem={renderItem}
-          showsVerticalScrollIndicator={false}
-        />
+        {isGridLayout ? (
+          <FlatList
+            key={'_'}
+            keyExtractor={item => '_' + item.id}
+            data={GRID_DATA}
+            renderItem={renderGridItem}
+            showsVerticalScrollIndicator={false}
+            numColumns={2}
+            style={{marginTop: 26}}
+            ItemSeparatorComponent={Divider}
+            contentContainerStyle={{}}
+          />
+        ) : (
+          <FlatList
+            key={'#'}
+            keyExtractor={item => '#' + item.id}
+            data={DATA}
+            renderItem={renderItem}
+            showsVerticalScrollIndicator={false}
+          />
+        )}
       </View>
     </SafeAreaProvider>
   );

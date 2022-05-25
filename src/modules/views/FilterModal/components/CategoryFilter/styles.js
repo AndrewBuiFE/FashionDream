@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { AppColors } from '../../../../../general/constants/AppStyle';
 const styles = StyleSheet.create({
   filterItem: {
-    height: 130,
+    height: 182,
     paddingHorizontal: 16,
     backgroundColor: AppColors.primaryColor,
   },
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     color: '#F7F7F7',
   },
-  sizeContainer: {
+  filterContainer: {
     marginTop: 24,
   },
 });

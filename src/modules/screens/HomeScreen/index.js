@@ -5,12 +5,11 @@ import {
   SectionList,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {AppImages} from '../../../general/constants/AppResource';
-import {ScreenNames} from '../../../general/constants/ScreenNames';
-import AppHeader from '../../components/AppHeader';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { AppImages } from '../../../general/constants/AppResource';
+import { ScreenNames } from '../../../general/constants/ScreenNames';
 import ProductCell from './components/ProductCell';
 import styles from './styles';
 HomeScreen.propTypes = {};
@@ -188,11 +187,7 @@ function HomeScreen(props) {
   return (
     <SafeAreaProvider>
       <View style={styles.homeContainer}>
-        <AppHeader title="Home">
-          <></>
-        </AppHeader>
         <SectionList
-          // contentContainerStyle={{paddingHorizontal: 10}}
           stickySectionHeadersEnabled={false}
           sections={DATA}
           showsVerticalScrollIndicator={false}

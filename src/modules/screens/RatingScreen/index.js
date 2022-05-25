@@ -3,15 +3,16 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppIcons } from '../../../general/constants/AppResource';
 import AppHeader from '../../components/AppHeader/index';
-import Star from '../HomeScreen/components/Star/index';
+import CheckBox from '../../components/CheckBox/index';
+import Star from '../../components/Star/index';
+import RatingModal from '../../views/RatingModal/index';
 import ReviewCell from './ReviewCell/index';
 import styles from './styles';
 RatingScreen.propTypes = {};
 RatingScreen.defaultProps = {};
 let promoCodeValue = '';
 function RatingScreen(props) {
-  const [isShowPromoModal, setShowPromoModal] = useState(false);
-  const [isShowSuccess, setShowSuccess] = useState(false);
+  const [isShowRatingModal, setShowRatingModal] = useState(false);
   return (
     <SafeAreaProvider>
       <View style={styles.reviewContainer}>
@@ -30,6 +31,34 @@ function RatingScreen(props) {
             </TouchableOpacity>
           </>
         </AppHeader>
+        <RatingModal
+          isVisible={isShowRatingModal}
+          onModalHidden={() => {
+            setShowRatingModal(false);
+          }}
+          onMenuClick={menu => {
+            switch (menu) {
+              case 0:
+                console.log('0');
+                break;
+              case 1:
+                console.log('1');
+                break;
+              case 2:
+                console.log('2');
+                break;
+              case 3:
+                console.log('3');
+                break;
+              case 4:
+                console.log('4');
+                break;
+              default:
+                console.log('-1');
+                break;
+            }
+          }}
+        />
         <View style = {{paddingLeft: 16, paddingRight: 16, marginTop: 41,}}>
           <View style={styles.ratingSection}>
             <View style={styles.firstCol}>
@@ -37,15 +66,15 @@ function RatingScreen(props) {
               <Text style={styles.text}>23 ratings</Text>
             </View>
             <View style={styles.secondCol}>
-              <Star starCount={5} />
+              <Star starCount={5} starType = 'small' width={70} justifyContent='flex-end'/>
               <View style={{height: 6}}></View>
-              <Star starCount={4} />
+              <Star starCount={4} starType = 'small' width={70} justifyContent='flex-end'/>
               <View style={{height: 6}}></View>
-              <Star starCount={3} />
+              <Star starCount={3} starType = 'small' width={70} justifyContent='flex-end'/>
               <View style={{height: 6}}></View>
-              <Star starCount={2} />
+              <Star starCount={2} starType = 'small' width={70} justifyContent='flex-end'/>
               <View style={{height: 6}}></View>
-              <Star starCount={1} />
+              <Star starCount={1} starType = 'small' width={70} justifyContent='flex-end'/>
             </View>
             <View style={styles.thirdCol}>
               <View style = {{borderRadius: 4, backgroundColor: '#FF3E3E', width: 114, height: 8, marginVertical: 3, marginLeft: 9}}></View>
@@ -68,15 +97,17 @@ function RatingScreen(props) {
           </View>
           <View style = {styles.indicator}>
             <Text style = {styles.countReview}>8 reviews</Text>
-            <View>
-              <Image />
+            <View style = {styles.check}>
+              <CheckBox />
               <Text style = {styles.text}>With photo</Text>
             </View>
           </View>
           <ReviewCell />
         </View>
-        <TouchableOpacity style = {styles.button}>  
-            <Image />
+        <TouchableOpacity style = {styles.button} onPress={()=> {
+          setShowRatingModal(true);
+        }}>  
+            <Image source={AppIcons.pen}/>
             <Text style = {styles.buttonText}>Write a review</Text>
         </TouchableOpacity>
       </View>

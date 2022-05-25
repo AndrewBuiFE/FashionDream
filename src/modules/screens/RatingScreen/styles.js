@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   },
   ratingSection: {
     height: 94,
-    backgroundColor: AppColors.cellColor,
+    backgroundColor: AppColors.primaryColor,
     flexDirection: 'row',
   },
   ratingOverall: {
@@ -47,6 +47,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 34, 
     marginBottom: 28,
+  },
+  check: {
+    flexDirection: 'row',
   },
   countReview: {
     fontFamily: 'Metropolis',
