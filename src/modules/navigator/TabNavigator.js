@@ -8,8 +8,8 @@ import { ScreenNames } from '../../general/constants/ScreenNames';
 import { isAndroid } from '../../general/helpers/Utils';
 import CartScreen from '../screens/CartScreen/index';
 import HomeScreen from '../screens/HomeScreen';
-import LoginScreen from '../screens/LoginScreen';
 import ProfileScreen from '../screens/ProfileScreen/index';
+import RatingScreen from '../screens/RatingScreen/index';
 import NestedCategory from './NestedCategory';
 TabNavigator.propTypes = {};
 const Tab = createBottomTabNavigator();
@@ -71,7 +71,7 @@ function TabNavigator(props) {
         tabBarInactiveTintColor: AppColors.tabBarNormalColor,
         tabBarActiveTintColor: AppColors.tabBarFocusedColor,
       })}
-      initialRouteName={ScreenNames.profileTab}>
+      initialRouteName={ScreenNames.favoriteTab}>
       <Tab.Screen
         name={ScreenNames.homeTab}
         component={HomeScreen}
@@ -89,7 +89,7 @@ function TabNavigator(props) {
       />
       <Tab.Screen
         name={ScreenNames.favoriteTab}
-        component={LoginScreen}
+        component={RatingScreen}
         options={{title: 'Favorites'}}
       />
       <Tab.Screen

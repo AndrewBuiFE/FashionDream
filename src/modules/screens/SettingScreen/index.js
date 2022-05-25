@@ -21,7 +21,7 @@ export default function SettingScreen(props) {
   return (
     <SafeAreaProvider>
       <View style={styles.settingContainer}>
-        <AppHeader>
+        <AppHeader title='Settings'>
           <>
             <TouchableOpacity
               onPress={() => {
@@ -64,9 +64,6 @@ export default function SettingScreen(props) {
             }
           }}
         />
-        <View style={styles.settingTitleContainer}>
-          <Text style={styles.settingTitle}>Settings</Text>
-        </View>
         <View style={[styles.titleContainer, {marginTop: 23}]}>
           <Text style={styles.title}>Personal information</Text>
         </View>

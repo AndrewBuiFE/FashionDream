@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {AppIcons} from '../../../general/constants/AppResource';
+import React, { useState } from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { AppIcons } from '../../../general/constants/AppResource';
 import AppHeaderNormal from '../../components/AppHeaderNormal/index';
 import GlobalButton from '../../components/GlobalButton/index';
 import SelectSizeModal from '../../views/SelectSizeModal/index';
-import Reviewing from '../HomeScreen/components/Reviewing/index';
+import Star from '../HomeScreen/components/Star/index';
 import styles from './styles';
 ProductCardScreen.propTypes = {};
 ProductCardScreen.defaultProps = {};
@@ -88,7 +88,7 @@ function ProductCardScreen(props) {
             <Text style={styles.brandText}>{document.brandName}</Text>
           </View>
           <View style={styles.starSection}>
-            <Reviewing starCount={document.starCount} />
+            <Star starCount={document.starCount} />
           </View>
         </View>
         <View style={styles.description}>

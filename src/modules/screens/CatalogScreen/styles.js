@@ -1,22 +1,10 @@
-import {StyleSheet} from 'react-native';
-import {AppColors} from '../../../general/constants/AppStyle';
+import { StyleSheet } from 'react-native';
+import { AppColors } from '../../../general/constants/AppStyle';
 const styles = StyleSheet.create({
   catalogContainer: {
     width: '100%',
     flex: 1,
     backgroundColor: AppColors.primaryColor,
-  },
-  categoryTitle: {
-    height: 34,
-    marginTop: 18,
-    marginLeft: 16,
-  },
-  categoryText: {
-    fontFamily: 'Metropolis',
-    fontWeight: '700',
-    fontSize: 34,
-    lineHeight: 34,
-    color: '#F7F7F7',
   },
   clothesTypes: {
     marginTop: 12,

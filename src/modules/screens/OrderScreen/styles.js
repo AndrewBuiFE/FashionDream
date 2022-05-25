@@ -6,19 +6,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     flex: 1,
   },
-
-  orderTitleContainer: {
-    height: 34,
-    marginTop: 18,
-    marginLeft: 16,
-  },
-  orderTitle: {
-    fontFamily: 'Metropolis',
-    fontWeight: '700',
-    fontSize: 34,
-    lineHeight: 34,
-    color: '#F7F7F7',
-  },
   status: {
     marginTop: 12,
     flexDirection: 'row',

@@ -21,4 +21,5 @@ export const ScreenNames = {
   settingScreen: 'SettingScreen',
   orderScreen: 'OrderScreen',
   orderDetailScreen: 'OrderDetailScreen',
+  ratingScreen: 'RatingScreen',
 };

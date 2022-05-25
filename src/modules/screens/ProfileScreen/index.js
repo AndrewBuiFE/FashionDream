@@ -18,7 +18,7 @@ function ProfileScreen(props) {
   return (
     <SafeAreaProvider>
       <View style={styles.profileContainer}>
-        <AppHeader>
+        <AppHeader title = 'My profile'>
           <>
             <TouchableOpacity
               onPress={() => {
@@ -33,9 +33,6 @@ function ProfileScreen(props) {
             </TouchableOpacity>
           </>
         </AppHeader>
-        <View style={styles.profileTitle}>
-          <Text style={styles.profileText}>My Profile</Text>
-        </View>
         <View style = {styles.generalInfo}>
               <View style = {styles.imageSection}>
                   <Image source={AppImages.black} style = {styles.image}/>

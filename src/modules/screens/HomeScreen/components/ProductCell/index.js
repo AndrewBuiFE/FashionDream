@@ -1,10 +1,10 @@
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
-import {AppIcons} from '../../../../../general/constants/AppResource';
-import {ScreenNames} from '../../../../../general/constants/ScreenNames';
-import Reviewing from '../Reviewing';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { AppIcons } from '../../../../../general/constants/AppResource';
+import { ScreenNames } from '../../../../../general/constants/ScreenNames';
+import Star from '../Star';
 import styles from './styles';
 ProductCell.propTypes = {
   item: PropTypes.object,
@@ -37,7 +37,7 @@ function ProductCell(props) {
         </View>
       </View>
       <View style={styles.infoSection}>
-        <Reviewing starCount={item.starCount} />
+        <Star starCount={item.starCount} />
         <View style={styles.textSection}>
           <Text style={styles.brand}>{item.brandName}</Text>
           <Text style={styles.product}>{item.productName}</Text>

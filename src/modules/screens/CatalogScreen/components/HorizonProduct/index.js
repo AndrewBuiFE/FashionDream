@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
-import React, {useState} from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import React, { useState } from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import {
   AppIcons,
-  AppImages,
+  AppImages
 } from '../../../../../general/constants/AppResource';
-import Reviewing from '../../../HomeScreen/components/Reviewing';
+import Star from '../../../HomeScreen/components/Star';
 import styles from './styles';
 HorizonProduct.propTypes = {
   starCount: PropTypes.number,
@@ -33,7 +33,7 @@ function HorizonProduct(props) {
       <View style={styles.infoSection}>
         <Text style={styles.product}>{productName}</Text>
         <Text style={styles.brand}>{brandName}</Text>
-        <Reviewing starCount={starCount} />
+        <Star starCount={starCount} />
         <View style={styles.priceSection}>
           <Text style={styles.price}>{price}$</Text>
         </View>
