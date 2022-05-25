@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import React, {useState} from 'react';
-import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {AppIcons} from '../../../general/constants/AppResource';
+import React, { useState } from 'react';
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { AppIcons } from '../../../general/constants/AppResource';
 import AppHeader from '../../components/AppHeader';
 import FilterModal from '../../views/FilterModal';
 import SortModal from '../../views/SortModal';
@@ -37,7 +37,7 @@ function CatalogScreen(props) {
   return (
     <SafeAreaProvider>
       <View style={styles.catalogContainer}>
-        <AppHeader>
+        <AppHeader title={category}>
           <>
             <TouchableOpacity
               onPress={() => {
@@ -108,9 +108,6 @@ function CatalogScreen(props) {
             }
           }}
         />
-        <View style={styles.categoryTitle}>
-          <Text style={styles.categoryText}>{category}</Text>
-        </View>
         <View style={styles.clothesTypes}>
           <TouchableOpacity style={[styles.typeContainer, {marginLeft: 16}]}>
             <Text style={styles.typeText}>T-shirts</Text>

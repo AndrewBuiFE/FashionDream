@@ -15,6 +15,7 @@ export const AppIcons = {
   heart_small: require('../../../src/assets/icons/heart_small.png'),
   heart_small_active: require('../../../src/assets/icons/heart_small_active.png'),
   star: require('../../../src/assets/icons/star.png'),
+  star_inactive: require('../../../src/assets/icons/star_inactive.png'),
   search: require('../../../src/assets/icons/search.png'),
   left_arrow: require('../../../src/assets/icons/left_arrow.png'),
   right_arrow: require('../../../src/assets/icons/arrow_right.png'),
@@ -27,6 +28,7 @@ export const AppIcons = {
   remove: require('../../../src/assets/icons/remove.png'),
   checkbox_on: require('../../../src/assets/icons/checkbox_on.png'),
   checkbox_inactive: require('../../../src/assets/icons/checkbox_inactive.png'),
+  helpful: require('../../../src/assets/icons/helpful.png'),
 };
 export const AppImages = {
   big_banner: require('../../../src/assets/images/big_banner.png'),

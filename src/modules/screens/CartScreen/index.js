@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {AppIcons} from '../../../general/constants/AppResource';
-import {ScreenNames} from '../../../general/constants/ScreenNames';
+import React, { useState } from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { AppIcons } from '../../../general/constants/AppResource';
+import { ScreenNames } from '../../../general/constants/ScreenNames';
 import AppHeader from '../../components/AppHeader/index';
 import GlobalButton from '../../components/GlobalButton/index';
 import PromoCodeModal from '../../views/PromoCodeModal/index';
@@ -19,7 +19,7 @@ function CartScreen(props) {
   return (
     <SafeAreaProvider>
       <View style={styles.cartContainer}>
-        <AppHeader>
+        <AppHeader title='My Bag'>
           <>
             <TouchableOpacity
               onPress={() => {
@@ -71,9 +71,6 @@ function CartScreen(props) {
             setShowSuccess(false);
           }}
         />
-        <View style={styles.bagTitleContainer}>
-          <Text style={styles.bagTitle}>My Bag</Text>
-        </View>
         <BagItem />
         <BagItem />
         <BagItem />

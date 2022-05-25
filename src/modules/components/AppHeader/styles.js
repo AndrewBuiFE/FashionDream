@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
-import { AppColors, AppDimensions } from '../../../general/constants/AppStyle';
+import { AppDimensions } from '../../../general/constants/AppStyle';
 const styles = StyleSheet.create({
   containerView: {
-    height: AppDimensions.NavigationBar.height + 20,
+    height: AppDimensions.NavigationBar.height + 52,
     flexDirection: 'row',
     width: '100%',
   },
@@ -16,17 +16,18 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: AppDimensions.mainPadding,
   },
-
-  textTitle: {
+  appHeaderTitle: {
+    height: 34,
+    marginTop: 62,
+    marginLeft: 16,
+    width: '100%',
+  }, 
+  title: {
     fontFamily: 'Metropolis',
     fontWeight: '700',
-    fontSize: AppDimensions.NavigationBar.titleSize,
+    fontSize: 34,
     lineHeight: 34,
-    color: AppColors.titleColor,
-  },
-  divider: {
-    borderBottomColor: '#D3D3D3',
-    borderBottomWidth: 1,
-  },
+    color: '#F7F7F7',
+  }
 });
 export default styles;

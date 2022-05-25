@@ -6,18 +6,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: AppColors.primaryColor,
   },
-  settingTitleContainer: {
-    height: 34,
-    marginTop: 18,
-    marginLeft: 16,
-  },
-  settingTitle: {
-    fontFamily: 'Metropolis',
-    fontWeight: '700',
-    fontSize: 34,
-    lineHeight: 34,
-    color: '#F7F7F7',
-  },
   titleContainer: {
     marginHorizontal: 16,
     flexDirection: 'row',

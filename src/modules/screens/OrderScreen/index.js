@@ -59,7 +59,7 @@ function OrderScreen(props) {
   return (
     <SafeAreaProvider>
       <View style={styles.orderContainer}>
-        <AppHeader>
+        <AppHeader title='My orders'>
           <>
             <TouchableOpacity
               onPress={() => {
@@ -74,9 +74,6 @@ function OrderScreen(props) {
             </TouchableOpacity>
           </>
         </AppHeader>
-        <View style={styles.orderTitleContainer}>
-          <Text style={styles.orderTitle}>My Orders</Text>
-        </View>
         <View style={styles.status}>
           <TouchableOpacity style={[styles.statusContainer]}>
             <Text style={styles.typeText}>Delivered</Text>

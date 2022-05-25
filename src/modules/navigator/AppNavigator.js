@@ -16,6 +16,7 @@ import OrderScreen from '../screens/OrderScreen/index';
 import PaymentScreen from '../screens/PaymentScreen/index';
 import ProductCardScreen from '../screens/ProductCardScreen/index';
 import ProfileScreen from '../screens/ProfileScreen/index';
+import RatingScreen from '../screens/RatingScreen/index';
 import SettingScreen from '../screens/SettingScreen/index';
 import ShippingScreen from '../screens/ShippingScreen/index';
 import SignupScreen from '../screens/SignupScreen';
@@ -103,6 +104,11 @@ function AppNavigator(props) {
            <Stack.Screen
             name={ScreenNames.orderDetailScreen}
             component={OrderDetailScreen}
+            options={{headerShown: false}}
+          />
+           <Stack.Screen
+            name={ScreenNames.ratingScreen}
+            component={RatingScreen}
             options={{headerShown: false}}
           />
         </Stack.Group>
