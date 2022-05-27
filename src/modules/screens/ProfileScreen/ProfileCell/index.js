@@ -9,19 +9,23 @@ ProfileCell.propTypes = {
     suggestion: PropTypes.string,
     marginTop: PropTypes.number,
     screenName: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    height: PropTypes.number,
 };
 ProfileCell.defaultProps = {
     title: 'My profile',
     suggestion: 'Here is my profile',
     marginTop: 0,
     screenName: 'MainTab',
+    backgroundColor: 'black',
+    height: 72,
 };
 
 function ProfileCell(props) {
-    const {title, suggestion, marginTop, screenName} = props;
+    const {title, suggestion, marginTop, screenName, backgroundColor, height} = props;
     const navigation = useNavigation();
   return (
-    <TouchableOpacity style = {[styles.cellContainer,{ marginTop: marginTop}]}
+    <TouchableOpacity style = {[styles.cellContainer,{ marginTop: marginTop, backgroundColor: backgroundColor, height: height}]}
         onPress = {() => {
             navigation.navigate(screenName);
         }}

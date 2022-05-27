@@ -1,16 +1,18 @@
-import {StyleSheet} from 'react-native';
-import {AppColors} from '../../../general/constants/AppStyle';
+import { StyleSheet } from 'react-native';
+import { AppColors } from '../../../general/constants/AppStyle';
 // const insets = useSafeAreaInsets();
 const styles = StyleSheet.create({
   sizeContainer: {
-    height: 368,
+    height: 358,
+    backgroundColor: AppColors.modalColor,
     borderTopLeftRadius: 34,
     borderTopRightRadius: 34,
-    backgroundColor: AppColors.modalColor,
+    position: 'absolute',
+    width: '100%',
   },
   titleContainer: {
     alignItems: 'center',
-    marginTop: 36,
+    marginTop: 16,
     height: 22,
   },
   title: {

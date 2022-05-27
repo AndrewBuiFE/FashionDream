@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   titleSection: {
-    marginTop: 30,
+    marginTop: 16,
     alignItems: 'center',
   },
   titleText: {

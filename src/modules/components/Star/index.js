@@ -18,7 +18,6 @@ Star.defaultProps = {
 
 function Star(props) {
   const {starCount, starType, justifyContent, width} = props;
-  console.log(props);
   return (
     <View style={[styles.starSection, {width: width, justifyContent: justifyContent}]}>
       {Array.from({length: starCount}).map((_, index) => (

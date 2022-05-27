@@ -1,6 +1,6 @@
 import React from 'react';
-import {Image, TextInput, TouchableOpacity} from 'react-native';
-import {AppIcons} from '../../../../../general/constants/AppResource';
+import { Image, TextInput, TouchableOpacity } from 'react-native';
+import { AppIcons } from '../../../../../general/constants/AppResource';
 import styles from './styles';
 PromoCode.propTypes = {};
 PromoCode.defaultProps = {};
@@ -20,7 +20,7 @@ function PromoCode(props) {
         onPress={() => {
           setShowPromoModal(true);
         }}>
-        <Image source={AppIcons.arrow_right} />
+        <Image source={AppIcons.promo_arrow} />
       </TouchableOpacity>
     </TouchableOpacity>
   );

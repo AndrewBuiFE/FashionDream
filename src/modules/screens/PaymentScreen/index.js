@@ -21,26 +21,25 @@ const CARD = [
     exp: '05/23',
     isDefault: true,
   },
-  // {
-  //   id: 2,
-  //   number: '* * * * * * * * * * * * 3947',
-  //   holder: 'Hoang',
-  //   exp: '05/23',
-  //   isDefault: false,
-  // },
-  // {
-  //   id: 3,
-  //   number: '* * * * * * * * * * * * 3947',
-  //   holder: 'Hoang',
-  //   exp: '05/23',
-  //   isDefault: false,
-  // },
+  {
+    id: 2,
+    number: '* * * * * * * * * * * * 3947',
+    holder: 'Hoang',
+    exp: '05/23',
+    isDefault: false,
+  },
+  {
+    id: 3,
+    number: '* * * * * * * * * * * * 3947',
+    holder: 'Hoang',
+    exp: '05/23',
+    isDefault: false,
+  },
 ];
 const Divider = () => <View style={{height: 39}}></View>;
 function PaymentScreen(props) {
   const [isShowAddCard, setShowAddCard] = useState(false);
   const insets = useSafeAreaInsets();
-  console.log(insets);
   const renderItem = ({item}) => {
     return (
       <View>

@@ -50,6 +50,12 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     resizeMode: 'cover',
   },
+  starSection: {
+    marginTop: 8,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
   infoSection: {},
   textSection: {
     marginTop: 6,

@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 30,
-    marginTop: 10,
+    marginTop: 16,
   },
   titleText: {
     fontFamily: 'Metropolis',

@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {FlatList, Text, View} from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 import ReactNativeModal from 'react-native-modal';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {AppImages} from '../../../general/constants/AppResource';
-import {AppColors} from '../../../general/constants/AppStyle';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AppImages } from '../../../general/constants/AppResource';
+import { AppColors } from '../../../general/constants/AppStyle';
+import Modalheader from '../../components/ModalHeader/index';
 import PromoCell from '../../screens/CartScreen/components/PromoCell/index';
 import PromoCode from '../../screens/CartScreen/components/PromoCode/index';
 import styles from './styles';
@@ -67,9 +68,18 @@ export default function PromoCodeModal(props) {
         menuIndex = -1;
       }}
       coverScreen={true}
+      hasBackdrop={true}
+      avoidKeyboard={true}
+      onSwipeComplete={() => {
+        if (onModalHidden) {
+          onModalHidden();
+        }
+      }}
+      swipeDirection="down"
       style={{margin: 0}}>
       <View style={[styles.promoContainer, {bottom: insets.bottom}]}>
-        <PromoCode marginTop={52} />
+        <Modalheader />
+        <PromoCode marginTop={32} />
         <View style={styles.titleSection}>
           <Text style={styles.titleText}>Your Promo Codes</Text>
         </View>

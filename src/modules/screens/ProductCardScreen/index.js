@@ -12,7 +12,6 @@ ProductCardScreen.defaultProps = {};
 
 function ProductCardScreen(props) {
   const {document} = props.route.params;
-  console.log(document);
   const [isShowSizeMenu, setShowSizeMenu] = useState(false);
   return (
     <SafeAreaProvider>

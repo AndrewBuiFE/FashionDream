@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { AppDimensions } from '../../../general/constants/AppStyle';
 const styles = StyleSheet.create({
   containerView: {
-    height: AppDimensions.NavigationBar.height + 52,
+    height: AppDimensions.NavigationBar.height + 66,
     flexDirection: 'row',
     width: '100%',
   },

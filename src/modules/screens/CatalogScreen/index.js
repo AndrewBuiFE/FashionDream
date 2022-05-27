@@ -25,7 +25,7 @@ const DATA = [
 const GRID_DATA = [
   {
     id: '1',
-    starCount: 0,
+    starCount: 3,
     brandName: 'Dorothy Perkins',
     productName: 'Evening Dress',
     price: 20,
@@ -35,7 +35,7 @@ const GRID_DATA = [
   },
   {
     id: '2',
-    starCount: 0,
+    starCount: 2,
     brandName: 'Perkins',
     productName: 'SDF',
     price: 15,
@@ -45,7 +45,7 @@ const GRID_DATA = [
   },
   {
     id: '3',
-    starCount: 0,
+    starCount: 4,
     brandName: 'Dorothy',
     productName: 'A',
     price: 21,
@@ -68,7 +68,7 @@ function CatalogScreen(props) {
       starCount={item.starCount}
     />
   );
-  const renderGridItem = ({item}) => <ProductCell item={item} />;
+  const renderGridItem = ({item}) => <ProductCell item={item} width={164}/>;
   return (
     <SafeAreaProvider>
       <View style={styles.catalogContainer}>
@@ -194,9 +194,10 @@ function CatalogScreen(props) {
             renderItem={renderGridItem}
             showsVerticalScrollIndicator={false}
             numColumns={2}
-            style={{marginTop: 26}}
+            style={{marginTop: 26, marginLeft: 5}}
             ItemSeparatorComponent={Divider}
-            contentContainerStyle={{}}
+            contentContainerStyle={{
+            }}
           />
         ) : (
           <FlatList

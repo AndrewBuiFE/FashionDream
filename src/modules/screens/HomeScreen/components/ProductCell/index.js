@@ -9,25 +9,27 @@ import styles from './styles';
 ProductCell.propTypes = {
   item: PropTypes.object,
   onItemClick: PropTypes.func,
+  width: PropTypes.number,
 };
 ProductCell.defaultProps = {
   item: null,
+  width: 150,
   onItemClick: () => {},
 };
 
 function ProductCell(props) {
-  const {item, onItemClick} = props;
+  const {item, onItemClick, width} = props;
   const navigation = useNavigation();
   return (
     <TouchableOpacity
-      style={styles.productContainer}
+      style={[styles.productContainer, {width: width}]}
       onPress={() => {
         onItemClick();
         navigation.navigate(ScreenNames.productCartScreen, {
           document: item,
         });
       }}>
-      <View style={styles.imageSection}>
+      <View style={[styles.imageSection, {width: width}]}>
         <Image source={item.image} style={styles.image} />
         <View style={styles.discountContainer}>
           <Text style={styles.discountText}>-20%</Text>
@@ -37,7 +39,10 @@ function ProductCell(props) {
         </View>
       </View>
       <View style={styles.infoSection}>
-        <Star starCount={item.starCount} />
+        <View style = {styles.starSection}>
+        <Star starCount={item.starCount} starType='small' width={item.starCount*14}/>
+          <Text>(3)</Text>
+        </View>
         <View style={styles.textSection}>
           <Text style={styles.brand}>{item.brandName}</Text>
           <Text style={styles.product}>{item.productName}</Text>

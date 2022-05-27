@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     marginHorizontal: 16,
     marginTop: 10,
-    backgroundColor: 'red',
+    flex: 1,
   },
   title: {
     fontFamily: 'Metropolis',

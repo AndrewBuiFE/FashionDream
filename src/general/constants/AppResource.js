@@ -33,6 +33,7 @@ export const AppIcons = {
   helpful: require('../../../src/assets/icons/helpful.png'),
   pen: require('../../../src/assets/icons/pen.png'),
   photo_camera: require('../../../src/assets/icons/photo_camera.png'),
+  promo_arrow: require('../../../src/assets/icons/promo_arrow.png'),
 };
 export const AppImages = {
   big_banner: require('../../../src/assets/images/big_banner.png'),

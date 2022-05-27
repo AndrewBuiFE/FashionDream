@@ -21,7 +21,7 @@ const DATA = [
     description: 'Super summer sale',
     data: [
       {
-        starCount: 0,
+        starCount: 3,
         brandName: 'Dorothy Perkins',
         productName: 'Evening Dress',
         price: 20,
@@ -30,7 +30,7 @@ const DATA = [
         description: 'dfkjdfkjdf',
       },
       {
-        starCount: 0,
+        starCount: 4,
         brandName: 'Perkins',
         productName: 'SDF',
         price: 15,
@@ -39,7 +39,7 @@ const DATA = [
         description: 'dfkjdfkjdf',
       },
       {
-        starCount: 0,
+        starCount: 5,
         brandName: 'Dorothy',
         productName: 'A',
         price: 21,
@@ -55,7 +55,7 @@ const DATA = [
     description: 'You’ve never seen it before!',
     data: [
       {
-        starCount: 0,
+        starCount: 1,
         brandName: 'Dorothy Perkins',
         productName: 'Evening Dress',
         price: 20,
@@ -64,7 +64,7 @@ const DATA = [
         description: 'dfkjdfkjdf',
       },
       {
-        starCount: 0,
+        starCount: 3,
         brandName: 'Perkins',
         productName: 'SDF',
         price: 15,
@@ -73,7 +73,7 @@ const DATA = [
         description: 'dfkjdfkjdf',
       },
       {
-        starCount: 0,
+        starCount: 2,
         brandName: 'Dorothy',
         productName: 'A',
         price: 21,
