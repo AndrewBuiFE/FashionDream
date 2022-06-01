@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {AppColors} from '../../../general/constants/AppStyle';
+import { StyleSheet } from 'react-native';
+import { AppColors } from '../../../general/constants/AppStyle';
 // const insets = useSafeAreaInsets();
 const styles = StyleSheet.create({
   checkoutContainer: {
@@ -80,9 +80,12 @@ const styles = StyleSheet.create({
   },
   deliveryContainer: {
     marginTop: 21,
-    height: 100,
+    height: 72,
     backgroundColor: AppColors.cellColor,
     borderRadius: 8,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
   orderContainer: {
     marginTop: 52,

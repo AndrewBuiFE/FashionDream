@@ -177,6 +177,7 @@ const renderSectionHeader = ({section}) => {
             />
           )}
           showsHorizontalScrollIndicator={false}
+          style={{marginTop: 10}}
         />
       ) : null}
     </View>

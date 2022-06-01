@@ -1,12 +1,13 @@
 import { StyleSheet } from 'react-native';
+import { AppColors } from '../../../../../general/constants/AppStyle';
 
 const styles = StyleSheet.create({
   productContainer: {
     flexDirection: 'column',
     width: 150,
-    height: 264,
+    height: 270,
     marginLeft: 16,
-    backgroundColor: 'black',
+    backgroundColor: AppColors.primaryColor,
     borderRadius: 8,
   },
   imageSection: {

@@ -44,4 +44,7 @@ export const AppImages = {
   bags: require('../../../src/assets/images/bags.png'),
   card: require('../../../src/assets/images/card.png'),
   chip: require('../../../src/assets/images/chip.png'),
+  fedex: require('../../../src/assets/images/fedex.png'),
+  usps: require('../../../src/assets/images/usps.png'),
+  dhl: require('../../../src/assets/images/dhl.png'),
 };

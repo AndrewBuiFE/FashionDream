@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Text, View } from 'react-native';
+import { AppColors } from '../../../general/constants/AppStyle';
 import styles from './styles';
 AppHeader.propTypes = {
   title: PropTypes.string,
@@ -8,8 +9,7 @@ AppHeader.propTypes = {
 };
 AppHeader.defaultProps = {
   title: '',
-  // backgroundColor: AppColors.primaryColor,
-  backgroundColor: 'red',
+  backgroundColor: AppColors.primaryColor,
 };
 function AppHeader(props) {
   const {title, backgroundColor} = props;
