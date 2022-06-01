@@ -1,9 +1,10 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
+import { AppColors } from '../../../../../general/constants/AppStyle';
 const styles = StyleSheet.create({
   filterItem: {
     height: 130,
     paddingHorizontal: 16,
-    backgroundColor: '#1E1F28',
+    backgroundColor: AppColors.primaryColor,
   },
   titleContainer: {
     height: 42,

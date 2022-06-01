@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import React, {useState} from 'react';
-import {FlatList, Text, View} from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, Text, View } from 'react-native';
 import ColorCell from '../ColorCell/index';
 import styles from './styles';
 ColorFilter.propTypes = {
@@ -64,7 +64,7 @@ export default function ColorFilter(props) {
         colorData={colorData}
         setColorData={setColorData}
         callBackData={data => {
-          console.log(data);
+          // console.log(data);
         }}
       />
     );

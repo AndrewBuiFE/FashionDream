@@ -93,9 +93,9 @@ function CheckOutScreen(props) {
             <Text style={styles.title}>Delivery method</Text>
           </View>
           <View style={styles.deliveryContainer}>
-            <Image />
-            <Image />
-            <Image />
+            <Image source={AppImages.fedex}/>
+            <Image source={AppImages.usps}/>
+            <Image source={AppImages.dhl}/>
           </View>
           <View style={styles.orderContainer}>
             <View style={styles.orderRow}>

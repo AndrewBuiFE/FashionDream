@@ -1,10 +1,11 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 // const insets = useSafeAreaInsets();
 const styles = StyleSheet.create({
   categoryContainer: {
     width: '100%',
     flex: 1,
     backgroundColor: 'black',
+    paddingHorizontal: 16,
   },
   listCategoryContainer: {
     width: '100%',
@@ -64,6 +65,12 @@ const styles = StyleSheet.create({
   },
   categoryImage: {
     flex: 1,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    borderTopRightRadius: 8,
+    borderBottomRightRadius: 8,
   },
 });
 export default styles;

@@ -1,14 +1,14 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
+import { AppColors } from '../../../../../general/constants/AppStyle';
 
 const styles = StyleSheet.create({
   productContainer: {
     flexDirection: 'column',
     width: 150,
-    height: 264,
-    margin: 20,
-    backgroundColor: 'black',
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
+    height: 270,
+    marginLeft: 16,
+    backgroundColor: AppColors.primaryColor,
+    borderRadius: 8,
   },
   imageSection: {
     width: 148,
@@ -50,6 +50,12 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRadius: 8,
     resizeMode: 'cover',
+  },
+  starSection: {
+    marginTop: 8,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   infoSection: {},
   textSection: {

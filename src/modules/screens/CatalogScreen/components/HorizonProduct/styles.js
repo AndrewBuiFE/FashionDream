@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   productContainer: {
@@ -35,9 +35,14 @@ const styles = StyleSheet.create({
   infoSection: {
     marginLeft: 11,
   },
+  starSection: {
+    marginTop: 8,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
   priceSection: {
     flexDirection: 'row',
-    marginTop: 3,
   },
   brand: {
     fontFamily: 'Metropolis',
@@ -60,7 +65,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontSize: 14,
     lineHeight: 20,
-    color: '#ABB4BD',
+    color: '#F7F7F7',
     marginTop: 8,
   },
 });

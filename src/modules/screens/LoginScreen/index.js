@@ -5,22 +5,29 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {AppIcons} from '../../../general/constants/AppResource';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { AppIcons } from '../../../general/constants/AppResource';
 import AppHeader from '../../components/AppHeader';
-import GlobalButton from '../../components/GlobalButton';
+import GlobalButton from '../../components/GlobalButton/index';
 import styles from './styles';
 
 export default function LoginScreen(props) {
   return (
     <SafeAreaView>
       <AppHeader backgroundColor="black" title="Login">
-        <></>
+        <>
+          <TouchableOpacity
+            onPress={() => {
+              props.navigation.goBack();
+            }}>
+            <Image source={AppIcons.left_arrow} />
+          </TouchableOpacity>
+        </>
         <></>
       </AppHeader>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.loginContainer}>
           <View style={styles.inputSection}>
             <TextInput
@@ -42,7 +49,7 @@ export default function LoginScreen(props) {
               <Image source={AppIcons.arrow_right} />
             </TouchableOpacity>
           </View>
-          <GlobalButton action="LOGIN" marginTop={30} />
+          <GlobalButton  actionText='LOGIN' marginTop={30} />
           <View style={{marginTop: 194}}>
             <Text style={styles.text}>Or login with social account</Text>
           </View>

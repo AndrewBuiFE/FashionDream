@@ -5,6 +5,7 @@ import {
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { ScreenNames } from '../../general/constants/ScreenNames';
+import BrandScreen from '../screens/BrandScreen/index';
 import CatalogScreen from '../screens/CatalogScreen';
 import CategoryScreen from '../screens/CategoryScreen';
 import AllCategory from '../screens/CategoryScreen/AllCategory';
@@ -109,6 +110,11 @@ function AppNavigator(props) {
            <Stack.Screen
             name={ScreenNames.ratingScreen}
             component={RatingScreen}
+            options={{headerShown: false}}
+          />
+            <Stack.Screen
+            name={ScreenNames.brandScreen}
+            component={BrandScreen}
             options={{headerShown: false}}
           />
         </Stack.Group>

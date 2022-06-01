@@ -87,7 +87,7 @@ function OrderScreen(props) {
         </View>
         <View
          style = {{height: 30}}></View>
-        <FlatList data = {ORDER_DATA} renderItem = {renderItem} ItemSeparatorComponent={Divider}/>
+        <FlatList data = {ORDER_DATA} renderItem = {renderItem} ItemSeparatorComponent={Divider} showsVerticalScrollIndicator={false}/>
       </View>
     </SafeAreaProvider>
   );

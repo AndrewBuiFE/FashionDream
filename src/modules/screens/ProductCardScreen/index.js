@@ -4,15 +4,14 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppIcons } from '../../../general/constants/AppResource';
 import AppHeaderNormal from '../../components/AppHeaderNormal/index';
 import GlobalButton from '../../components/GlobalButton/index';
+import Star from '../../components/Star/index';
 import SelectSizeModal from '../../views/SelectSizeModal/index';
-import Star from '../HomeScreen/components/Star/index';
 import styles from './styles';
 ProductCardScreen.propTypes = {};
 ProductCardScreen.defaultProps = {};
 
 function ProductCardScreen(props) {
   const {document} = props.route.params;
-  console.log(document);
   const [isShowSizeMenu, setShowSizeMenu] = useState(false);
   return (
     <SafeAreaProvider>

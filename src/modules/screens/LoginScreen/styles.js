@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {AppColors} from '../../../general/constants/AppStyle';
-import {DeviceConstants} from '../../../general/constants/Global';
+import { StyleSheet } from 'react-native';
+import { AppColors } from '../../../general/constants/AppStyle';
+import { DeviceConstants } from '../../../general/constants/Global';
 const styles = StyleSheet.create({
   loginContainer: {
     height: DeviceConstants.screenHeight,

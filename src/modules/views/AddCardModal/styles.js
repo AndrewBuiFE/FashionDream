@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {AppColors} from '../../../general/constants/AppStyle';
+import { StyleSheet } from 'react-native';
+import { AppColors } from '../../../general/constants/AppStyle';
 // const insets = useSafeAreaInsets();
 const styles = StyleSheet.create({
   addCardContainer: {
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   titleSection: {
-    marginTop: 30,
+    marginTop: 16,
     alignItems: 'center',
   },
   titleText: {

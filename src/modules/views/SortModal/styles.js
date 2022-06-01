@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 // const insets = useSafeAreaInsets();
 const styles = StyleSheet.create({
   sortContainer: {
@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
     height: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 36,
     marginBottom: 30,
+    marginTop: 16,
   },
   titleText: {
     fontFamily: 'Metropolis',

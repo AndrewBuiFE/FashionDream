@@ -1,10 +1,10 @@
 import React from 'react';
-import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {AppIcons} from '../../../../general/constants/AppResource';
-import {ScreenNames} from '../../../../general/constants/ScreenNames';
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { AppIcons } from '../../../../general/constants/AppResource';
+import { ScreenNames } from '../../../../general/constants/ScreenNames';
 import AppHeaderNormal from '../../../components/AppHeaderNormal';
-import GlobalButton from '../../../components/GlobalButton';
+import GlobalButton from '../../../components/GlobalButton/index';
 import styles from './styles';
 AllCategory.propTypes = {};
 AllCategory.defaultProps = {};
@@ -53,7 +53,7 @@ function AllCategory(props) {
             </TouchableOpacity>
           </>
         </AppHeaderNormal>
-        <GlobalButton action="VIEW ALL ITEMS" marginTop={16} />
+        <GlobalButton actionText='VIEW ALL ITEMS' marginTop={16} />
         <Text style={styles.text}>Choose category</Text>
         <FlatList
           data={DATA}

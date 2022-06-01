@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {AppColors} from '../../../general/constants/AppStyle';
+import { StyleSheet } from 'react-native';
+import { AppColors } from '../../../general/constants/AppStyle';
 // const insets = useSafeAreaInsets();
 const styles = StyleSheet.create({
   filterContainer: {
@@ -18,5 +18,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: 'red',
   },
+  button: {
+    marginTop: 20,
+    flexDirection: 'row',
+  }
 });
 export default styles;

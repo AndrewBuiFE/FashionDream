@@ -22,4 +22,5 @@ export const ScreenNames = {
   orderScreen: 'OrderScreen',
   orderDetailScreen: 'OrderDetailScreen',
   ratingScreen: 'RatingScreen',
+  brandScreen: 'BrandScreen',
 };

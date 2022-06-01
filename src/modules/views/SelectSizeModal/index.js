@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
-import React, {useState} from 'react';
-import {FlatList, Image, Text, View} from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, Text, View } from 'react-native';
 import ReactNativeModal from 'react-native-modal';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {AppIcons} from '../../../general/constants/AppResource';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AppColors } from '../../../general/constants/AppStyle';
 import GlobalButton from '../../components/GlobalButton/index';
+import Modalheader from '../../components/ModalHeader/index';
+import ProfileCell from '../../screens/ProfileScreen/ProfileCell/index';
 import CategoryCell from '../FilterModal/components/CategoryCell/index';
 import styles from './styles';
 SelectSizeModal.propTypes = {
@@ -63,9 +65,19 @@ export default function SelectSizeModal(props) {
         }
         menuIndex = -1;
       }}
+      hasBackdrop={true}
+      avoidKeyboard={true}
+      onSwipeComplete={() => {
+        if (onModalHidden) {
+          onModalHidden();
+        }
+      }}
+      swipeDirection="down"
       coverScreen={true}
-      style={{margin: 0, bottom: insets.bottom, position: 'absolute'}}>
+      style={{margin: 0}}
+      >
       <View style={[styles.sizeContainer, {bottom: insets.bottom}]}>
+        <Modalheader />
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Select size</Text>
         </View>
@@ -81,13 +93,13 @@ export default function SelectSizeModal(props) {
             justifyContent: 'space-between',
           }}
           numColumns={3}
-          columnWrapperStyle={{}}
         />
-        <View style={[styles.divider, {marginTop: 24}]}></View>
-        <View style={styles.sizeInfo}>
+        <View style={[styles.divider, {marginTop: 0}]}></View>
+        {/* <View style={styles.sizeInfo}>
           <Text style={styles.sizeInfoText}>Size info</Text>
-          <Image source={AppIcons.arrow_right} />
-        </View>
+          <Image source={AppIcons.right_arrow} />
+        </View> */}
+        <ProfileCell title='Size info' backgroundColor={AppColors.modalColor} suggestion='' height={48}/>
         <View style={styles.divider}></View>
         <GlobalButton actionText="ADD TO CART" marginTop={28} />
       </View>

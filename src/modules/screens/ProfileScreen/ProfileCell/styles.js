@@ -4,7 +4,6 @@ import { AppColors } from '../../../../general/constants/AppStyle';
 const styles = StyleSheet.create({
     cellContainer: {
         width: '100%',
-        height: 72,
         flexDirection: 'row',
         backgroundColor: AppColors.primaryColor,
       },

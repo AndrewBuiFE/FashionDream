@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import ReactNativeModal from 'react-native-modal';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import GlobalButton from '../../components/GlobalButton/index';
@@ -47,9 +47,9 @@ export default function PasswordModal(props) {
             style={styles.textInput}
           />
         </View>
-        <View style = {styles.forgotPass}>
+        <TouchableOpacity style = {styles.forgotPass}>
           <Text>Forgot password?</Text>
-        </View>
+        </TouchableOpacity>
         <View style={[styles.inputContainer, {marginTop: 18}]}>
           <TextInput
             placeholder="New Password"

@@ -7,8 +7,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   status: {
-    marginTop: 12,
+    marginTop: 20,
     flexDirection: 'row',
+    marginHorizontal: 16,
+    justifyContent: 'space-between',
   },
   statusContainer: {
     width: 100,

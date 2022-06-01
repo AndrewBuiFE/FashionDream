@@ -5,12 +5,11 @@ import {
   SectionList,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {AppImages} from '../../../general/constants/AppResource';
-import {ScreenNames} from '../../../general/constants/ScreenNames';
-import AppHeader from '../../components/AppHeader';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { AppImages } from '../../../general/constants/AppResource';
+import { ScreenNames } from '../../../general/constants/ScreenNames';
 import ProductCell from './components/ProductCell';
 import styles from './styles';
 HomeScreen.propTypes = {};
@@ -22,7 +21,7 @@ const DATA = [
     description: 'Super summer sale',
     data: [
       {
-        starCount: 0,
+        starCount: 3,
         brandName: 'Dorothy Perkins',
         productName: 'Evening Dress',
         price: 20,
@@ -31,7 +30,7 @@ const DATA = [
         description: 'dfkjdfkjdf',
       },
       {
-        starCount: 0,
+        starCount: 4,
         brandName: 'Perkins',
         productName: 'SDF',
         price: 15,
@@ -40,7 +39,7 @@ const DATA = [
         description: 'dfkjdfkjdf',
       },
       {
-        starCount: 0,
+        starCount: 5,
         brandName: 'Dorothy',
         productName: 'A',
         price: 21,
@@ -56,7 +55,7 @@ const DATA = [
     description: 'You’ve never seen it before!',
     data: [
       {
-        starCount: 0,
+        starCount: 1,
         brandName: 'Dorothy Perkins',
         productName: 'Evening Dress',
         price: 20,
@@ -65,7 +64,7 @@ const DATA = [
         description: 'dfkjdfkjdf',
       },
       {
-        starCount: 0,
+        starCount: 3,
         brandName: 'Perkins',
         productName: 'SDF',
         price: 15,
@@ -74,7 +73,7 @@ const DATA = [
         description: 'dfkjdfkjdf',
       },
       {
-        starCount: 0,
+        starCount: 2,
         brandName: 'Dorothy',
         productName: 'A',
         price: 21,
@@ -178,6 +177,7 @@ const renderSectionHeader = ({section}) => {
             />
           )}
           showsHorizontalScrollIndicator={false}
+          style={{marginTop: 10}}
         />
       ) : null}
     </View>
@@ -188,11 +188,7 @@ function HomeScreen(props) {
   return (
     <SafeAreaProvider>
       <View style={styles.homeContainer}>
-        <AppHeader title="Home">
-          <></>
-        </AppHeader>
         <SectionList
-          // contentContainerStyle={{paddingHorizontal: 10}}
           stickySectionHeadersEnabled={false}
           sections={DATA}
           showsVerticalScrollIndicator={false}

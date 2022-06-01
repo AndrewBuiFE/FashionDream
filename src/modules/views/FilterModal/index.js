@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
-import React, {useState} from 'react';
-import {Image, TouchableOpacity, View} from 'react-native';
+import React, { useState } from 'react';
+import { Image, TouchableOpacity, View } from 'react-native';
 import ReactNativeModal from 'react-native-modal';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {AppIcons} from '../../../general/constants/AppResource';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AppIcons } from '../../../general/constants/AppResource';
+import { ScreenNames } from '../../../general/constants/ScreenNames';
 import AppHeaderNormal from '../../components/AppHeaderNormal';
 import GlobalButton from '../../components/GlobalButton/index';
+import ProfileCell from '../../screens/ProfileScreen/ProfileCell/index';
+import CategoryFilter from './components/CategoryFilter/index';
 import ColorFilter from './components/ColorFilter/index';
 import PriceRange from './components/PriceRange/index';
 import SizeFilter from './components/SizeFilter/index';
@@ -34,6 +37,14 @@ export default function FilterModal(props) {
         }
         menuIndex = -1;
       }}
+      hasBackdrop={true}
+      avoidKeyboard={true}
+      onSwipeComplete={() => {
+        if (onModalHidden) {
+          onModalHidden();
+        }
+      }}
+      swipeDirection="down"
       coverScreen={true}
       style={{margin: 0}}>
       <View style={[styles.filterContainer, {bottom: insets.bottom}]}>
@@ -54,15 +65,26 @@ export default function FilterModal(props) {
         <DividerView />
         <SizeFilter />
         <DividerView />
-        <GlobalButton
-          actionText="Apply"
-          backgroundColor="red"
-          marginTop={10}
-          width={160}
-          action={() => {
-            onModalHidden();
-          }}
-        />
+        <CategoryFilter />
+        <ProfileCell title='Brand' suggestion='adidas Originals, Jack & Jones, s.Oliver' screenName={ScreenNames.brandScreen}/>
+        <View style = {styles.button}>
+          <GlobalButton
+            actionText="Discard"
+            backgroundColor="red"
+            width={160}
+            action={() => {
+              onModalHidden();
+            }}
+          />
+          <GlobalButton
+            actionText="Apply"
+            backgroundColor="red"
+            width={160}
+            action={() => {
+              onModalHidden();
+            }}
+          />
+        </View>
       </View>
     </ReactNativeModal>
   );

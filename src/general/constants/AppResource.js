@@ -16,11 +16,13 @@ export const AppIcons = {
   heart_small_active: require('../../../src/assets/icons/heart_small_active.png'),
   star: require('../../../src/assets/icons/star.png'),
   star_inactive: require('../../../src/assets/icons/star_inactive.png'),
+  star_large: require('../../../src/assets/icons/star3x.png'),
   search: require('../../../src/assets/icons/search.png'),
   left_arrow: require('../../../src/assets/icons/left_arrow.png'),
   right_arrow: require('../../../src/assets/icons/arrow_right.png'),
   filter: require('../../../src/assets/icons/filter.png'),
   layout: require('../../../src/assets/icons/layout.png'),
+  grid_layout: require('../../../src/assets/icons/grid_layout.png'),
   sorting_arrow: require('../../../src/assets/icons/sorting_arrow.png'),
   more: require('../../../src/assets/icons/more.png'),
   add: require('../../../src/assets/icons/add.png'),
@@ -29,6 +31,9 @@ export const AppIcons = {
   checkbox_on: require('../../../src/assets/icons/checkbox_on.png'),
   checkbox_inactive: require('../../../src/assets/icons/checkbox_inactive.png'),
   helpful: require('../../../src/assets/icons/helpful.png'),
+  pen: require('../../../src/assets/icons/pen.png'),
+  photo_camera: require('../../../src/assets/icons/photo_camera.png'),
+  promo_arrow: require('../../../src/assets/icons/promo_arrow.png'),
 };
 export const AppImages = {
   big_banner: require('../../../src/assets/images/big_banner.png'),
@@ -39,4 +44,7 @@ export const AppImages = {
   bags: require('../../../src/assets/images/bags.png'),
   card: require('../../../src/assets/images/card.png'),
   chip: require('../../../src/assets/images/chip.png'),
+  fedex: require('../../../src/assets/images/fedex.png'),
+  usps: require('../../../src/assets/images/usps.png'),
+  dhl: require('../../../src/assets/images/dhl.png'),
 };

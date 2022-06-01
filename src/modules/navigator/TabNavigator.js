@@ -9,7 +9,7 @@ import { isAndroid } from '../../general/helpers/Utils';
 import CartScreen from '../screens/CartScreen/index';
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen/index';
-import RatingScreen from '../screens/RatingScreen/index';
+import SignupScreen from '../screens/SignupScreen/index';
 import NestedCategory from './NestedCategory';
 TabNavigator.propTypes = {};
 const Tab = createBottomTabNavigator();
@@ -89,7 +89,7 @@ function TabNavigator(props) {
       />
       <Tab.Screen
         name={ScreenNames.favoriteTab}
-        component={RatingScreen}
+        component={SignupScreen}
         options={{title: 'Favorites'}}
       />
       <Tab.Screen

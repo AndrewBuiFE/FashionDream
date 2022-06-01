@@ -7,9 +7,9 @@ import {
 import { AppIcons } from '../../../general/constants/AppResource';
 import AddButton from '../../components/AddButton/index';
 import AppHeaderNormal from '../../components/AppHeaderNormal/index';
+import CheckBox from '../../components/CheckBox/index';
 import AddCardModal from '../../views/AddCardModal/index';
 import Card from './Card/index';
-import CheckBox from './CheckBox/index';
 import styles from './styles';
 PaymentScreen.propTypes = {};
 PaymentScreen.defaultProps = {};
@@ -21,26 +21,25 @@ const CARD = [
     exp: '05/23',
     isDefault: true,
   },
-  // {
-  //   id: 2,
-  //   number: '* * * * * * * * * * * * 3947',
-  //   holder: 'Hoang',
-  //   exp: '05/23',
-  //   isDefault: false,
-  // },
-  // {
-  //   id: 3,
-  //   number: '* * * * * * * * * * * * 3947',
-  //   holder: 'Hoang',
-  //   exp: '05/23',
-  //   isDefault: false,
-  // },
+  {
+    id: 2,
+    number: '* * * * * * * * * * * * 3947',
+    holder: 'Hoang',
+    exp: '05/23',
+    isDefault: false,
+  },
+  {
+    id: 3,
+    number: '* * * * * * * * * * * * 3947',
+    holder: 'Hoang',
+    exp: '05/23',
+    isDefault: false,
+  },
 ];
 const Divider = () => <View style={{height: 39}}></View>;
 function PaymentScreen(props) {
   const [isShowAddCard, setShowAddCard] = useState(false);
   const insets = useSafeAreaInsets();
-  console.log(insets);
   const renderItem = ({item}) => {
     return (
       <View>
