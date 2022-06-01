@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { Text, View } from 'react-native';
 import ReactNativeModal from 'react-native-modal';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import PaymentCard from '../../../model/PaymentCard/index';
 import CheckBox from '../../components/CheckBox/index';
 import GlobalButton from '../../components/GlobalButton/index';
 import Modalheader from '../../components/ModalHeader/index';
@@ -11,9 +12,11 @@ AddCardModal.propTypes = {};
 AddCardModal.defaultProps = {};
 var menuIndex = -1;
 var isCheck = true;
+let newCard = new PaymentCard();
 export default function AddCardModal(props) {
   const {isVisible, onModalHidden, onMenuClick} = props;
   const insets = useSafeAreaInsets();
+  const date = new Date().getTime();
   return (
     <ReactNativeModal
       isVisible={isVisible}
@@ -42,13 +45,14 @@ export default function AddCardModal(props) {
         <View style={styles.titleSection}>
           <Text style={styles.titleText}>Add new card</Text>
         </View>
-        <View style={styles.inputContainer}>
+        {/* <View style={styles.inputContainer}>
           <TextInput
             placeholder="Name on card"
             placeholderTextColor={'#ABB4BD'}
             style={styles.textInput}
           />
-        </View>
+        </View> */}
+        <InputSection title={''} content={'Name on card'} />
         <InputSection title={'Card number'} content={'5546 8205 3693 3947'} />
         <InputSection title={'Expire date'} content={'05/22'} />
         <InputSection title={'CVV'} content={'567'} />

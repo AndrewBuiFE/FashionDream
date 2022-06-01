@@ -3,7 +3,7 @@ import { AppColors } from '../../../general/constants/AppStyle';
 // const insets = useSafeAreaInsets();
 const styles = StyleSheet.create({
   addCardContainer: {
-    height: '100%',
+    height: '90%',
     backgroundColor: '#1E1F28',
     borderTopLeftRadius: 34,
     borderTopRightRadius: 34,

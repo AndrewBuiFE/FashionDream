@@ -1,18 +1,20 @@
 import React from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { KeyboardAvoidingView, Text, View } from 'react-native';
 import ReactNativeModal from 'react-native-modal';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import ShippingAddress from '../../../model/ShippingAddress/index';
 import GlobalButton from '../../components/GlobalButton/index';
 import Modalheader from '../../components/ModalHeader/index';
 import InputSection from '../../screens/PaymentScreen/InputSection/index';
 import styles from './styles';
 ShippingModal.propTypes = {};
 ShippingModal.defaultProps = {};
-var menuIndex = -1;
-var isCheck = true;
+let newShip = new ShippingAddress();
 export default function ShippingModal(props) {
-  const {isVisible, onModalHidden, onMenuClick} = props;
+  const {isVisible, onModalHidden, onButtonClick} = props;
   const insets = useSafeAreaInsets();
+  const date = new Date().getTime();
+  newShip.Id = date;
   return (
     <ReactNativeModal
       isVisible={isVisible}
@@ -21,10 +23,7 @@ export default function ShippingModal(props) {
       }}
       onModalHide={() => {
         console.log('On modal hide');
-        if (menuIndex != -1 && onMenuClick) {
-          onMenuClick(menuIndex);
-        }
-        menuIndex = -1;
+        onButtonClick(newShip);
       }}
       hasBackdrop={true}
       avoidKeyboard={true}
@@ -37,23 +36,74 @@ export default function ShippingModal(props) {
       coverScreen={true}
       style={{margin: 0}}>
       <View style={[styles.addCardContainer, {bottom: insets.bottom}]}>
-        <Modalheader />
-        <View style={styles.titleSection}>
-          <Text style={styles.titleText}>Adding shipping addresses</Text>
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholder="Full name"
-            placeholderTextColor={'#ABB4BD'}
-            style={styles.textInput}
+        <KeyboardAvoidingView behavior={'position'}>
+          <Modalheader />
+          <View style={styles.titleSection}>
+            <Text style={styles.titleText}>Adding shipping addresses</Text>
+          </View>
+          {/* <View style={styles.inputContainer}>
+            <TextInput
+              placeholder="Full name"
+              placeholderTextColor={'#ABB4BD'}
+              style={styles.textInput}
+              value={name}
+              onChangeText={value => {
+                setName(value);
+                newShip.CustomerName = value;
+              }}
+            />
+          </View> */}
+          <InputSection
+            title={''}
+            content={'Full name'}
+            handleInput={value => {
+              newShip.CustomerName = value;
+            }}
           />
-        </View>
-        <InputSection title={'Address'} content={'3 Newbridge Court'} />
-        <InputSection title={'City'} content={'Chino Hills'} />
-        <InputSection title={'State/Province/Region'} content={'California'} />
-        <InputSection title={'Zip code (Postal Code)'} content={'91709'} />
-        <InputSection title={'Country'} content={'United States'} />
-        <GlobalButton actionText="SAVE ADDRESS" marginTop={40} />
+          <InputSection
+            title={'Address'}
+            content={'3 Newbridge Court'}
+            handleInput={value => {
+              newShip.Address = value;
+            }}
+          />
+          <InputSection
+            title={'City'}
+            content={'Chino Hills'}
+            handleInput={value => {
+              newShip.City = value;
+            }}
+          />
+          <InputSection
+            title={'State/Province/Region'}
+            content={'California'}
+            handleInput={value => {
+              newShip.State = value;
+            }}
+          />
+          <InputSection
+            title={'Zip code (Postal Code)'}
+            content={'91709'}
+            handleInput={value => {
+              newShip.Zipcode = value;
+            }}
+          />
+          <InputSection
+            title={'Country'}
+            content={'United States'}
+            handleInput={value => {
+              newShip.Country = value;
+            }}
+          />
+          <GlobalButton
+            actionText="SAVE ADDRESS"
+            marginTop={40}
+            action={() => {
+              console.log(newShip);
+              onModalHidden();
+            }}
+          />
+        </KeyboardAvoidingView>
       </View>
     </ReactNativeModal>
   );

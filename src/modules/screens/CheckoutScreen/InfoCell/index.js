@@ -1,7 +1,24 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import CheckBox from '../../../components/CheckBox/index';
 import styles from './styles';
+InfoCell.propTypes = {
+  name: PropTypes.string, 
+  address: PropTypes.string,
+  action: PropTypes.func,
+  actionType: PropTypes.string, 
+  isShowCheck: PropTypes.bool,
+  isCheck: PropTypes.bool,
+};
+InfoCell.defaultProps = {
+  name: '',
+  address: '',
+  action: () => {},
+  actionType: '',
+  isShowCheck: false,
+  isCheck: false,
+};
 export default function InfoCell(props) {
   const {name, address, action, actionType, isShowCheck, isCheck} = props;
   return (

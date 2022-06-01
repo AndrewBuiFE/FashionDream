@@ -10,8 +10,10 @@ import InfoCell from './InfoCell/index';
 import styles from './styles';
 CheckOutScreen.propTypes = {};
 CheckOutScreen.defaultProps = {};
+let delivery = 20;
 function CheckOutScreen(props) {
   const [isShowSuccess, setShowSuccess] = useState(false);
+  const {totalAmount} = props.route.params;
   return (
     <SafeAreaProvider>
       <View style={styles.checkoutContainer}>
@@ -62,7 +64,7 @@ function CheckOutScreen(props) {
             name={'Jane Doe'}
             actionType={'Change'}
             address={'3 Newbridge Court Chino Hills, CA 91709, United States'}
-            isShowCheck={true}
+            isShowCheck={false}
             action={() => {
               props.navigation.navigate(ScreenNames.shippingScreen);
             }}
@@ -100,18 +102,18 @@ function CheckOutScreen(props) {
           <View style={styles.orderContainer}>
             <View style={styles.orderRow}>
               <Text style={styles.orderTitle}>Order: </Text>
-              <Text style={styles.price}>$121</Text>
+              <Text style={styles.price}>${totalAmount}</Text>
             </View>
             <View style={styles.orderRow}>
               <Text style={styles.orderTitle}>Delivery: </Text>
-              <Text style={styles.price}>$23</Text>
+              <Text style={styles.price}>${delivery}</Text>
             </View>
             <View style={[styles.orderRow, {marginBottom: 0}]}>
               <Text style={[styles.orderTitle, {fontSize: 16, lineHeight: 26}]}>
                 Summary:
               </Text>
               <Text style={[styles.price, {fontSize: 18, lineHeight: 22}]}>
-                $144
+                ${totalAmount + delivery}
               </Text>
             </View>
           </View>
