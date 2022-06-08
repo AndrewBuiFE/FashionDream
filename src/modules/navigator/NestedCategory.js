@@ -1,9 +1,8 @@
-import {createNavigationContainerRef} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNavigationContainerRef } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import {ScreenNames} from '../../general/constants/ScreenNames';
+import { ScreenNames } from '../../general/constants/ScreenNames';
 import CatalogScreen from '../screens/CatalogScreen';
-import CategoryScreen from '../screens/CategoryScreen';
 import AllCategory from '../screens/CategoryScreen/AllCategory';
 NestedCategory.propTypes = {};
 const Stack = createNativeStackNavigator();
@@ -14,11 +13,11 @@ function NestedCategory(props) {
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen
+      {/* <Stack.Screen
         name={ScreenNames.categoryScreen}
         component={CategoryScreen}
         options={{headerShown: false}}
-      />
+      /> */}
       <Stack.Screen
         name={ScreenNames.allCategory}
         component={AllCategory}

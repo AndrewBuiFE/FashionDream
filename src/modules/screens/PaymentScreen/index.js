@@ -21,24 +21,25 @@ const CARD = [
     exp: '05/23',
     isDefault: true,
   },
-  {
-    id: 2,
-    number: '* * * * * * * * * * * * 3947',
-    holder: 'Hoang',
-    exp: '05/23',
-    isDefault: false,
-  },
-  {
-    id: 3,
-    number: '* * * * * * * * * * * * 3947',
-    holder: 'Hoang',
-    exp: '05/23',
-    isDefault: false,
-  },
+  // {
+  //   id: 2,
+  //   number: '* * * * * * * * * * * * 3947',
+  //   holder: 'Hoang',
+  //   exp: '05/23',
+  //   isDefault: false,
+  // },
+  // {
+  //   id: 3,
+  //   number: '* * * * * * * * * * * * 3947',
+  //   holder: 'Hoang',
+  //   exp: '05/23',
+  //   isDefault: false,
+  // },
 ];
 const Divider = () => <View style={{height: 39}}></View>;
 function PaymentScreen(props) {
   const [isShowAddCard, setShowAddCard] = useState(false);
+  const [cardData, setCardData] = useState(CARD);
   const insets = useSafeAreaInsets();
   const renderItem = ({item}) => {
     return (
@@ -71,27 +72,11 @@ function PaymentScreen(props) {
           onModalHidden={() => {
             setShowAddCard(false);
           }}
-          onMenuClick={menu => {
-            switch (menu) {
-              case 0:
-                console.log('0');
-                break;
-              case 1:
-                console.log('1');
-                break;
-              case 2:
-                console.log('2');
-                break;
-              case 3:
-                console.log('3');
-                break;
-              case 4:
-                console.log('4');
-                break;
-              default:
-                console.log('-1');
-                break;
-            }
+          onButtonClick={card => {
+            console.log("Card: ", card);
+            let tempCardData = [...cardData];
+            tempCardData.push(card);
+            console.log("Temp Card: ", tempCardData);
           }}
         />
         <View style={styles.contentContainer}>

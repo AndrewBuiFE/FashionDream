@@ -10,13 +10,14 @@ import InputSection from '../../screens/PaymentScreen/InputSection/index';
 import styles from './styles';
 AddCardModal.propTypes = {};
 AddCardModal.defaultProps = {};
-var menuIndex = -1;
 var isCheck = true;
 let newCard = new PaymentCard();
+
 export default function AddCardModal(props) {
-  const {isVisible, onModalHidden, onMenuClick} = props;
+  const {isVisible, onModalHidden, onButtonClick} = props;
   const insets = useSafeAreaInsets();
   const date = new Date().getTime();
+  newCard.Id = date;
   return (
     <ReactNativeModal
       isVisible={isVisible}
@@ -25,10 +26,7 @@ export default function AddCardModal(props) {
       }}
       onModalHide={() => {
         console.log('On modal hide');
-        if (menuIndex != -1 && onMenuClick) {
-          onMenuClick(menuIndex);
-        }
-        menuIndex = -1;
+        onButtonClick(newCard);
       }}
       hasBackdrop={true}
       avoidKeyboard={true}
@@ -52,17 +50,47 @@ export default function AddCardModal(props) {
             style={styles.textInput}
           />
         </View> */}
-        <InputSection title={''} content={'Name on card'} />
-        <InputSection title={'Card number'} content={'5546 8205 3693 3947'} />
-        <InputSection title={'Expire date'} content={'05/22'} />
-        <InputSection title={'CVV'} content={'567'} />
+        <InputSection
+          title={''}
+          content={'Name on card'}
+          handleInput={value => {
+            newCard.CardName = value;
+          }}
+        />
+        <InputSection
+          title={'Card number'}
+          content={'5546 8205 3693 3947'}
+          handleInput={value => {
+            newCard.CardNumber = value;
+          }}
+        />
+        <InputSection
+          title={'Expire date'}
+          content={'05/22'}
+          handleInput={value => {
+            newCard.ExpDate = value;
+          }}
+        />
+        <InputSection
+          title={'CVV'}
+          content={'567'}
+          handleInput={value => {
+            newCard.CVV = value;
+          }}
+        />
         <CheckBox
-          isCheck={true}
+          isCheck={false}
           message={'Set as default payment method'}
           marginLeft={16}
           marginTop={20}
         />
-        <GlobalButton actionText="ADD CARD" marginTop={25} />
+        <GlobalButton
+          actionText="ADD CARD"
+          marginTop={25}
+          action={() => {
+            onModalHidden();
+          }}
+        />
       </View>
     </ReactNativeModal>
   );
