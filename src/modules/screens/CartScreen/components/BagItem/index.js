@@ -1,69 +1,57 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-import {
-  AppIcons,
-  AppImages
-} from '../../../../../general/constants/AppResource';
+import { AppIcons } from '../../../../../general/constants/AppResource';
 import styles from './styles';
 BagItem.propTypes = {
-  name: PropTypes.string,
-  color: PropTypes.string,
-  size: PropTypes.string,
-  itemQuantity: PropTypes.number,
-  basePrice: PropTypes.number,
+  item: PropTypes.object,
   handleIncrement: PropTypes.func,
+  handleDescreasement: PropTypes.func,
 };
 BagItem.defaultProps = {
-  name: '',
-  color: '',
-  size: '',
-  itemQuantity: 0,
-  basePrice: 0,
+  item: null,
   handleIncrement: () => {},
+  handleDescreasement: () => {},
 };
-let tempPrice = 0;
-let tempQuantity = 0;
 function BagItem(props) {
-  const {
-    name,
-    color,
-    size,
-    itemQuantity,
-    basePrice,
-    handleIncrement,
-    handleDescreasement,
-  } = props;
-  const [quantity, setQuantity] = useState(itemQuantity);
-  tempPrice = basePrice * itemQuantity;
+  const {item, handleIncrement, handleDescreasement} = props;
+  let tempPrice = item.price * item.quantity;
+  let tempDiscountPrice = tempPrice - tempPrice * (item.discountPercent / 100);
+  const [quantity, setQuantity] = useState(item.quantity);
   const [price, setPrice] = useState(tempPrice);
+  const [discountPrice, setDiscountPrice] = useState(tempDiscountPrice);
   return (
     <TouchableOpacity style={styles.bagItem}>
       <View style={styles.imageSection}>
-        <Image source={AppImages.black} style={styles.image} />
+        <Image source={item.image} style={styles.image} />
       </View>
       <View style={styles.itemSection}>
         <View style={styles.itemName}>
-          <Text style={styles.nameText}>{name}</Text>
+          <Text style={styles.nameText}>{item.name}</Text>
         </View>
         <View style={styles.itemDetail}>
           <View>
-            <Text style={styles.itemText}>Color: {color}</Text>
+            <Text style={styles.itemText}>Color: {item.color}</Text>
           </View>
           <View style={{marginLeft: 13}}>
-            <Text style={styles.itemText}>Size: {size}</Text>
+            <Text style={styles.itemText}>Size: {item.size}</Text>
           </View>
         </View>
         <View style={styles.quantityChange}>
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              console.log('Quantity: ', quantity);
               if (quantity > 0) {
-                setQuantity(quantity - 1);
-                setPrice((quantity - 1) * basePrice);
+                let tempQuantity = quantity - 1;
+                tempPrice = tempQuantity * item.price;
+                tempDiscountPrice =
+                  tempPrice * (1 - item.discountPercent / 100);
+                setQuantity(tempQuantity);
+                setPrice(tempQuantity * item.price);
+                setDiscountPrice(tempDiscountPrice);
                 handleDescreasement();
               }
+              console.log('Quantity: ', quantity);
             }}>
             <Image source={AppIcons.remove} />
           </TouchableOpacity>
@@ -73,8 +61,12 @@ function BagItem(props) {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              setQuantity(quantity + 1);
-              setPrice((quantity + 1) * basePrice);
+              let tempQuantity = quantity + 1;
+              tempPrice = tempQuantity * item.price;
+              tempDiscountPrice = tempPrice * (1 - item.discountPercent / 100);
+              setQuantity(tempQuantity);
+              setPrice(tempPrice);
+              setDiscountPrice(tempDiscountPrice);
               handleIncrement();
             }}>
             <Image source={AppIcons.add} />
@@ -85,7 +77,8 @@ function BagItem(props) {
         <TouchableOpacity>
           <Image source={AppIcons.more} />
         </TouchableOpacity>
-        <Text style={styles.priceText}>${price}</Text>
+        <Text>${price}</Text>
+        <Text style={styles.priceText}>${discountPrice}</Text>
       </View>
     </TouchableOpacity>
   );

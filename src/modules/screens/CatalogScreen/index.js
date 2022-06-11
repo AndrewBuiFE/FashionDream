@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { AppIcons, AppImages } from '../../../general/constants/AppResource';
+import { AppIcons } from '../../../general/constants/AppResource';
 import AppHeader from '../../components/AppHeader/index';
 import FilterModal from '../../views/FilterModal';
 import SortModal from '../../views/SortModal';
@@ -10,69 +10,27 @@ import ProductCell from '../HomeScreen/components/ProductCell/index';
 import HorizonProduct from './components/HorizonProduct';
 import styles from './styles';
 CatalogScreen.propTypes = {
-  category: PropTypes.string,
+  item: PropTypes.object,
 };
 CatalogScreen.defaultProps = {
-  category: '',
+  item: null,
 };
-const DATA = [
-  {id: 1, title: 'Dress', brand: 'Perkins', price: 51, starCount: 2},
-  {id: 2, title: 'Pullover', brand: 'Mango', price: 38, starCount: 3},
-  {id: 3, title: 'Blouse', brand: 'Perkins', price: 150, starCount: 2},
-  {id: 4, title: 'T-shirt', brand: 'LOST Ink', price: 10, starCount: 5},
-  {id: 5, title: 'Shirt', brand: 'Topshop', price: 15, starCount: 4},
-];
-const GRID_DATA = [
-  {
-    id: '1',
-    starCount: 3,
-    brandName: 'Dorothy Perkins',
-    productName: 'Evening Dress',
-    price: 20,
-    discountPrice: 12,
-    image: AppImages.main,
-    description: 'dfkjdfkjdf',
-  },
-  {
-    id: '2',
-    starCount: 2,
-    brandName: 'Perkins',
-    productName: 'SDF',
-    price: 15,
-    discountPrice: 12,
-    image: AppImages.big_banner,
-    description: 'dfkjdfkjdf',
-  },
-  {
-    id: '3',
-    starCount: 4,
-    brandName: 'Dorothy',
-    productName: 'A',
-    price: 21,
-    discountPrice: 12,
-    image: AppImages.black,
-    description: 'dfkjdfkjdf',
-  },
-];
 const Divider = () => <View style={{height: 20}}></View>;
 function CatalogScreen(props) {
-  const {category} = props.route.params;
+  const {item} = props.route.params;
   const [isShowSortMenu, setShowSortMenu] = useState(false);
   const [isShowFilterMenu, setShowFilterMenu] = useState(false);
   const [isGridLayout, setGridLayout] = useState(false);
   const renderItem = ({item}) => (
     <HorizonProduct
-      brandName={item.brand}
-      price={item.price}
-      productName={item.title}
-      starCount={item.starCount}
+      item = {item}
     />
   );
-  const renderGridItem = ({item}) => <ProductCell item={item} width={164}/>;
+  const renderGridItem = ({item}) => <ProductCell item={item} width={164} />;
   return (
     <SafeAreaProvider>
       <View style={styles.catalogContainer}>
-        <AppHeader title={category}>
+        <AppHeader title={item.title}>
           <>
             <TouchableOpacity
               onPress={() => {
@@ -190,20 +148,19 @@ function CatalogScreen(props) {
           <FlatList
             key={'_'}
             keyExtractor={item => '_' + item.id}
-            data={GRID_DATA}
+            data={item.listProduct}
             renderItem={renderGridItem}
             showsVerticalScrollIndicator={false}
             numColumns={2}
             style={{marginTop: 26, marginLeft: 5}}
             ItemSeparatorComponent={Divider}
-            contentContainerStyle={{
-            }}
+            contentContainerStyle={{}}
           />
         ) : (
           <FlatList
             key={'#'}
             keyExtractor={item => '#' + item.id}
-            data={DATA}
+            data={item.listProduct}
             renderItem={renderItem}
             showsVerticalScrollIndicator={false}
           />

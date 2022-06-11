@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { PAYMENT_CARD, SHIPPING_ADDRESS } from '../../../data/index';
 import { AppIcons, AppImages } from '../../../general/constants/AppResource';
-import { ScreenNames } from '../../../general/constants/ScreenNames';
 import AppHeaderNormal from '../../components/AppHeaderNormal/index';
 import GlobalButton from '../../components/GlobalButton/index';
+import AddCardModal from '../../views/AddCardModal/index';
+import ShippingModal from '../../views/ShippingModal/index';
 import Success from '../../views/Success/index';
 import InfoCell from './InfoCell/index';
 import styles from './styles';
@@ -13,6 +15,10 @@ CheckOutScreen.defaultProps = {};
 let delivery = 20;
 function CheckOutScreen(props) {
   const [isShowSuccess, setShowSuccess] = useState(false);
+  const [isAddShipAddress, setAddShipAddress] = useState(false);
+  const [isShowAddCard, setShowAddCard] = useState(false);
+  const [cardData, setCardData] = useState(PAYMENT_CARD);
+  const [shipData, setShipData] = useState(SHIPPING_ADDRESS);
   const {totalAmount} = props.route.params;
   return (
     <SafeAreaProvider>
@@ -56,17 +62,45 @@ function CheckOutScreen(props) {
             }
           }}
         />
+        <ShippingModal
+          isVisible={isAddShipAddress}
+          item = {shipData}
+          onModalHidden={() => {
+            setAddShipAddress(false);
+          }}
+          onButtonClick={ship => {
+            console.log('ship: ', ship);
+            let tempShipData = [...shipData];
+            tempShipData.push(ship);
+            console.log('Temp ship: ', tempShipData);
+            // setShipData(tempShipData);
+          }}
+        />
+        <AddCardModal
+          isVisible={isShowAddCard}
+          item = {cardData}
+          onModalHidden={() => {
+            setShowAddCard(false);
+          }}
+          onButtonClick={card => {
+            console.log('Card: ', card);
+            let tempCardData = [...cardData];
+            tempCardData.push(card);
+            console.log('Temp Card: ', tempCardData);
+          }}
+        />
         <View style={styles.contentContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>Shipping address</Text>
           </View>
           <InfoCell
-            name={'Jane Doe'}
+            name={shipData.customerName}
             actionType={'Change'}
-            address={'3 Newbridge Court Chino Hills, CA 91709, United States'}
+            address={shipData.address}
             isShowCheck={false}
             action={() => {
-              props.navigation.navigate(ScreenNames.shippingScreen);
+              setAddShipAddress(true);
+              // props.navigation.navigate(ScreenNames.shippingScreen);
             }}
           />
           <View style={styles.paymentContainer}>
@@ -79,7 +113,8 @@ function CheckOutScreen(props) {
               <Text style={styles.title}>Payment</Text>
               <TouchableOpacity
                 onPress={() => {
-                  props.navigation.navigate(ScreenNames.paymentScreen);
+                  // props.navigation.navigate(ScreenNames.paymentScreen);
+                  setShowAddCard(true);
                 }}>
                 <Text style={styles.action}>Change</Text>
               </TouchableOpacity>
@@ -88,16 +123,16 @@ function CheckOutScreen(props) {
               <View style={styles.card}>
                 <Image source={AppImages.card} />
               </View>
-              <Text style={styles.text}>**** **** **** 3947</Text>
+              <Text style={styles.text}>{cardData.cardNumber}</Text>
             </View>
           </View>
           <View style={[styles.titleContainer, {marginTop: 51}]}>
             <Text style={styles.title}>Delivery method</Text>
           </View>
           <View style={styles.deliveryContainer}>
-            <Image source={AppImages.fedex}/>
-            <Image source={AppImages.usps}/>
-            <Image source={AppImages.dhl}/>
+            <Image source={AppImages.fedex} />
+            <Image source={AppImages.usps} />
+            <Image source={AppImages.dhl} />
           </View>
           <View style={styles.orderContainer}>
             <View style={styles.orderRow}>
@@ -118,9 +153,13 @@ function CheckOutScreen(props) {
             </View>
           </View>
         </View>
-        <GlobalButton actionText="SUBMIT ORDER" marginTop={23} action = {() => {
-          setShowSuccess(true);
-        }}/>
+        <GlobalButton
+          actionText="SUBMIT ORDER"
+          marginTop={23}
+          action={() => {
+            setShowSuccess(true);
+          }}
+        />
       </View>
     </SafeAreaProvider>
   );

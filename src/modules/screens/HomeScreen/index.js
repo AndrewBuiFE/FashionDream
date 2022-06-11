@@ -8,6 +8,7 @@ import {
   View
 } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { PRODUCT } from '../../../data/index';
 import { AppImages } from '../../../general/constants/AppResource';
 import { ScreenNames } from '../../../general/constants/ScreenNames';
 import ProductCell from './components/ProductCell';
@@ -19,93 +20,13 @@ const DATA = [
     title: 'Sale',
     horizontal: true,
     description: 'Super summer sale',
-    data: [
-      {
-        starCount: 3,
-        discountPercent: 10,
-        brandName: 'Dorothy Perkins',
-        productName: 'Evening Dress',
-        price: 20,
-        color: 'red',
-        size: 'M',
-        storeStatus: 'have',
-        noComment: 6,
-        image: AppImages.black,
-        description: 'dfkjdfkjdf',
-      },
-      {
-        starCount: 4,
-        discountPercent: 10,
-        brandName: 'Perkins',
-        productName: 'SDF',
-        price: 15,
-        color: 'red',
-        size: 'M',
-        storeStatus: 'have',
-        noComment: 6,
-        image: AppImages.men_hat,
-        description: 'dfkjdfkjdf',
-      },
-      {
-        starCount: 5,
-        discountPercent: 10,
-        brandName: 'Dorothy',
-        productName: 'A',
-        price: 21,
-        color: 'red',
-        size: 'M',
-        storeStatus: 'have',
-        noComment: 6,
-        image: AppImages.small_banner,
-        description: 'dfkjdfkjdf',
-      },
-    ],
+    data: PRODUCT,
   },
   {
     title: 'New',
     horizontal: true,
     description: 'You’ve never seen it before!',
-    data: [
-      {
-        starCount: 1,
-        discountPercent: 10,
-        brandName: 'Dorothy Perkins',
-        productName: 'Evening Dress',
-        price: 20,
-        color: 'red',
-        size: 'M',
-        storeStatus: 'have',
-        noComment: 6,
-        image: AppImages.main,
-        description: 'dfkjdfkjdf',
-      },
-      {
-        starCount: 3,
-        discountPercent: 10,
-        brandName: 'Perkins',
-        productName: 'SDF',
-        price: 15,
-        color: 'red',
-        size: 'M',
-        storeStatus: 'have',
-        noComment: 6,
-        image: AppImages.big_banner,
-        description: 'dfkjdfkjdf',
-      },
-      {
-        starCount: 2,
-        discountPercent: 10,
-        brandName: 'Dorothy',
-        productName: 'A',
-        price: 21,
-        color: 'red',
-        size: 'M',
-        storeStatus: 'have',
-        noComment: 6,
-        image: AppImages.black,
-        description: 'dfkjdfkjdf',
-      },
-    ],
+    data: PRODUCT,
   },
 ];
 const renderItem = ({item, section}) => {
@@ -224,4 +145,8 @@ function HomeScreen(props) {
     </SafeAreaProvider>
   );
 }
+// const actions = {};
+// export default connect(state => {
+//   return {};
+// }, actions)(HomeScreen);
 export default HomeScreen;

@@ -16,9 +16,10 @@ ProductCell.defaultProps = {
   width: 150,
   onItemClick: () => {},
 };
-
+var discountPrice = 0;
 function ProductCell(props) {
   const {item, onItemClick, width} = props;
+  discountPrice = item.price - item.price * (item.discountPercent/100);
   const navigation = useNavigation();
   return (
     <TouchableOpacity
@@ -32,7 +33,7 @@ function ProductCell(props) {
       <View style={[styles.imageSection, {width: width}]}>
         <Image source={item.image} style={styles.image} />
         <View style={styles.discountContainer}>
-          <Text style={styles.discountText}>-20%</Text>
+          <Text style={styles.discountText}>-{item.discountPercent}%</Text>
         </View>
         <View style={styles.likeContainer}>
           <Image source={AppIcons.heart_small} />
@@ -41,15 +42,15 @@ function ProductCell(props) {
       <View style={styles.infoSection}>
         <View style = {styles.starSection}>
         <Star starCount={item.starCount} starType='small' width={item.starCount*14}/>
-          <Text>(3)</Text>
+          <Text>({item.noComment})</Text>
         </View>
         <View style={styles.textSection}>
-          <Text style={styles.brand}>{item.brandName}</Text>
-          <Text style={styles.product}>{item.productName}</Text>
+          <Text style={styles.brand}>{item.brand}</Text>
+          <Text style={styles.product}>{item.name}</Text>
           <View style={styles.priceSection}>
             <Text style={styles.price}>{item.price}$</Text>
             <Text style={[styles.price, {color: '#FF3E3E', marginLeft: 4}]}>
-              {item.discountPrice}$
+              {discountPrice}$
             </Text>
           </View>
         </View>

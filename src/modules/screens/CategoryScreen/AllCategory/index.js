@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { CATEGORY } from '../../../../data/index';
 import { AppIcons } from '../../../../general/constants/AppResource';
 import { ScreenNames } from '../../../../general/constants/ScreenNames';
 import AppHeaderNormal from '../../../components/AppHeaderNormal';
@@ -8,24 +9,11 @@ import GlobalButton from '../../../components/GlobalButton/index';
 import styles from './styles';
 AllCategory.propTypes = {};
 AllCategory.defaultProps = {};
-const DATA = [
-  {id: 1, title: 'Tops'},
-  {id: 2, title: 'Shirts & Blouses'},
-  {id: 3, title: 'Cardigans & Sweaters'},
-  {id: 4, title: 'Knitwear'},
-  {id: 5, title: 'Blazers'},
-  {id: 6, title: 'Outerwear'},
-  {id: 7, title: 'Pants'},
-  {id: 8, title: 'Jeans'},
-  {id: 9, title: 'Shorts'},
-  {id: 10, title: 'Skirts'},
-  {id: 11, title: 'Dresses'},
-];
 const CategoryItem = ({item, navigation}) => (
   <TouchableOpacity
     style={styles.categoryItem}
     onPress={() => {
-      navigation.navigate(ScreenNames.catalogScreen, {category: item.title});
+      navigation.navigate(ScreenNames.catalogScreen, {item: item});
     }}>
     <Text style={styles.title}>{item.title}</Text>
   </TouchableOpacity>
@@ -56,7 +44,7 @@ function AllCategory(props) {
         <GlobalButton actionText='VIEW ALL ITEMS' marginTop={16} />
         <Text style={styles.text}>Choose category</Text>
         <FlatList
-          data={DATA}
+          data={CATEGORY}
           renderItem={renderItem}
           ItemSeparatorComponent={Divider}
           style={{marginTop: 15}}

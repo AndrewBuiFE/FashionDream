@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { connect, useSelector } from '../../../../node_modules/react-redux/es/exports';
+import { CART } from '../../../data/index';
 import { AppIcons } from '../../../general/constants/AppResource';
 import { ScreenNames } from '../../../general/constants/ScreenNames';
 import AppHeader from '../../components/AppHeader/index';
@@ -13,90 +15,44 @@ import styles from './styles';
 CartScreen.propTypes = {};
 CartScreen.defaultProps = {};
 let promoCodeValue = '';
-let BAG_DATA = [
-  {
-    id: '1',
-    name: 'Hoang',
-    size: 'L',
-    color: 'black',
-    basePrice: 20,
-    itemQuantity: 2,
-  },
-  {
-    id: '2',
-    name: 'Hoa',
-    size: 'M',
-    color: 'blue',
-    basePrice: 25,
-    itemQuantity: 2,
-  },
-  {
-    id: '3',
-    name: 'Hoa',
-    size: 'L',
-    color: 'black',
-    basePrice: 40,
-    itemQuantity: 3,
-  },
-  {
-    id: '4',
-    name: 'Hoa',
-    size: 'L',
-    color: 'black',
-    basePrice: 10,
-    itemQuantity: 2,
-  },
-  {
-    id: '5',
-    name: 'Hoang',
-    size: 'L',
-    color: 'black',
-    basePrice: 25,
-    itemQuantity: 1,
-  },
-];
-const calculateTotal = (itemData) => {
+
+const calculateTotal = itemData => {
   let total = 0;
   for (let item of itemData) {
-    total = total + item.basePrice * item.itemQuantity; 
+    let discountPrice = item.price - item.price * (item.discountPercent / 100);
+    total += discountPrice;
   }
   return total;
-}
+};
 function CartScreen(props) {
-  let totalMoney = calculateTotal(BAG_DATA);
+  let totalMoney = calculateTotal(CART.listProduct);
   const [isShowPromoModal, setShowPromoModal] = useState(false);
   const [isShowSuccess, setShowSuccess] = useState(false);
   const [quantity, setQuantity] = useState(0);
   const [total, setTotal] = useState(totalMoney);
-  const renderItem = ({item, index}) => {
-    return <BagItem
-      basePrice={item.basePrice}
-      color={item.color}
-      itemQuantity={item.itemQuantity}
-      name={item.name}
-      size={item.size}
-      handleIncrement = {
-        () => {
+  const {setCardData} = useSelector(state => state.cart)
+  const renderItem = ({item}) => {
+    return (
+      <BagItem
+        item={item}
+        handleIncrement={() => {
           console.log('Increase!');
-          item.itemQuantity = item.itemQuantity + 1;
-          // setQuantity(item.itemQuantity);
-          console.log("Item quantity: ", item.itemQuantity);
-          console.log("Total: ", calculateTotal(BAG_DATA));
-          setTotal(calculateTotal(BAG_DATA));
-        }
-      }
-      handleDescreasement = {
-        () => {
+          // item.itemQuantity = item.itemQuantity + 1;
+          // // setQuantity(item.itemQuantity);
+          // console.log('Item quantity: ', item.itemQuantity);
+          // console.log('Total: ', calculateTotal(CART));
+          // setTotal(calculateTotal(CART));
+        }}
+        handleDescreasement={() => {
           console.log('Descrease!');
-          item.itemQuantity = item.itemQuantity - 1;
-          // setQuantity(item.itemQuantity);
-          console.log("Item quantity: ", item.itemQuantity);
-          setTotal(calculateTotal(BAG_DATA));
-          
-        }
-      }
-    />
-}
+          // item.itemQuantity = item.itemQuantity - 1;
+          // // setQuantity(item.itemQuantity);
+          // console.log('Item quantity: ', item.itemQuantity);
+          // setTotal(calculateTotal(CART));
+        }}
+      />
+    );
+  };
   return (
     <SafeAreaProvider>
       <View style={styles.cartContainer}>
@@ -152,12 +108,16 @@ function CartScreen(props) {
             setShowSuccess(false);
           }}
         />
-        <FlatList data={BAG_DATA} renderItem={renderItem} />
+        <FlatList data={CART.listProduct} renderItem={renderItem} />
         <PromoCode
           setShowPromoModal={setShowPromoModal}
           marginTop={25}
           inputValue={promoCodeValue}
         />
+        <View style={styles.total}>
+          <Text style={styles.totalText}>Discount:</Text>
+          <Text style={styles.priceText}>${total}</Text>
+        </View>
         <View style={styles.total}>
           <Text style={styles.totalText}>Total amount:</Text>
           <Text style={styles.priceText}>${total}</Text>
@@ -166,11 +126,18 @@ function CartScreen(props) {
           actionText="CHECK OUT"
           marginTop={24}
           action={() => {
-            props.navigation.navigate(ScreenNames.checkoutScreen, {totalAmount: total});
+            props.navigation.navigate(ScreenNames.checkoutScreen, {
+              totalAmount: total,
+            });
           }}
         />
       </View>
     </SafeAreaProvider>
   );
 }
-export default CartScreen;
+const actions = {}
+export default connect(state => {
+  return {};
+}, actions)
+(CartScreen);
+// export default CartScreen;

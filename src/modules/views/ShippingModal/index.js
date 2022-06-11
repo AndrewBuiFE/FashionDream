@@ -11,7 +11,8 @@ ShippingModal.propTypes = {};
 ShippingModal.defaultProps = {};
 let newShip = new ShippingAddress();
 export default function ShippingModal(props) {
-  const {isVisible, onModalHidden, onButtonClick} = props;
+  const {isVisible, onModalHidden, onButtonClick, item} = props;
+  console.log("ship item: ", item)
   const insets = useSafeAreaInsets();
   const date = new Date().getTime();
   newShip.Id = date;
@@ -23,7 +24,7 @@ export default function ShippingModal(props) {
       }}
       onModalHide={() => {
         console.log('On modal hide');
-        onButtonClick(newShip);
+        // onButtonClick(newShip);
       }}
       hasBackdrop={true}
       avoidKeyboard={true}
@@ -39,7 +40,7 @@ export default function ShippingModal(props) {
         <KeyboardAvoidingView behavior={'position'}>
           <Modalheader />
           <View style={styles.titleSection}>
-            <Text style={styles.titleText}>Adding shipping addresses</Text>
+            <Text style={styles.titleText}>Shipping Addresses</Text>
           </View>
           {/* <View style={styles.inputContainer}>
             <TextInput
@@ -54,43 +55,43 @@ export default function ShippingModal(props) {
             />
           </View> */}
           <InputSection
-            title={''}
-            content={'Full name'}
+            title={'Full name'}
+            content={item.customerName}
             handleInput={value => {
               newShip.CustomerName = value;
             }}
           />
           <InputSection
             title={'Address'}
-            content={'3 Newbridge Court'}
+            content={item.address}
             handleInput={value => {
               newShip.Address = value;
             }}
           />
           <InputSection
             title={'City'}
-            content={'Chino Hills'}
+            content={item.city}
             handleInput={value => {
               newShip.City = value;
             }}
           />
           <InputSection
             title={'State/Province/Region'}
-            content={'California'}
+            content={item.state}
             handleInput={value => {
               newShip.State = value;
             }}
           />
           <InputSection
             title={'Zip code (Postal Code)'}
-            content={'91709'}
+            content={item.zipcode.toString()}
             handleInput={value => {
               newShip.Zipcode = value;
             }}
           />
           <InputSection
             title={'Country'}
-            content={'United States'}
+            content={item.country}
             handleInput={value => {
               newShip.Country = value;
             }}
