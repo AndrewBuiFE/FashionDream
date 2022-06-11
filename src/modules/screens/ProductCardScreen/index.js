@@ -11,12 +11,12 @@ ProductCardScreen.propTypes = {};
 ProductCardScreen.defaultProps = {};
 
 function ProductCardScreen(props) {
-  const {document} = props.route.params;
+  const document = props.route.params.document;
   const [isShowSizeMenu, setShowSizeMenu] = useState(false);
   return (
     <SafeAreaProvider>
       <View style={styles.homeContainer}>
-        <AppHeaderNormal title={document.productName}>
+        <AppHeaderNormal title={document.name}>
           <>
             <TouchableOpacity
               onPress={() => {
@@ -80,11 +80,11 @@ function ProductCardScreen(props) {
         </View>
         <View style={styles.itemContainer}>
           <View style={styles.itemName}>
-            <Text style={styles.itemText}>{document.productName}</Text>
+            <Text style={styles.itemText}>{document.name}</Text>
             <Text style={styles.itemText}>${document.price}</Text>
           </View>
           <View style={styles.brand}>
-            <Text style={styles.brandText}>{document.brandName}</Text>
+            <Text style={styles.brandText}>{document.brand}</Text>
           </View>
           <View style={styles.starSection}>
             <Star starCount={document.starCount} />

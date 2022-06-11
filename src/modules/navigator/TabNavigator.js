@@ -71,7 +71,7 @@ function TabNavigator(props) {
         tabBarInactiveTintColor: AppColors.tabBarNormalColor,
         tabBarActiveTintColor: AppColors.tabBarFocusedColor,
       })}
-      initialRouteName={ScreenNames.favoriteTab}>
+      initialRouteName={ScreenNames.homeTab}>
       <Tab.Screen
         name={ScreenNames.homeTab}
         component={HomeScreen}

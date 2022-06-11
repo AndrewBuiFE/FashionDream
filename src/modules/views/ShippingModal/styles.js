@@ -5,8 +5,8 @@ const styles = StyleSheet.create({
   addCardContainer: {
     height: '100%',
     backgroundColor: '#1E1F28',
-    borderTopLeftRadius: 34,
-    borderTopRightRadius: 34,
+    // borderTopLeftRadius: 34,
+    // borderTopRightRadius: 34,
     position: 'absolute',
     width: '100%',
   },

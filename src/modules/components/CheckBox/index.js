@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { AppIcons } from '../../../general/constants/AppResource';
 import styles from './styles';
 export default function CheckBox(props) {
   const {isCheck, message, marginLeft, marginTop, marginBottom} = props;
+  const [check, setCheck] = useState(isCheck);
   return (
     <View
       style={[
@@ -14,15 +15,15 @@ export default function CheckBox(props) {
           marginBottom: marginBottom,
         },
       ]}>
-      {isCheck ? (
-        <TouchableOpacity>
-          <Image source={AppIcons.checkbox_on} />
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity>
-          <Image source={AppIcons.checkbox_inactive} />
-        </TouchableOpacity>
-      )}
+      <TouchableOpacity
+        onPress={() => {
+          setCheck(!check);
+        }}>
+        <Image
+          source={check ? AppIcons.checkbox_on : AppIcons.checkbox_inactive}
+        />
+      </TouchableOpacity>
+
       <Text style={styles.boxText}>{message}</Text>
     </View>
   );

@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppIcons } from '../../../general/constants/AppResource';
+import { ScreenNames } from '../../../general/constants/ScreenNames';
 import AppHeader from '../../components/AppHeader';
 import GlobalButton from '../../components/GlobalButton/index';
 import styles from './styles';
@@ -18,12 +19,12 @@ export default function LoginScreen(props) {
     <SafeAreaView>
       <AppHeader backgroundColor="black" title="Login">
         <>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => {
               props.navigation.goBack();
             }}>
             <Image source={AppIcons.left_arrow} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </>
         <></>
       </AppHeader>
@@ -49,7 +50,11 @@ export default function LoginScreen(props) {
               <Image source={AppIcons.arrow_right} />
             </TouchableOpacity>
           </View>
-          <GlobalButton  actionText='LOGIN' marginTop={30} />
+          <GlobalButton  actionText='LOGIN' marginTop={30} action={
+            () => {
+              props.navigation.navigate(ScreenNames.mainTab);
+            }
+          }/>
           <View style={{marginTop: 194}}>
             <Text style={styles.text}>Or login with social account</Text>
           </View>
