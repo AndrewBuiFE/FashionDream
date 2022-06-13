@@ -1,18 +1,27 @@
 import React, { useState } from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
 import { AppIcons } from '../../../general/constants/AppResource';
 import AppHeaderNormal from '../../components/AppHeaderNormal/index';
 import GlobalButton from '../../components/GlobalButton/index';
 import Star from '../../components/Star/index';
+import SelectColorModal from '../../views/SelectColorModal';
 import SelectSizeModal from '../../views/SelectSizeModal/index';
+import CartUtils from '../CartScreen/CartUtils';
 import styles from './styles';
 ProductCardScreen.propTypes = {};
 ProductCardScreen.defaultProps = {};
 
+var cartUtils = new CartUtils();
 function ProductCardScreen(props) {
   const document = props.route.params.document;
   const [isShowSizeMenu, setShowSizeMenu] = useState(false);
+  const [isShowColorMenu, setShowColorMenu] = useState(false);
+  const [productColor, setProductColor] = useState('');
+  const [productSize, setProductSize] = useState('');
+  const {cartData} = useSelector(state => state.cart);
+  console.log(cartData);
   return (
     <SafeAreaProvider>
       <View style={styles.homeContainer}>
@@ -31,33 +40,22 @@ function ProductCardScreen(props) {
             </TouchableOpacity>
           </>
         </AppHeaderNormal>
-        {/* <FlatList data={document} renderItem={renderItem} /> */}
         <SelectSizeModal
           isVisible={isShowSizeMenu}
           onModalHidden={() => {
             setShowSizeMenu(false);
           }}
-          onMenuClick={menu => {
-            switch (menu) {
-              case 0:
-                console.log('0');
-                break;
-              case 1:
-                console.log('1');
-                break;
-              case 2:
-                console.log('2');
-                break;
-              case 3:
-                console.log('3');
-                break;
-              case 4:
-                console.log('4');
-                break;
-              default:
-                console.log('-1');
-                break;
-            }
+          onAddSize={size => {
+            setProductSize(size);
+          }}
+        />
+        <SelectColorModal
+          isVisible={isShowColorMenu}
+          onModalHidden={() => {
+            setShowColorMenu(false);
+          }}
+          onAddColor={color => {
+            setProductColor(color);
           }}
         />
         <View style={styles.imageSection}>
@@ -69,11 +67,19 @@ function ProductCardScreen(props) {
             onPress={() => {
               setShowSizeMenu(true);
             }}>
-            <Text style={styles.boxText}>Size</Text>
+            <Text style={styles.boxText}>
+              {productSize.length > 0 ? productSize : 'Size'}
+            </Text>
           </TouchableOpacity>
-          <View style={styles.selectionBox}>
-            <Text style={styles.boxText}>Black</Text>
-          </View>
+          <TouchableOpacity
+            style={styles.selectionBox}
+            onPress={() => {
+              setShowColorMenu(true);
+            }}>
+            <Text style={styles.boxText}>
+              {productColor.length > 0 ? productColor : 'Color'}
+            </Text>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.likeContainer}>
             <Image source={AppIcons.heart_small} />
           </TouchableOpacity>
@@ -95,7 +101,29 @@ function ProductCardScreen(props) {
             {document.description}
           </Text>
         </View>
-        <GlobalButton actionText="ADD TO CART" marginTop={20} />
+        <GlobalButton
+          actionText="ADD TO CART"
+          marginTop={20}
+          action={() => {
+            if (productColor.length < 1 || productSize.length < 1)
+              Alert.alert('Failed!', 'Need to choose both size and color');
+            else {
+              let product = {
+                ...document,
+                color: productColor,
+                size: productSize,
+              };
+              let isDuplicate = cartUtils.isDuplicateProduct(product, cartData);
+              if (!isDuplicate) {
+                product.id = Date.now();
+                console.log("adding...");
+                cartUtils.addCartItem(product, cartData);
+              }
+
+              props.navigation.goBack();
+            }
+          }}
+        />
       </View>
     </SafeAreaProvider>
   );

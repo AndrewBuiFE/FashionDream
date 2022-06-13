@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 // Get preference value with key
 export const getPreference = async (key = "", defaultValue = null) => {
   try {

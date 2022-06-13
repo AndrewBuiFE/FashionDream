@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
-import React, {useState} from 'react';
-import {FlatList, Text, View} from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, Text, View } from 'react-native';
+import { SIZES } from '../../../../../data';
 import SizeCell from '../SizeCell/index';
 import styles from './styles';
 SizeFilter.propTypes = {
@@ -11,28 +12,6 @@ SizeFilter.defaultProps = {
   colorOnFocus: '',
   setColorFocus: () => {},
 };
-let SIZES = [
-  {
-    id: 1,
-    title: 'XS',
-  },
-  {
-    id: 2,
-    title: 'S',
-  },
-  {
-    id: 3,
-    title: 'M',
-  },
-  {
-    id: 4,
-    title: 'L',
-  },
-  {
-    id: 5,
-    title: 'XL',
-  },
-];
 
 export default function SizeFilter(props) {
   console.log('Size filter');

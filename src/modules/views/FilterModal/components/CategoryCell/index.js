@@ -1,40 +1,52 @@
 import PropTypes from 'prop-types';
-import React, {useState} from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import React from 'react';
+import { Text, TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setSizeFocus,
+  setSizeIdFocus
+} from '../../../../screens/ProductCardScreen/ProductSlice';
 import styles from './styles';
 CategoryCell.propTypes = {
-  colorOnFocus: PropTypes.string,
-  setColorFocus: PropTypes.func,
+  item: PropTypes.object,
 };
 CategoryCell.defaultProps = {
-  colorOnFocus: '',
-  setColorFocus: () => {},
+  item: null,
 };
 
 export default function CategoryCell(props) {
-  const {item, sizeData, setSizeData} = props;
-  const [sizeOnFocus, setSizeFocus] = useState(false);
+  const {item} = props;
+  const {sizeIdFocus, isSizeFocus} = useSelector(state => state.product);
+  const dispatch = useDispatch();
   return (
     <TouchableOpacity
       style={[
         styles.categoryContainer,
         {
-          backgroundColor: sizeOnFocus ? '#EF3651' : 'black',
-          borderColor: sizeOnFocus ? '#EF3651' : '#ABB4BD',
+          backgroundColor:
+            isSizeFocus && item.id == sizeIdFocus ? '#EF3651' : 'black',
+          borderColor:
+            isSizeFocus && item.id == sizeIdFocus ? '#EF3651' : '#ABB4BD',
         },
       ]}
       onPress={() => {
-        let tempData = sizeData;
-        let cell = tempData.filter(obj => obj.id == item.id);
-        cell.onFocus = !cell.onFocus;
-        setSizeData(tempData);
-        setSizeFocus(!sizeOnFocus);
+        if (isSizeFocus && item.id == sizeIdFocus)
+          dispatch(setSizeFocus(false));
+        else if (!isSizeFocus && item.id == sizeIdFocus)
+          dispatch(setSizeFocus(true));
+        else if (!isSizeFocus && item.id != sizeIdFocus) {
+          dispatch(setSizeFocus(true));
+          dispatch(setSizeIdFocus(item.id));
+        } else {
+          dispatch(setSizeIdFocus(item.id));
+        }
       }}>
       <Text
         style={[
           styles.sizeText,
           {
-            color: sizeOnFocus ? '#2A2C36' : '#F7F7F7',
+            color:
+              isSizeFocus && item.id == sizeIdFocus ? '#2A2C36' : '#F7F7F7',
           },
         ]}>
         {item.title}

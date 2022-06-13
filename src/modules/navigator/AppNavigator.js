@@ -1,6 +1,6 @@
 import {
-  createNavigationContainerRef,
-  NavigationContainer
+    createNavigationContainerRef,
+    NavigationContainer
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
@@ -68,7 +68,7 @@ function AppNavigator(props) {
             options={{headerShown: false}}
           />
           <Stack.Screen
-            name={ScreenNames.productCartScreen}
+            name={ScreenNames.productCardScreen}
             component={ProductCardScreen}
             options={{headerShown: false}}
           />

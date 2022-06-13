@@ -4,31 +4,35 @@ import { FlatList, Text, View } from 'react-native';
 import ReactNativeModal from 'react-native-modal';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
-import { SIZES } from '../../../data';
+import { COLORS } from '../../../data';
 import { AppColors } from '../../../general/constants/AppStyle';
 import GlobalButton from '../../components/GlobalButton/index';
 import Modalheader from '../../components/ModalHeader/index';
-import { setSizeFocus } from '../../screens/ProductCardScreen/ProductSlice';
+import { setColorFocus } from '../../screens/ProductCardScreen/ProductSlice';
 import ProfileCell from '../../screens/ProfileScreen/ProfileCell';
-import CategoryCell from '../FilterModal/components/CategoryCell/index';
+import ColorCell from '../FilterModal/components/ColorCell';
 import styles from './styles';
-SelectSizeModal.propTypes = {
+SelectColorModal.propTypes = {
   isVisible: PropTypes.bool,
   onModalHidden: PropTypes.func,
-  onAddSize: PropTypes.func,
+  onAddColor: PropTypes.func,
 };
-SelectSizeModal.defaultProps = {
-  isVisible: false,
+SelectColorModal.defaultProps = {
+  isVisible: true,
   onModalHidden: () => {},
-  onAddSize: () => {},
+  onAddColor: () => {},
 };
-export default function SelectSizeModal(props) {
-  const {isVisible, onModalHidden, onAddSize} = props;
+export default function SelectColorModal(props) {
+  const {isVisible, onModalHidden, onAddColor} = props;
   const insets = useSafeAreaInsets();
-  const {sizeIdFocus, isSizeFocus} = useSelector(state => state.product);
+  const {colorIdFocus, isColorFocus} = useSelector(state => state.product);
   const dispatch = useDispatch();
   const renderItem = ({item}) => {
-    return <CategoryCell item={item} />;
+    return (
+      <ColorCell
+        item={item}
+      />
+    );
   };
   return (
     <ReactNativeModal
@@ -38,17 +42,17 @@ export default function SelectSizeModal(props) {
       }}
       onModalHide={() => {
         console.log('On modal hide');
-        if (isSizeFocus && onAddSize) {
-          let sizeName = '';
-          for (let size of SIZES) {
-            if (size.id == sizeIdFocus) {
-              sizeName = size.title;
+        if (isColorFocus && onAddColor) {
+          let colorName = '';
+          for (let color of COLORS) {
+            if (color.id == colorIdFocus) {
+              colorName = color.name;
               continue;
             }
           }
-          onAddSize(sizeName);
+          onAddColor(colorName);
         }
-        dispatch(setSizeFocus(false));
+        dispatch(setColorFocus(false));
       }}
       hasBackdrop={true}
       avoidKeyboard={true}
@@ -63,12 +67,11 @@ export default function SelectSizeModal(props) {
       <View style={[styles.sizeContainer, {bottom: insets.bottom}]}>
         <Modalheader />
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Select size</Text>
+          <Text style={styles.title}>Select color</Text>
         </View>
         <FlatList
-          data={SIZES}
+          data={COLORS}
           renderItem={renderItem}
-          horizontal={false}
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
             marginHorizontal: 26,
@@ -76,18 +79,18 @@ export default function SelectSizeModal(props) {
             marginTop: 22,
             justifyContent: 'space-between',
           }}
-          numColumns={3}
+          numColumns={5}
         />
         <View style={[styles.divider, {marginTop: 0}]}></View>
         <ProfileCell
-          title="Size info"
+          title="Color info"
           backgroundColor={AppColors.modalColor}
           suggestion=""
           height={48}
         />
         <View style={styles.divider}></View>
         <GlobalButton
-          actionText="ADD SIZE"
+          actionText="ADD COLOR"
           marginTop={28}
           action={() => {
             onModalHidden();

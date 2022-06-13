@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { AppIcons } from '../../../../../general/constants/AppResource';
+import CartUtils from '../../CartUtils';
 import styles from './styles';
 BagItem.propTypes = {
   item: PropTypes.object,
@@ -13,6 +14,7 @@ BagItem.defaultProps = {
   handleIncrement: () => {},
   handleDescreasement: () => {},
 };
+var cartUtils = new CartUtils();
 function BagItem(props) {
   const {item, handleIncrement, handleDescreasement} = props;
   let tempPrice = item.price * item.quantity;
@@ -47,9 +49,9 @@ function BagItem(props) {
                 tempDiscountPrice =
                   tempPrice * (1 - item.discountPercent / 100);
                 setQuantity(tempQuantity);
-                setPrice(tempQuantity * item.price);
+                setPrice(tempPrice);
                 setDiscountPrice(tempDiscountPrice);
-                handleDescreasement();
+                handleDescreasement(tempPrice, tempDiscountPrice);
               }
               console.log('Quantity: ', quantity);
             }}>
@@ -67,7 +69,7 @@ function BagItem(props) {
               setQuantity(tempQuantity);
               setPrice(tempPrice);
               setDiscountPrice(tempDiscountPrice);
-              handleIncrement();
+              handleIncrement(tempPrice, tempDiscountPrice);
             }}>
             <Image source={AppIcons.add} />
           </TouchableOpacity>

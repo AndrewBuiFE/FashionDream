@@ -12,7 +12,7 @@ export const ScreenNames = {
   categoryScreen: 'CategoryScreen',
   allCategory: 'AllCategory',
   catalogScreen: 'CatalogScreen',
-  productCartScreen: 'ProductCartScreen',
+  productCardScreen: 'ProductCardScreen',
   cartScreen: 'CartScreen',
   checkoutScreen: 'CheckoutScreen',
   paymentScreen: 'PaymentScreen',

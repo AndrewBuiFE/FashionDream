@@ -8,6 +8,7 @@ import {
   View
 } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { connect } from 'react-redux';
 import { PRODUCT } from '../../../data/index';
 import { AppImages } from '../../../general/constants/AppResource';
 import { ScreenNames } from '../../../general/constants/ScreenNames';
@@ -145,8 +146,8 @@ function HomeScreen(props) {
     </SafeAreaProvider>
   );
 }
-// const actions = {};
-// export default connect(state => {
-//   return {};
-// }, actions)(HomeScreen);
-export default HomeScreen;
+const actions = {};
+export default connect(state => {
+  return {};
+}, actions)(HomeScreen);
+// export default HomeScreen;
