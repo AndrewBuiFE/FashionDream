@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { connect, useSelector } from '../../../../node_modules/react-redux/es/exports';
+import { useDispatch, useSelector } from 'react-redux';
 import { CART } from '../../../data/index';
 import { AppIcons } from '../../../general/constants/AppResource';
 import { ScreenNames } from '../../../general/constants/ScreenNames';
@@ -30,7 +30,8 @@ function CartScreen(props) {
   const [isShowSuccess, setShowSuccess] = useState(false);
   const [quantity, setQuantity] = useState(0);
   const [total, setTotal] = useState(totalMoney);
-  const {setCardData} = useSelector(state => state.cart)
+  const {cartData} = useSelector(state => state.cart);
+  const dispatch = useDispatch();
   const renderItem = ({item}) => {
     return (
       <BagItem
@@ -135,9 +136,4 @@ function CartScreen(props) {
     </SafeAreaProvider>
   );
 }
-const actions = {}
-export default connect(state => {
-  return {};
-}, actions)
-(CartScreen);
-// export default CartScreen;
+export default CartScreen;

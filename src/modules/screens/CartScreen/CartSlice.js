@@ -1,21 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initAppState = {
-  cardData: [],
+  cartData: [{id: 1, name: 'card data'}],
 };
 
 const cartSlice = createSlice({
   name: 'slice/cart',
   initialState: initAppState,
   reducers: {
-    setCardData(state, action) {
+    setCartData(state, action) {
       return {
         ...state,
-        cardData: action.payload,
+        cartData: action.payload,
       };
     },
   },
 });
 
 export default cartSlice.reducer;
-export const {setCardData} = cartSlice.actions;
+export const {setCartData} = cartSlice.actions;
