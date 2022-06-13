@@ -1,34 +1,45 @@
 import PropTypes from 'prop-types';
-import React, {useState} from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import React from 'react';
+import { TouchableOpacity, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setColorFocus,
+  setColorIdFocus
+} from '../../../../screens/ProductCardScreen/ProductSlice';
 import styles from './styles';
 ColorCell.propTypes = {
-  colorOnFocus: PropTypes.string,
-  setColorFocus: PropTypes.func,
+  item: PropTypes.object,
 };
 ColorCell.defaultProps = {
-  colorOnFocus: '',
-  setColorFocus: () => {},
+  item: null,
 };
 
 export default function ColorCell(props) {
-  const {item, colorData, setColorData, callBackData} = props;
-  const [colorFocus, setColorFocus] = useState(false);
+  const {item} = props;
+  const {colorIdFocus, isColorFocus} = useSelector(state => state.product);
+  const dispatch = useDispatch();
   return (
     <TouchableOpacity
       style={[
         styles.outterCircle,
-        {borderColor: colorFocus ? item.borderColor : 'transparent'},
+        {
+          borderColor:
+            isColorFocus && item.id == colorIdFocus
+              ? item.borderColor
+              : 'transparent',
+        },
       ]}
       onPress={() => {
-        let tempData = colorData;
-        let cell = tempData.filter(obj => obj.id == item.id);
-        console.log(cell);
-        cell[0].onFocus = !cell[0].onFocus;
-        console.log('After: ', cell);
-        setColorData(tempData);
-        setColorFocus(!colorFocus);
-        callBackData(tempData);
+        if (isColorFocus && item.id == colorIdFocus)
+          dispatch(setColorFocus(false));
+        else if (!isColorFocus && item.id == colorIdFocus)
+          dispatch(setColorFocus(true));
+        else if (!isColorFocus && item.id != colorIdFocus) {
+          dispatch(setColorFocus(true));
+          dispatch(setColorIdFocus(item.id));
+        } else {
+          dispatch(setColorIdFocus(item.id));
+        }
       }}>
       <View
         style={[

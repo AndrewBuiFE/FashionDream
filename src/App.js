@@ -13,6 +13,7 @@ const App: () => Node = () => {
   useEffect(() => {
     (async () => {
       try {
+        // tempSetCartData();
         let cartData = await loadCartData();
         store.dispatch(setCartData(cartData));
       } catch (error) {

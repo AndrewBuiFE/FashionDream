@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import {
-  AppIcons
+    AppIcons
 } from '../../../../../general/constants/AppResource';
 import { ScreenNames } from '../../../../../general/constants/ScreenNames';
 import Star from '../../../../components/Star/index';
@@ -22,7 +22,7 @@ function HorizonProduct(props) {
   return (
     <TouchableOpacity style={styles.productContainer} onPress={
       () => {
-        navigation.navigate(ScreenNames.productCartScreen, {document: item})
+        navigation.navigate(ScreenNames.productCardScreen, {document: item})
       }
     }>
       <View style={styles.imageSection}>

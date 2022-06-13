@@ -31,25 +31,22 @@ function CartScreen(props) {
   const [quantity, setQuantity] = useState(0);
   const [total, setTotal] = useState(totalMoney);
   const {cartData} = useSelector(state => state.cart);
+  console.log('Cart data: ', cartData);
   const dispatch = useDispatch();
   const renderItem = ({item}) => {
+    console.log("Bag item: ", item);
     return (
       <BagItem
         item={item}
-        handleIncrement={() => {
+        handleIncrement={(tempPrice, tempDiscountPrice) => {
           console.log('Increase!');
-          // item.itemQuantity = item.itemQuantity + 1;
-          // // setQuantity(item.itemQuantity);
-          // console.log('Item quantity: ', item.itemQuantity);
-          // console.log('Total: ', calculateTotal(CART));
-          // setTotal(calculateTotal(CART));
+          console.log('Temp price: ', tempPrice);
+          console.log('temp discountPrice: ', tempDiscountPrice);
         }}
-        handleDescreasement={() => {
+        handleDescreasement={(tempPrice, tempDiscountPrice) => {
           console.log('Descrease!');
-          // item.itemQuantity = item.itemQuantity - 1;
-          // // setQuantity(item.itemQuantity);
-          // console.log('Item quantity: ', item.itemQuantity);
-          // setTotal(calculateTotal(CART));
+          console.log('Temp price: ', tempPrice);
+          console.log('temp discountPrice: ', tempDiscountPrice);
         }}
       />
     );
@@ -109,7 +106,7 @@ function CartScreen(props) {
             setShowSuccess(false);
           }}
         />
-        <FlatList data={CART.listProduct} renderItem={renderItem} />
+        <FlatList data={cartData.ListProduct} renderItem={renderItem} />
         <PromoCode
           setShowPromoModal={setShowPromoModal}
           marginTop={25}

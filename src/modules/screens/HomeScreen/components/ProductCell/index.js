@@ -26,7 +26,7 @@ function ProductCell(props) {
       style={[styles.productContainer, {width: width}]}
       onPress={() => {
         onItemClick();
-        navigation.navigate(ScreenNames.productCartScreen, {
+        navigation.navigate(ScreenNames.productCardScreen, {
           document: item,
         });
       }}>
