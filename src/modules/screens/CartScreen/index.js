@@ -59,8 +59,6 @@ function CartScreen(props) {
       />
     );
   };
-  // console.log("Total", calculateTotal(cartData.ListProduct));
-  console.log("Cart data: ", cartData);
   return (
     <SafeAreaProvider>
       <View style={styles.cartContainer}>

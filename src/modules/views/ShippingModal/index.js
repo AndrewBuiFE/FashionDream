@@ -15,6 +15,7 @@ export default function ShippingModal(props) {
   const insets = useSafeAreaInsets();
   const date = new Date().getTime();
   newShip.Id = date;
+  console.log("Item: ", item);
   return (
     <ReactNativeModal
       isVisible={isVisible}

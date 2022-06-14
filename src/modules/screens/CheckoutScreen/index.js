@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { PAYMENT_CARD, SHIPPING_ADDRESS } from '../../../data/index';
+import { CHECKOUT } from '../../../data/index';
 import { AppIcons, AppImages } from '../../../general/constants/AppResource';
 import AppHeaderNormal from '../../components/AppHeaderNormal/index';
 import GlobalButton from '../../components/GlobalButton/index';
@@ -17,8 +17,8 @@ function CheckOutScreen(props) {
   const [isShowSuccess, setShowSuccess] = useState(false);
   const [isAddShipAddress, setAddShipAddress] = useState(false);
   const [isShowAddCard, setShowAddCard] = useState(false);
-  const [cardData, setCardData] = useState(PAYMENT_CARD);
-  const [shipData, setShipData] = useState(SHIPPING_ADDRESS);
+  const [cardData, setCardData] = useState(CHECKOUT.paymentCard);
+  const [shipData, setShipData] = useState(CHECKOUT.shippingAddress);
   const {totalAmount} = props.route.params;
   return (
     <SafeAreaProvider>

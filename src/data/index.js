@@ -415,33 +415,28 @@ export const SHIPPING_ADDRESS = {
   isShowCheck: true,
   isCheck: false,
 };
-export const CHECKOUT = [
-  {
-    shippingAddress: [
-      {
-        id: 1,
-        customerName: 'Jane',
-        address: 'United States',
-        zipcode: 3483,
-        city: 'Ha Noi',
-        state: 'Thanh Xuan',
-        isShowCheck: true,
-        isCheck: false,
-      },
-    ],
-    paymentCard: [
-      {
-        id: 1,
-        cardNumber: '* * * * * * * * * * * * 3947',
-        holderName: 'Hoang',
-        exp: '05/23',
-        cvv: 9348,
-        isDefault: true,
-      },
-    ],
-    delivery: 15,
+export const CHECKOUT = {
+  shippingAddress: {
+    id: 1,
+    customerName: 'Hoang',
+    address: 'United States',
+    zipcode: 3483,
+    city: 'Ha Noi',
+    state: 'Thanh Xuan',
+    country: 'Viet Nam',
+    isShowCheck: true,
+    isCheck: false,
   },
-];
+  paymentCard: {
+    id: 1,
+    cardNumber: '* * * * * * * * * * * * 3947',
+    holderName: 'Hoang',
+    exp: '05/23',
+    cvv: 9348,
+    isDefault: true,
+  },
+  delivery: 15,
+};
 export const COLORS = [
   {
     id: 1,
