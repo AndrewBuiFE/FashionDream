@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, Text, TouchableOpacity, View } from 'react-native';
+import { useSelector } from 'react-redux';
 import { AppIcons } from '../../../../../general/constants/AppResource';
 import CartUtils from '../../CartUtils';
 import styles from './styles';
@@ -22,6 +23,7 @@ function BagItem(props) {
   const [quantity, setQuantity] = useState(item.quantity);
   const [price, setPrice] = useState(tempPrice);
   const [discountPrice, setDiscountPrice] = useState(tempDiscountPrice);
+  const {cartData} = useSelector(state => state.cart);
   return (
     <TouchableOpacity style={styles.bagItem}>
       <View style={styles.imageSection}>
@@ -43,7 +45,7 @@ function BagItem(props) {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              if (quantity > 0) {
+              if (quantity > 1) {
                 let tempQuantity = quantity - 1;
                 tempPrice = tempQuantity * item.price;
                 tempDiscountPrice =
@@ -51,9 +53,26 @@ function BagItem(props) {
                 setQuantity(tempQuantity);
                 setPrice(tempPrice);
                 setDiscountPrice(tempDiscountPrice);
-                handleDescreasement(tempPrice, tempDiscountPrice);
+                handleDescreasement(tempQuantity);
+              } else {
+                Alert.alert(
+                  'Delete',
+                  `Are you sure you want to delete this item ?`,
+                  [
+                    {
+                      text: 'Delete',
+                      onPress: () => {
+                        cartUtils.removeCartItem(item, cartData);
+                      },
+                    },
+                    {
+                      text: 'Cancel',
+                      onPress: () => console.log('Cancel Pressed'),
+                      style: 'cancel',
+                    },
+                  ],
+                );
               }
-              console.log('Quantity: ', quantity);
             }}>
             <Image source={AppIcons.remove} />
           </TouchableOpacity>
@@ -69,7 +88,7 @@ function BagItem(props) {
               setQuantity(tempQuantity);
               setPrice(tempPrice);
               setDiscountPrice(tempDiscountPrice);
-              handleIncrement(tempPrice, tempDiscountPrice);
+              handleIncrement(tempQuantity);
             }}>
             <Image source={AppIcons.add} />
           </TouchableOpacity>
@@ -79,7 +98,13 @@ function BagItem(props) {
         <TouchableOpacity>
           <Image source={AppIcons.more} />
         </TouchableOpacity>
-        <Text>${price}</Text>
+        <Text
+          style={{
+            textDecorationLine: 'line-through',
+            textDecorationStyle: 'solid',
+          }}>
+          ${price}
+        </Text>
         <Text style={styles.priceText}>${discountPrice}</Text>
       </View>
     </TouchableOpacity>

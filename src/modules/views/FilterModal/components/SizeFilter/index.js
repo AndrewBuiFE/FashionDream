@@ -14,7 +14,6 @@ SizeFilter.defaultProps = {
 };
 
 export default function SizeFilter(props) {
-  console.log('Size filter');
   const [sizeData, setSizeData] = useState(SIZES);
   const [sizeOnFocus, setSizeFocus] = useState('');
   const renderItem = ({item}) => {

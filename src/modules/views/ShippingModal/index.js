@@ -1,5 +1,5 @@
 import React from 'react';
-import { KeyboardAvoidingView, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import ReactNativeModal from 'react-native-modal';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ShippingAddress from '../../../model/ShippingAddress/index';
@@ -12,7 +12,6 @@ ShippingModal.defaultProps = {};
 let newShip = new ShippingAddress();
 export default function ShippingModal(props) {
   const {isVisible, onModalHidden, onButtonClick, item} = props;
-  console.log("ship item: ", item)
   const insets = useSafeAreaInsets();
   const date = new Date().getTime();
   newShip.Id = date;
@@ -37,7 +36,6 @@ export default function ShippingModal(props) {
       coverScreen={true}
       style={{margin: 0}}>
       <View style={[styles.addCardContainer, {bottom: insets.bottom}]}>
-        <KeyboardAvoidingView behavior={'position'}>
           <Modalheader />
           <View style={styles.titleSection}>
             <Text style={styles.titleText}>Shipping Addresses</Text>
@@ -54,57 +52,57 @@ export default function ShippingModal(props) {
               }}
             />
           </View> */}
-          <InputSection
-            title={'Full name'}
-            content={item.customerName}
-            handleInput={value => {
-              newShip.CustomerName = value;
-            }}
-          />
-          <InputSection
-            title={'Address'}
-            content={item.address}
-            handleInput={value => {
-              newShip.Address = value;
-            }}
-          />
-          <InputSection
-            title={'City'}
-            content={item.city}
-            handleInput={value => {
-              newShip.City = value;
-            }}
-          />
-          <InputSection
-            title={'State/Province/Region'}
-            content={item.state}
-            handleInput={value => {
-              newShip.State = value;
-            }}
-          />
-          <InputSection
-            title={'Zip code (Postal Code)'}
-            content={item.zipcode.toString()}
-            handleInput={value => {
-              newShip.Zipcode = value;
-            }}
-          />
-          <InputSection
-            title={'Country'}
-            content={item.country}
-            handleInput={value => {
-              newShip.Country = value;
-            }}
-          />
+          <ScrollView>
+            <InputSection
+              title={'Full name'}
+              content={item.customerName}
+              handleInput={value => {
+                newShip.CustomerName = value;
+              }}
+            />
+            <InputSection
+              title={'Address'}
+              content={item.address}
+              handleInput={value => {
+                newShip.Address = value;
+              }}
+            />
+            <InputSection
+              title={'City'}
+              content={item.city}
+              handleInput={value => {
+                newShip.City = value;
+              }}
+            />
+            <InputSection
+              title={'State/Province/Region'}
+              content={item.state}
+              handleInput={value => {
+                newShip.State = value;
+              }}
+            />
+            <InputSection
+              title={'Zip code (Postal Code)'}
+              content={item.zipcode.toString()}
+              handleInput={value => {
+                newShip.Zipcode = value;
+              }}
+            />
+            <InputSection
+              title={'Country'}
+              content={item.country}
+              handleInput={value => {
+                newShip.Country = value;
+              }}
+            />
+          </ScrollView>
           <GlobalButton
             actionText="SAVE ADDRESS"
             marginTop={40}
             action={() => {
-              console.log(newShip);
               onModalHidden();
             }}
           />
-        </KeyboardAvoidingView>
       </View>
     </ReactNativeModal>
   );

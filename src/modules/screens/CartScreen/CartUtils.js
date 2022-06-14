@@ -1,3 +1,4 @@
+import { store } from '../../../libs/storage/AppStore';
 import { setCartData } from './CartSlice';
 
 const {PreferenceKeys} = require('../../../general/constants/Global');
@@ -13,24 +14,34 @@ class CartUtils {
       console.log(error);
     }
   }
-  // getCartItem(itemId, cartData) {
-  //     for (let item of cartData.ListProduct) {
-  //         if (item.id == itemId) {
-  //             console.log('Found!');
-  //             console.log('item: ', item);
-  //             return item;
-  //         }
-  //     }
-  // }
+  getCartItem(itemId, cartData) {
+      for (let item of cartData.ListProduct) {
+          if (item.id == itemId) {
+              return item;
+          }
+      }
+  }
   addCartItem(item, cartData) {
-    let newCartData = {...cartData};
+    let newCartData = cartData;
     newCartData.ListProduct.push(item);
-    setCartData(newCartData);
+    store.dispatch(setCartData(newCartData));
     this.saveCartData(newCartData);
+  }
+  updateCartItem(item, cartData) {
+    let newItem = this.getCartItem(item.id, cartData);
+    newItem.quantity = item.quantity;
+    this.saveCartData(cartData);
+    // console.log(newItem);
+  }
+  removeCartItem(item, cartData) {
+    let itemList = cartData.ListProduct;
+    let newItemList = itemList.filter(obj => obj.id != item.id);
+    cartData.ListProduct = newItemList;
+    store.dispatch(setCartData(cartData));
+    this.saveCartData(cartData);
   }
   isDuplicateProduct(product, cartData) {
     let productList = cartData.ListProduct;
-    console.log('ProductList: ', productList);
     for (let item of productList) {
       if (item.id != product.id) {
         console.log('Different product!');
@@ -44,5 +55,7 @@ class CartUtils {
       }
     }
   }
+
+
 }
 export default CartUtils;

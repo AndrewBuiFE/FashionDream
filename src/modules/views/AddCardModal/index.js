@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import ReactNativeModal from 'react-native-modal';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PaymentCard from '../../../model/PaymentCard/index';
@@ -15,7 +15,6 @@ let newCard = new PaymentCard();
 
 export default function AddCardModal(props) {
   const {isVisible, onModalHidden, onButtonClick, item} = props;
-  console.log('item: ', item);
   const insets = useSafeAreaInsets();
   const date = new Date().getTime();
   newCard.Id = date;
@@ -44,7 +43,7 @@ export default function AddCardModal(props) {
         <View style={styles.titleSection}>
           <Text style={styles.titleText}>Payment Methods</Text>
         </View>
-        <View style = {{marginTop: 10}}>
+        <View style={{marginTop: 10}}>
           <Card item={item} />
         </View>
         {/* <View style={styles.inputContainer}>
@@ -54,34 +53,36 @@ export default function AddCardModal(props) {
             style={styles.textInput}
           />
         </View> */}
-        <InputSection
-          title={'Name on card'}
-          content={item.holderName}
-          handleInput={value => {
-            newCard.CardName = value;
-          }}
-        />
-        <InputSection
-          title={'Card number'}
-          content={item.cardNumber}
-          handleInput={value => {
-            newCard.CardNumber = value;
-          }}
-        />
-        <InputSection
-          title={'Expire date'}
-          content={item.exp}
-          handleInput={value => {
-            newCard.ExpDate = value;
-          }}
-        />
-        <InputSection
-          title={'CVV'}
-          content={item.cvv.toString()}
-          handleInput={value => {
-            newCard.CVV = value;
-          }}
-        />
+        <ScrollView>
+          <InputSection
+            title={'Name on card'}
+            content={item.holderName}
+            handleInput={value => {
+              newCard.CardName = value;
+            }}
+          />
+          <InputSection
+            title={'Card number'}
+            content={item.cardNumber}
+            handleInput={value => {
+              newCard.CardNumber = value;
+            }}
+          />
+          <InputSection
+            title={'Expire date'}
+            content={item.exp}
+            handleInput={value => {
+              newCard.ExpDate = value;
+            }}
+          />
+          <InputSection
+            title={'CVV'}
+            content={item.cvv.toString()}
+            handleInput={value => {
+              newCard.CVV = value;
+            }}
+          />
+        </ScrollView>
         {/* <CheckBox
           isCheck={false}
           message={'Set as default payment method'}

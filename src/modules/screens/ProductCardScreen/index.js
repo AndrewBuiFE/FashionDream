@@ -21,7 +21,8 @@ function ProductCardScreen(props) {
   const [productColor, setProductColor] = useState('');
   const [productSize, setProductSize] = useState('');
   const {cartData} = useSelector(state => state.cart);
-  console.log(cartData);
+  let discountPrice =
+    document.price - (document.price * document.discountPercent) / 100;
   return (
     <SafeAreaProvider>
       <View style={styles.homeContainer}>
@@ -87,7 +88,20 @@ function ProductCardScreen(props) {
         <View style={styles.itemContainer}>
           <View style={styles.itemName}>
             <Text style={styles.itemText}>{document.name}</Text>
-            <Text style={styles.itemText}>${document.price}</Text>
+            <View style = {{flexDirection: 'row' }}>
+              <Text
+                style={[
+                  styles.itemText,
+                  {
+                    textDecorationLine: 'line-through',
+                    textDecorationStyle: 'solid',
+                    marginRight: 10,
+                  },
+                ]}>
+                ${document.price}
+              </Text>
+              <Text style={[styles.itemText, {color: 'red'}]}>${discountPrice}</Text>
+            </View>
           </View>
           <View style={styles.brand}>
             <Text style={styles.brandText}>{document.brand}</Text>
@@ -116,7 +130,7 @@ function ProductCardScreen(props) {
               let isDuplicate = cartUtils.isDuplicateProduct(product, cartData);
               if (!isDuplicate) {
                 product.id = Date.now();
-                console.log("adding...");
+                console.log('adding...');
                 cartUtils.addCartItem(product, cartData);
               }
 

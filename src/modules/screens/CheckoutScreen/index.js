@@ -69,11 +69,8 @@ function CheckOutScreen(props) {
             setAddShipAddress(false);
           }}
           onButtonClick={ship => {
-            console.log('ship: ', ship);
             let tempShipData = [...shipData];
             tempShipData.push(ship);
-            console.log('Temp ship: ', tempShipData);
-            // setShipData(tempShipData);
           }}
         />
         <AddCardModal
@@ -83,10 +80,8 @@ function CheckOutScreen(props) {
             setShowAddCard(false);
           }}
           onButtonClick={card => {
-            console.log('Card: ', card);
             let tempCardData = [...cardData];
             tempCardData.push(card);
-            console.log('Temp Card: ', tempCardData);
           }}
         />
         <View style={styles.contentContainer}>

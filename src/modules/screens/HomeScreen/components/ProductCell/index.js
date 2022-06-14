@@ -19,7 +19,7 @@ ProductCell.defaultProps = {
 var discountPrice = 0;
 function ProductCell(props) {
   const {item, onItemClick, width} = props;
-  discountPrice = item.price - item.price * (item.discountPercent/100);
+  discountPrice = item.price - item.price * (item.discountPercent / 100);
   const navigation = useNavigation();
   return (
     <TouchableOpacity
@@ -40,15 +40,28 @@ function ProductCell(props) {
         </View>
       </View>
       <View style={styles.infoSection}>
-        <View style = {styles.starSection}>
-        <Star starCount={item.starCount} starType='small' width={item.starCount*14}/>
+        <View style={styles.starSection}>
+          <Star
+            starCount={item.starCount}
+            starType="small"
+            width={item.starCount * 14}
+          />
           <Text>({item.noComment})</Text>
         </View>
         <View style={styles.textSection}>
           <Text style={styles.brand}>{item.brand}</Text>
           <Text style={styles.product}>{item.name}</Text>
           <View style={styles.priceSection}>
-            <Text style={styles.price}>{item.price}$</Text>
+            <Text
+              style={[
+                styles.price,
+                {
+                  textDecorationLine: 'line-through',
+                  textDecorationStyle: 'solid',
+                },
+              ]}>
+              {item.price}$
+            </Text>
             <Text style={[styles.price, {color: '#FF3E3E', marginLeft: 4}]}>
               {discountPrice}$
             </Text>
