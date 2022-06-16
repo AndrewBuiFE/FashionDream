@@ -1,11 +1,11 @@
 export default class Category {
-  Id: number;
-  Name: string;
-  ListProduct: object;
+  id: number;
+  name: string;
+  listProduct: object;
   constructor(category = null) {
-    this.Id = category && category.Id ? category.Id : 1;
-    this.Name = category && category.Name ? category.Name : '';
-    this.ListProduct =
-      category && category.ListProduct ? category.ListProduct : null;
+    this.id = category && category.id ? category.id : 1;
+    this.name = category && category.name ? category.name : '';
+    this.listProduct =
+      category && category.listProduct ? category.listProduct : null;
   }
 }

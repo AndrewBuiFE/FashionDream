@@ -1,14 +1,16 @@
 export default class PaymentCard {
-  Id: number;
-  CardNumber: number;
-  CardName: string;
-  ExpDate: string;
-  CVV: number;
+  id: number;
+  cardNumber: string;
+  holderName: string;
+  exp: string;
+  cvv: number;
+  isDefault: boolean;
   constructor(cardInfo = null) {
-    this.Id = cardInfo && cardInfo.Id ? cardInfo.Id : 1;
-    this.CardNumber = cardInfo && cardInfo.CardNumber ? cardInfo.CardNumber : 0;
-    this.CardName = cardInfo && cardInfo.CardName ? cardInfo.CardName : '';
-    this.ExpDate = cardInfo && cardInfo.ExpDate ? cardInfo.ExpDate : '';
-    this.CVV = cardInfo && cardInfo.CVV ? cardInfo.CVV : 0;
+    this.id = cardInfo && cardInfo.id ? cardInfo.id : 1;
+    this.cardNumber = cardInfo && cardInfo.cardNumber ? cardInfo.cardNumber : '';
+    this.holderName = cardInfo && cardInfo.holderName ? cardInfo.holderName : '';
+    this.exp = cardInfo && cardInfo.exp ? cardInfo.exp : '';
+    this.cvv = cardInfo && cardInfo.cvv ? cardInfo.cvv : 0;
+    this.isDefault = cardInfo && cardInfo.isDefault ? cardInfo.isDefault : 0;
   }
 }

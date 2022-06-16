@@ -133,7 +133,7 @@ export const CATEGORY = [
       },
     ],
   },
-  {
+  { 
     id: 4,
     title: 'Knitwear',
     listProduct: [
@@ -315,6 +315,7 @@ export const CART = {
   listProduct: [
     {
       id: 1,
+      productId: 1, 
       categoryId: 1,
       name: 'Evening Dress',
       description: 'dfkjdfkjdf',
@@ -331,6 +332,7 @@ export const CART = {
     },
     {
       id: 2,
+      productId: 1,
       categoryId: 1,
       name: 'Evening Dress',
       description: 'dfkjdfkjdf',
@@ -394,7 +396,7 @@ export const USER = [
         id: 1,
         customerName: 'Jane',
         address: 'United States',
-        zipcode: 3483,
+        zipcode: '3483',
         city: 'Ha Noi',
         state: 'Thanh Xuan',
         country: 'Viet Nam',
@@ -408,7 +410,7 @@ export const SHIPPING_ADDRESS = {
   id: 1,
   customerName: 'Jane',
   address: 'United States',
-  zipcode: 3483,
+  zipcode: '3483',
   city: 'Ha Noi',
   state: 'Thanh Xuan',
   country: 'Viet Nam',
@@ -420,12 +422,10 @@ export const CHECKOUT = {
     id: 1,
     customerName: 'Hoang',
     address: 'United States',
-    zipcode: 3483,
+    zipcode: '3483',
     city: 'Ha Noi',
     state: 'Thanh Xuan',
     country: 'Viet Nam',
-    isShowCheck: true,
-    isCheck: false,
   },
   paymentCard: {
     id: 1,

@@ -32,27 +32,32 @@ function CartScreen(props) {
   const [isShowSuccess, setShowSuccess] = useState(false);
   const [quantity, setQuantity] = useState(0);
   const {cartData} = useSelector(state => state.cart);
-  let [tempTotal, tempDiscountTotal] = calculateTotal(cartData.ListProduct);
-  // console.log("total: ", tempTotal, tempDiscountTotal);
+  let [tempTotal, tempDiscountTotal] = calculateTotal(cartData.listProduct);
   const [total, setTotal] = useState(tempTotal);
   const [discountTotal, setDiscountTotal] = useState(tempDiscountTotal);
+  // console.log('total: ', tempTotal, tempDiscountTotal);
+  // console.log('state total: ', total, discountTotal);
+  console.log('cart data: ', cartData)
   const renderItem = ({item}) => {
     return (
       <BagItem
         item={item}
         handleIncrement={(quantity) => {
-          item.quantity = quantity;
-          cartUtils.updateCartItem(item, cartData);
-          let [total, discountTotal] = calculateTotal(cartData.ListProduct);
+          debugger;
+          let newItem = {...item}
+          newItem.quantity = quantity;
+          cartUtils.updateCartItemQuantity(newItem, cartData);
+          let [total, discountTotal] = calculateTotal(cartData.listProduct);
           setTotal(total);
           setDiscountTotal(discountTotal);
           console.log('Increase!');
         }}
         handleDescreasement={(quantity) => {
           console.log('Descrease!');
-          item.quantity = quantity;
-          cartUtils.updateCartItem(item, cartData);
-          let [total, discountTotal] = calculateTotal(cartData.ListProduct);
+          let newItem = {...item}
+          newItem.quantity = quantity;
+          cartUtils.updateCartItemQuantity(newItem, cartData);
+          let [total, discountTotal] = calculateTotal(cartData.listProduct);
           setTotal(total);
           setDiscountTotal(discountTotal);
         }}
@@ -82,28 +87,6 @@ function CartScreen(props) {
           onModalHidden={() => {
             setShowPromoModal(false);
           }}
-          onMenuClick={menu => {
-            switch (menu) {
-              case 0:
-                console.log('0');
-                break;
-              case 1:
-                console.log('1');
-                break;
-              case 2:
-                console.log('2');
-                break;
-              case 3:
-                console.log('3');
-                break;
-              case 4:
-                console.log('4');
-                break;
-              default:
-                console.log('-1');
-                break;
-            }
-          }}
           getPromoCode={promoCode => {
             promoCodeValue = promoCode;
           }}
@@ -114,7 +97,7 @@ function CartScreen(props) {
             setShowSuccess(false);
           }}
         />
-        <FlatList data={cartData.ListProduct} renderItem={renderItem} />
+        <FlatList data={cartData.listProduct} renderItem={renderItem} />
         <PromoCode
           setShowPromoModal={setShowPromoModal}
           marginTop={25}
@@ -122,18 +105,18 @@ function CartScreen(props) {
         />
         <View style={styles.total}>
           <Text style={styles.totalText}>Discount:</Text>
-          <Text style={styles.priceText}>${discountTotal}</Text>
+          <Text style={styles.priceText}>${tempDiscountTotal}</Text>
         </View>
         <View style={styles.total}>
           <Text style={styles.totalText}>Total amount:</Text>
-          <Text style={styles.priceText}>${total}</Text>
+          <Text style={styles.priceText}>${tempTotal}</Text>
         </View>
         <GlobalButton
           actionText="CHECK OUT"
           marginTop={24}
           action={() => {
             props.navigation.navigate(ScreenNames.checkoutScreen, {
-              totalAmount: total,
+              totalAmount: tempTotal,
             });
           }}
         />

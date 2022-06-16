@@ -1,10 +1,10 @@
 import Product from '../Product/index';
 
 export default class Cart {
-  Id: number;
-  ListProduct: Array<Product>;
+  id: number;
+  listProduct: Array<Product>;
   constructor(cart = null) {
-    this.ListProduct = cart && cart.ListProduct ? cart.ListProduct : [];
-    this.Id = cart && cart.Id ? cart.Id : 0;
+    this.listProduct = cart && cart.listProduct ? cart.listProduct : [];
+    this.id = cart && cart.id ? cart.id : 0;
   }
 }

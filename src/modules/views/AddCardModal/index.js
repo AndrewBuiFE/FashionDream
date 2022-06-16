@@ -10,14 +10,12 @@ import InputSection from '../../screens/PaymentScreen/InputSection/index';
 import styles from './styles';
 AddCardModal.propTypes = {};
 AddCardModal.defaultProps = {};
-var isCheck = true;
+var changeData = false;
 let newCard = new PaymentCard();
 
 export default function AddCardModal(props) {
   const {isVisible, onModalHidden, onButtonClick, item} = props;
   const insets = useSafeAreaInsets();
-  const date = new Date().getTime();
-  newCard.Id = date;
   return (
     <ReactNativeModal
       isVisible={isVisible}
@@ -26,7 +24,16 @@ export default function AddCardModal(props) {
       }}
       onModalHide={() => {
         console.log('On modal hide');
-        // onButtonClick(newCard);
+        const date = new Date().getTime();
+        newCard.id = date;
+        if (newCard.cardNumber.length == 0) newCard.cardNumber = item.cardNumber;
+        if (newCard.exp.length == 0) newCard.exp = item.exp;
+        if (newCard.cvv == 0) newCard.cvv = item.cvv;
+        if (newCard.holderName.length == 0) newCard.holderName = item.holderName;
+        if (changeData) {
+          onButtonClick(newCard);
+          changeData = false;
+        }
       }}
       hasBackdrop={true}
       avoidKeyboard={true}
@@ -58,28 +65,32 @@ export default function AddCardModal(props) {
             title={'Name on card'}
             content={item.holderName}
             handleInput={value => {
-              newCard.CardName = value;
+              newCard.holderName = value;
+              changeData = true;
             }}
           />
           <InputSection
             title={'Card number'}
             content={item.cardNumber}
             handleInput={value => {
-              newCard.CardNumber = value;
+              newCard.cardNumber = value;
+              changeData = true;
             }}
           />
           <InputSection
             title={'Expire date'}
             content={item.exp}
             handleInput={value => {
-              newCard.ExpDate = value;
+              newCard.exp = value;
+              changeData = true;
             }}
           />
           <InputSection
             title={'CVV'}
             content={item.cvv.toString()}
             handleInput={value => {
-              newCard.CVV = value;
+              newCard.cvv = value;
+              changeData = true;
             }}
           />
         </ScrollView>

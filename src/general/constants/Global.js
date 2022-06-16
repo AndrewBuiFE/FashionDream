@@ -19,4 +19,7 @@ export const DeviceConstants = {
 export const PreferenceKeys = {
     Product: 'Products',
     CartData: 'CartData',
+    ShippingAddress: 'ShippingAddress',
+    PaymentCard: 'PaymentCard',
+    Checkout: 'Checkout',
 }

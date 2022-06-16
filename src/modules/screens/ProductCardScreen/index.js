@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Alert, Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppIcons } from '../../../general/constants/AppResource';
 import AppHeaderNormal from '../../components/AppHeaderNormal/index';
 import GlobalButton from '../../components/GlobalButton/index';
 import Star from '../../components/Star/index';
 import SelectColorModal from '../../views/SelectColorModal';
 import SelectSizeModal from '../../views/SelectSizeModal/index';
+import { setCartNewThing } from '../CartScreen/CartSlice';
 import CartUtils from '../CartScreen/CartUtils';
 import styles from './styles';
 ProductCardScreen.propTypes = {};
@@ -20,7 +21,8 @@ function ProductCardScreen(props) {
   const [isShowColorMenu, setShowColorMenu] = useState(false);
   const [productColor, setProductColor] = useState('');
   const [productSize, setProductSize] = useState('');
-  const {cartData} = useSelector(state => state.cart);
+  const {cartData, isCartNewThing} = useSelector(state => state.cart);
+  const dispatch = useDispatch();
   let discountPrice =
     document.price - (document.price * document.discountPercent) / 100;
   return (
@@ -88,7 +90,7 @@ function ProductCardScreen(props) {
         <View style={styles.itemContainer}>
           <View style={styles.itemName}>
             <Text style={styles.itemText}>{document.name}</Text>
-            <View style = {{flexDirection: 'row' }}>
+            <View style={{flexDirection: 'row'}}>
               <Text
                 style={[
                   styles.itemText,
@@ -100,7 +102,9 @@ function ProductCardScreen(props) {
                 ]}>
                 ${document.price}
               </Text>
-              <Text style={[styles.itemText, {color: 'red'}]}>${discountPrice}</Text>
+              <Text style={[styles.itemText, {color: 'red'}]}>
+                ${discountPrice}
+              </Text>
             </View>
           </View>
           <View style={styles.brand}>
@@ -127,11 +131,21 @@ function ProductCardScreen(props) {
                 color: productColor,
                 size: productSize,
               };
+              product.productId = product.id;
+              product.id = Date.now();
+              console.log("product: ", product);
               let isDuplicate = cartUtils.isDuplicateProduct(product, cartData);
+              console.log(isDuplicate);
               if (!isDuplicate) {
-                product.id = Date.now();
                 console.log('adding...');
                 cartUtils.addCartItem(product, cartData);
+                dispatch(setCartNewThing(true));
+              } else {
+                let oldItem = cartUtils.getCartItem(product, cartData);
+                console.log("Old item: ", oldItem);
+                oldItem.quantity = oldItem.quantity + 1;
+                console.log("Old item changed: ", oldItem);
+                cartUtils.updateCartItemQuantity(oldItem, cartData);
               }
 
               props.navigation.goBack();

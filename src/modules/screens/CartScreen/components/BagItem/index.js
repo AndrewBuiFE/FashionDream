@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Alert, Image, Text, TouchableOpacity, View } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppIcons } from '../../../../../general/constants/AppResource';
 import CartUtils from '../../CartUtils';
 import styles from './styles';
@@ -24,6 +24,7 @@ function BagItem(props) {
   const [price, setPrice] = useState(tempPrice);
   const [discountPrice, setDiscountPrice] = useState(tempDiscountPrice);
   const {cartData} = useSelector(state => state.cart);
+  const dispatch = useDispatch();
   return (
     <TouchableOpacity style={styles.bagItem}>
       <View style={styles.imageSection}>
