@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initAppState = {
-  cartData: [{id: 1, name: 'card data'}],
+  cartData: {},
   isCartNewThing: false,
 };
 

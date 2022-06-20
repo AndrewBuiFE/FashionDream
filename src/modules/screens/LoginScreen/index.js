@@ -33,7 +33,7 @@ export default function LoginScreen(props) {
           <View style={styles.inputSection}>
             <TextInput
               style={styles.textInput}
-              placeholder="Email"
+              placeholder="Username"
               placeholderTextColor="#ABB4BD"></TextInput>
             <TextInput
               style={[styles.textInput, {marginTop: 8}]}

@@ -7,8 +7,6 @@ export const PRODUCT = [
     name: 'Evening Dress',
     description: 'dfkjdfkjdf',
     brand: 'Dorothy Perkins',
-    // color: 'red',
-    // size: 'M',
     quantity: 1,
     price: 20,
     discountPercent: 20,
@@ -23,8 +21,6 @@ export const PRODUCT = [
     name: 'Evening',
     description: 'dfkjdfkjdf',
     brand: 'Perkins',
-    // color: 'red',
-    // size: 'M',
     quantity: 1,
     price: 20,
     discountPercent: 10,
@@ -39,8 +35,6 @@ export const PRODUCT = [
     name: 'Dress',
     description: 'dfkjdfkjdf',
     brand: 'Dorothy',
-    // color: 'red',
-    // size: 'M',
     quantity: 1,
     price: 20,
     discountPercent: 10,
@@ -61,8 +55,6 @@ export const CATEGORY = [
         name: 'Evening Dress',
         description: 'dfkjdfkjdf',
         brand: 'Dorothy Perkins',
-        // color: 'red',
-        // size: 'M',
         quantity: 1,
         price: 20,
         discountPercent: 10,
@@ -77,8 +69,6 @@ export const CATEGORY = [
         name: 'Evening Dress',
         description: 'dfkjdfkjdf',
         brand: 'Dorothy Perkins',
-        // color: 'red',
-        // size: 'M',
         quantity: 1,
         price: 20,
         discountPercent: 10,
@@ -95,12 +85,10 @@ export const CATEGORY = [
     listProduct: [
       {
         id: 1,
-        categoryId: 1,
+        categoryId: 2,
         name: 'Evening Dress',
         description: 'dfkjdfkjdf',
         brand: 'Dorothy Perkins',
-        // color: 'red',
-        // size: 'M',
         quantity: 1,
         price: 20,
         discountPercent: 20,
@@ -117,12 +105,10 @@ export const CATEGORY = [
     listProduct: [
       {
         id: 1,
-        categoryId: 1,
+        categoryId: 3,
         name: 'Evening Dress',
         description: 'dfkjdfkjdf',
         brand: 'Dorothy Perkins',
-        // color: 'red',
-        // size: 'M',
         quantity: 1,
         price: 20,
         discountPercent: 10,
@@ -139,12 +125,10 @@ export const CATEGORY = [
     listProduct: [
       {
         id: 1,
-        categoryId: 1,
+        categoryId: 4,
         name: 'Evening Dress',
         description: 'dfkjdfkjdf',
         brand: 'Dorothy Perkins',
-        // color: 'red',
-        // size: 'M',
         quantity: 1,
         price: 20,
         discountPercent: 10,
@@ -161,12 +145,10 @@ export const CATEGORY = [
     listProduct: [
       {
         id: 1,
-        categoryId: 1,
+        categoryId: 5,
         name: 'Evening Dress',
         description: 'dfkjdfkjdf',
         brand: 'Dorothy Perkins',
-        // color: 'red',
-        // size: 'M',
         quantity: 1,
         price: 20,
         discountPercent: 10,
@@ -183,12 +165,10 @@ export const CATEGORY = [
     listProduct: [
       {
         id: 1,
-        categoryId: 1,
+        categoryId: 6,
         name: 'Evening Dress',
         description: 'dfkjdfkjdf',
         brand: 'Dorothy Perkins',
-        // color: 'red',
-        // size: 'M',
         quantity: 1,
         price: 20,
         discountPercent: 10,
@@ -205,12 +185,10 @@ export const CATEGORY = [
     listProduct: [
       {
         id: 1,
-        categoryId: 1,
+        categoryId: 7,
         name: 'Evening Dress',
         description: 'dfkjdfkjdf',
         brand: 'Dorothy Perkins',
-        // color: 'red',
-        // size: 'M',
         quantity: 1,
         price: 20,
         discountPercent: 10,
@@ -227,12 +205,10 @@ export const CATEGORY = [
     listProduct: [
       {
         id: 1,
-        categoryId: 1,
+        categoryId: 8,
         name: 'Evening Dress',
         description: 'dfkjdfkjdf',
         brand: 'Dorothy Perkins',
-        // color: 'red',
-        // size: 'M',
         quantity: 1,
         price: 20,
         discountPercent: 10,
@@ -249,12 +225,10 @@ export const CATEGORY = [
     listProduct: [
       {
         id: 1,
-        categoryId: 1,
+        categoryId: 9,
         name: 'Evening Dress',
         description: 'dfkjdfkjdf',
         brand: 'Dorothy Perkins',
-        // color: 'red',
-        // size: 'M',
         quantity: 1,
         price: 20,
         discountPercent: 10,
@@ -271,12 +245,10 @@ export const CATEGORY = [
     listProduct: [
       {
         id: 1,
-        categoryId: 1,
+        categoryId: 10,
         name: 'Evening Dress',
         description: 'dfkjdfkjdf',
         brand: 'Dorothy Perkins',
-        // color: 'red',
-        // size: 'M',
         quantity: 1,
         price: 20,
         discountPercent: 10,
@@ -293,12 +265,10 @@ export const CATEGORY = [
     listProduct: [
       {
         id: 1,
-        categoryId: 1,
+        categoryId: 11,
         name: 'Evening Dress',
         description: 'dfkjdfkjdf',
         brand: 'Dorothy Perkins',
-        // color: 'red',
-        // size: 'M',
         quantity: 1,
         price: 20,
         discountPercent: 10,
@@ -358,50 +328,6 @@ export const PAYMENT_CARD = {
   cvv: 9348,
   isDefault: true,
 };
-export const USER = [
-  {
-    id: 1,
-    email: 'buiviethoang12062000@gmail.com',
-    password: '123834',
-    cartProduct: [
-      {
-        id: 1,
-        categoryId: 1,
-        name: 'Evening Dress',
-        description: 'dfkjdfkjdf',
-        brand: 'Dorothy Perkins',
-        color: 'red',
-        size: 'M',
-        quantity: 1,
-        price: 20,
-        discountPercent: 10,
-        storeQuantity: 3,
-        noComment: 6,
-        starCount: 3,
-        image: AppImages.black,
-      },
-    ],
-    paymentCard: {
-      id: 1,
-      cardNumber: '* * * * * * * * * * * * 3947',
-      holderName: 'Hoang',
-      exp: '05/23',
-      cvv: 9348,
-      isDefault: true,
-    },
-    shippingAddress: {
-      id: 1,
-      customerName: 'Jane',
-      address: 'United States',
-      zipcode: '3483',
-      city: 'Ha Noi',
-      state: 'Thanh Xuan',
-      country: 'Viet Nam',
-      isShowCheck: true,
-      isCheck: false,
-    },
-  },
-];
 export const SHIPPING_ADDRESS = {
   id: 1,
   customerName: 'Jane',
@@ -433,69 +359,3 @@ export const CHECKOUT = {
   },
   delivery: 15,
 };
-export const COLORS = [
-  {
-    id: 1,
-    borderColor: '#ABB4BD',
-    backgroundColor: '#020202',
-    onFocus: false,
-    name: 'black',
-  },
-  {
-    id: 2,
-    borderColor: '#ABB4BD',
-    backgroundColor: '#F7F7F7',
-    onFocus: false,
-    name: 'white',
-  },
-  {
-    id: 3,
-    borderColor: '#ABB4BD',
-    backgroundColor: '#F48117',
-    onFocus: false,
-    name: 'orange',
-  },
-  {
-    id: 4,
-    borderColor: '#ABB4BD',
-    backgroundColor: '#BEA9A9',
-    onFocus: false,
-    name: 'brown',
-  },
-  {
-    id: 5,
-    borderColor: '#ABB4BD',
-    backgroundColor: '#91BA4F',
-    onFocus: false,
-    name: 'green',
-  },
-  {
-    id: 6,
-    borderColor: '#ABB4BD',
-    backgroundColor: '#2CB1B1',
-    onFocus: false,
-    name: 'blue',
-  },
-];
-export const SIZES = [
-  {
-    id: 1,
-    title: 'XS',
-  },
-  {
-    id: 2,
-    title: 'S',
-  },
-  {
-    id: 3,
-    title: 'M',
-  },
-  {
-    id: 4,
-    title: 'L',
-  },
-  {
-    id: 5,
-    title: 'XL',
-  },
-];

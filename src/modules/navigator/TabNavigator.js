@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Image } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +7,6 @@ import { AppIcons } from '../../general/constants/AppResource';
 import { AppColors, AppDimensions } from '../../general/constants/AppStyle';
 import { ScreenNames } from '../../general/constants/ScreenNames';
 import { isAndroid } from '../../general/helpers/Utils';
-import { setCartNewThing } from '../screens/CartScreen/CartSlice';
 import CartScreen from '../screens/CartScreen/index';
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen/index';
@@ -32,6 +31,16 @@ function TabNavigator(props) {
   const insets = useSafeAreaInsets();
   const {isCartNewThing} = useSelector(state => state.cart);
   const dispatch = useDispatch();
+  useEffect(() => {
+    const unsubscribe = props.navigation.addListener('tabPress', e => {
+      // Prevent default behavior
+      e.preventDefault();
+
+      console.log(e);
+    });
+
+    return unsubscribe;
+  }, [props.navigation]);
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -41,9 +50,8 @@ function TabNavigator(props) {
             : TabBarIcons[route.name].icon[0];
           if (isCartNewThing) {
             if (route.name == 'BagTab') {
-              dispatch(setCartNewThing(false));
+              iconSource = TabBarIcons[route.name].icon[2];
             }
-            else iconSource = TabBarIcons[route.name].icon[2];
           }
           const tintColor = focused
             ? AppColors.tabBarFocusedColor

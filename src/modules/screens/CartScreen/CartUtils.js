@@ -29,46 +29,43 @@ class CartUtils {
     return null;
   }
   addCartItem(item, cartData) {
-    let newCartData = {...cartData};
+    var newCartData = cartData;
     newCartData.listProduct.push(item);
     store.dispatch(setCartData(newCartData));
     this.saveCartData(newCartData);
   }
   updateCartItemQuantity(item, cartData) {
-    let newCartData = {...cartData};
-    debugger;
-    let newListProduct = newCartData.listProduct.filter(
-      obj => obj.productId != item.productId,
-    );
-    newListProduct.push(item);
-    newCartData.listProduct = newListProduct;
-    store.dispatch(setCartData(newCartData));
-    this.saveCartData(newCartData);
+    var newData = cartData;
+    this.removeCartItem(item, newData);
+    this.addCartItem(item, newData);
+    store.dispatch(setCartData(newData));
+    this.saveCartData(newData);
   }
   removeCartItem(item, cartData) {
-    let itemList = cartData.listProduct;
-    let newItemList = itemList.filter(obj => obj.id != item.id);
-    cartData.listProduct = newItemList;
+    var newData = cartData
+    newData.listProduct = newData.listProduct.filter(obj => obj.id != item.id);
     store.dispatch(setCartData(cartData));
     this.saveCartData(cartData);
   }
   isDuplicateProduct(product, cartData) {
     debugger;
+    let different = true;
     let productList = cartData.listProduct;
     for (let item of productList) {
       if (item.productId != product.productId) {
         continue;
       } else {
+        different = false;
         if (item.color == product.color && item.size == product.size) {
           console.log('Same product!');
           return true;
         } else {
-          console.log('Same product but not same color or size');
-          return false;
+          continue;
         }
       }
     }
-    console.log('Different product!');
+    if (different) console.log('Different product!');
+    else console.log('Same product but not same color or size');
     return false;
   }
 }

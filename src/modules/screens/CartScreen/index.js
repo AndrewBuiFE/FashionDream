@@ -20,12 +20,22 @@ const calculateTotal = cartItems => {
   let total = 0;
   let discountTotal = 0;
   for (let item of cartItems) {
-    let discountPrice = (item.price - item.price * (item.discountPercent / 100))*item.quantity;
+    let discountPrice =
+      (item.price - item.price * (item.discountPercent / 100)) * item.quantity;
     total += discountPrice;
-    discountTotal += (item.price * (item.discountPercent /100))*item.quantity;
+    discountTotal += item.price * (item.discountPercent / 100) * item.quantity;
   }
   return [total, discountTotal];
 };
+function sortProduct(a, b) {
+  if (a.name.localeCompare(b.name)) {
+    return a.name.localeCompare(b.name);
+  } else if (a.color.localeCompare(b.color)) {
+    return a.color.localeCompare(b.color);
+  } else if (a.size.localeCompare(b.size)) {
+    return a.size.localeCompare(b.size);
+  } else return 0;
+}
 const cartUtils = new CartUtils();
 function CartScreen(props) {
   const [isShowPromoModal, setShowPromoModal] = useState(false);
@@ -35,16 +45,13 @@ function CartScreen(props) {
   let [tempTotal, tempDiscountTotal] = calculateTotal(cartData.listProduct);
   const [total, setTotal] = useState(tempTotal);
   const [discountTotal, setDiscountTotal] = useState(tempDiscountTotal);
-  // console.log('total: ', tempTotal, tempDiscountTotal);
-  // console.log('state total: ', total, discountTotal);
-  console.log('cart data: ', cartData)
+  console.log('cart data: ', cartData);
   const renderItem = ({item}) => {
     return (
       <BagItem
         item={item}
-        handleIncrement={(quantity) => {
-          debugger;
-          let newItem = {...item}
+        handleIncrement={quantity => {
+          var newItem = item;
           newItem.quantity = quantity;
           cartUtils.updateCartItemQuantity(newItem, cartData);
           let [total, discountTotal] = calculateTotal(cartData.listProduct);
@@ -52,9 +59,9 @@ function CartScreen(props) {
           setDiscountTotal(discountTotal);
           console.log('Increase!');
         }}
-        handleDescreasement={(quantity) => {
+        handleDescreasement={quantity => {
           console.log('Descrease!');
-          let newItem = {...item}
+          let newItem = {...item};
           newItem.quantity = quantity;
           cartUtils.updateCartItemQuantity(newItem, cartData);
           let [total, discountTotal] = calculateTotal(cartData.listProduct);
@@ -97,7 +104,11 @@ function CartScreen(props) {
             setShowSuccess(false);
           }}
         />
-        <FlatList data={cartData.listProduct} renderItem={renderItem} />
+        <FlatList
+          data={cartData.listProduct.sort(sortProduct)}
+          renderItem={renderItem}
+          extraData={cartData.listProduct}
+        />
         <PromoCode
           setShowPromoModal={setShowPromoModal}
           marginTop={25}

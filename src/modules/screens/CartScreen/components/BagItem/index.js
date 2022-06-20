@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Alert, Image, Text, TouchableOpacity, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { AppIcons } from '../../../../../general/constants/AppResource';
 import CartUtils from '../../CartUtils';
 import styles from './styles';
@@ -20,11 +20,9 @@ function BagItem(props) {
   const {item, handleIncrement, handleDescreasement} = props;
   let tempPrice = item.price * item.quantity;
   let tempDiscountPrice = tempPrice - tempPrice * (item.discountPercent / 100);
-  const [quantity, setQuantity] = useState(item.quantity);
   const [price, setPrice] = useState(tempPrice);
   const [discountPrice, setDiscountPrice] = useState(tempDiscountPrice);
   const {cartData} = useSelector(state => state.cart);
-  const dispatch = useDispatch();
   return (
     <TouchableOpacity style={styles.bagItem}>
       <View style={styles.imageSection}>
@@ -46,12 +44,11 @@ function BagItem(props) {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              if (quantity > 1) {
-                let tempQuantity = quantity - 1;
+              if (item.quantity > 1) {
+                let tempQuantity = item.quantity - 1;
                 tempPrice = tempQuantity * item.price;
                 tempDiscountPrice =
                   tempPrice * (1 - item.discountPercent / 100);
-                setQuantity(tempQuantity);
                 setPrice(tempPrice);
                 setDiscountPrice(tempDiscountPrice);
                 handleDescreasement(tempQuantity);
@@ -78,15 +75,14 @@ function BagItem(props) {
             <Image source={AppIcons.remove} />
           </TouchableOpacity>
           <View style={styles.button}>
-            <Text style={styles.text}>{quantity}</Text>
+            <Text style={styles.text}>{item.quantity}</Text>
           </View>
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              let tempQuantity = quantity + 1;
+              let tempQuantity = item.quantity + 1;
               tempPrice = tempQuantity * item.price;
               tempDiscountPrice = tempPrice * (1 - item.discountPercent / 100);
-              setQuantity(tempQuantity);
               setPrice(tempPrice);
               setDiscountPrice(tempDiscountPrice);
               handleIncrement(tempQuantity);
