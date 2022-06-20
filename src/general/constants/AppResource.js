@@ -35,6 +35,8 @@ export const AppIcons = {
   pen: require('../../../src/assets/icons/pen.png'),
   photo_camera: require('../../../src/assets/icons/photo_camera.png'),
   promo_arrow: require('../../../src/assets/icons/promo_arrow.png'),
+  check: require('../../../src/assets/icons/check.png'),
+  close: require('../../../src/assets/icons/close.png'),
 };
 export const AppImages = {
   big_banner: require('../../../src/assets/images/big_banner.png'),

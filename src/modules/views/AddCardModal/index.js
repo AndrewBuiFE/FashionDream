@@ -66,7 +66,14 @@ export default function AddCardModal(props) {
             content={item.holderName}
             handleInput={value => {
               newCard.holderName = value;
-              changeData = true;
+              const regex = /^[a-zA-Z]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
             }}
           />
           <InputSection
@@ -74,7 +81,14 @@ export default function AddCardModal(props) {
             content={item.cardNumber}
             handleInput={value => {
               newCard.cardNumber = value;
-              changeData = true;
+              const regex = /^[0-9]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
             }}
           />
           <InputSection
@@ -82,7 +96,14 @@ export default function AddCardModal(props) {
             content={item.exp}
             handleInput={value => {
               newCard.exp = value;
-              changeData = true;
+              const regex = /^[0-9/]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
             }}
           />
           <InputSection
@@ -90,7 +111,14 @@ export default function AddCardModal(props) {
             content={item.cvv.toString()}
             handleInput={value => {
               newCard.cvv = value;
-              changeData = true;
+              const regex = /^[0-9]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
             }}
           />
         </ScrollView>

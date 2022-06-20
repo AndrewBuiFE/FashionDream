@@ -69,7 +69,14 @@ export default function ShippingModal(props) {
             content={item.customerName}
             handleInput={value => {
               newShip.customerName = value;
-              changeData = true;
+              const regex = /^[a-zA-Z]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
             }}
           />
           <InputSection
@@ -77,7 +84,14 @@ export default function ShippingModal(props) {
             content={item.address}
             handleInput={value => {
               newShip.address = value;
-              changeData = true;
+              const regex = /^[a-zA-Z0-9]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
             }}
           />
           <InputSection
@@ -85,7 +99,14 @@ export default function ShippingModal(props) {
             content={item.city}
             handleInput={value => {
               newShip.city = value;
-              changeData = true;
+              const regex = /^[a-zA-Z]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
             }}
           />
           <InputSection
@@ -93,7 +114,14 @@ export default function ShippingModal(props) {
             content={item.state}
             handleInput={value => {
               newShip.state = value;
-              changeData = true;
+              const regex = /^[a-zA-Z]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
             }}
           />
           <InputSection
@@ -101,7 +129,14 @@ export default function ShippingModal(props) {
             content={item.zipcode}
             handleInput={value => {
               newShip.zipcode = value;
-              changeData = true;
+              const regex = /^[0-9]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
             }}
           />
           <InputSection
@@ -109,7 +144,14 @@ export default function ShippingModal(props) {
             content={item.country}
             handleInput={value => {
               newShip.country = value;
-              changeData = true;
+              const regex = /^[a-zA-Z]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
             }}
           />
         </ScrollView>
