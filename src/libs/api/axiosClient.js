@@ -5,27 +5,30 @@ import axios from 'axios';
 // Tham khao: `https://github.com/axios/axios#request-config`
 // de xem chi tiet
 const axiosClient = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  // baseURL: process.env.REACT_APP_API_URL,
+  baseURL: 'http://192.168.100.181:8000',
   timeout: 30 * 1000,
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded',
+    'Content-Type': 'application/json',
   },
 });
 
 axiosClient.interceptors.request.use(async config => {
+  console.log("config", config);
   console.log(
     config.url,
     config.method,
-    config.method === 'post' ? config.data : config.params,
+    config.method === 'post' ? config.data : '',
   );
   return config;
 });
 
 axiosClient.interceptors.response.use(
   response => {
-    if (response && response.data) {
-      return response.data;
-    }
+    console.log("Response: ", response);
+    // if (response && response.data) {
+    //   return response.data;
+    // }
 
     return response;
   },

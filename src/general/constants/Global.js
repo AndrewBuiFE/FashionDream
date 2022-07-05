@@ -4,6 +4,7 @@ export const AppConfig = {
   ignoreGetConfig: false,
   maxItems: 100,
 };
+export const HostName = 'http://192.168.100.181:8000'
 export const DeviceConstants = {
   screenWidth: Dimensions.get("screen").width,
   screenHeight: Dimensions.get("screen").height,

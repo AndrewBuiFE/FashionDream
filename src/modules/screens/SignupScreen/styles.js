@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.primaryColor,
   },
   inputSection: {
-    height: 208,
+    height: 280,
     width: DeviceConstants.screenWidth - 16 * 2,
     marginHorizontal: 16,
     marginTop: 73,

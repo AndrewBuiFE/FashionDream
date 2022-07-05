@@ -1,63 +1,28 @@
-import axiosClient from "./axiosClient";
-
+import axiosClient from './axiosClient';
+import axios from 'axios';
+import {HostName} from '../../general/constants/Global';
 const commonApi = {
-  // Get app configs
-    getProduct: params => {
-      const url = 'http://20.247.114.145:8099/api/v1/products/';
-      return axiosClient.get(url, {params});
-    },
-  //   getSource: params => {
-  //     const url = 'https://newsapi.org/v2/top-headlines/sources';
-  //     return axiosClient.get(url, {params});
-  //   },
-  //   getFeeds: params => {
-  //     const url = 'https://newsapi.org/v2/top-headlines';
-  //     return axiosClient.get(url, {params});
-  //   },
-  //   // Get app notifications
-  //   getNotifications: params => {
-  //     const url = 'https://visearch.net/remotetv/get_app_notifications.php';
-  //     return axiosClient.get(url, {params});
-  //   },
-  //   // Subscribe by Apple
-  //   subscribeByApple: async params => {
-  //     const url = 'https://visearch.net/remotetv/subscribe_by_apple.php';
-  //     const data = new URLSearchParams();
-  //     Object.keys(params).forEach(key => {
-  //       data.append(key, params[key]);
-  //     });
-  //     return axiosClient.post(url, data, {
-  //       headers: {
-  //         'Content-Type': 'application/x-www-form-urlencoded',
-  //       },
-  //     });
-  //   },
-  //   // Subscribe by Google
-  //   subscribeByGoogle: async params => {
-  //     const url = 'https://visearch.net/remotetv/subscribe_by_googleplay.php';
-  //     const data = new URLSearchParams();
-  //     Object.keys(params).forEach(key => {
-  //       data.append(key, params[key]);
-  //     });
-  //     return axiosClient.post(url, data, {
-  //       headers: {
-  //         'Content-Type': 'application/x-www-form-urlencoded',
-  //       },
-  //     });
-  //   },
-  //   // Update payment info
-  //   updatePaymentInfo: async params => {
-  //     const url = 'https://visearch.net/remotetv/update_payment_info.php';
-  //     const data = new URLSearchParams();
-  //     Object.keys(params).forEach(key => {
-  //       data.append(key, params[key]);
-  //     });
-  //     return axiosClient.post(url, data, {
-  //       headers: {
-  //         'Content-Type': 'application/x-www-form-urlencoded',
-  //       },
-  //     });
-  //   },
+  getProduct: params => {
+    const url = 'http://20.247.114.145:8099/api/v1/products/';
+    return axiosClient.get(url, params);
+  },
+  register: params => {
+    const url = `${HostName}/api/auth/register`;
+    return axiosClient.post(url, params);
+  },
+  login: params => {
+    const url = `${HostName}/api/auth/login`;
+    return axiosClient.post(url, params);
+  },
+  getUser: () => {
+    const token =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzI0ZGFhYjFmYjRiZTc2NTdiMjQ5YyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NjkyOTkyNCwiZXhwIjoxNjU3MTAyNzI0fQ.UUXKMkySb9nxnoEnHzEulD1kEEr0Igeya0yfDtBp0U0';
+    const config = {
+      headers: {token: `Bearer ${token}`},
+    };
+    const url = `${HostName}/api/users/find/62c24daab1fb4be7657b249c`;
+    return axiosClient.get(url, config);
+  },
 };
 
 export default commonApi;

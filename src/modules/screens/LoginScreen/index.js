@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
+  Alert,
   Image,
   ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { AppIcons } from '../../../general/constants/AppResource';
-import { ScreenNames } from '../../../general/constants/ScreenNames';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {AppIcons} from '../../../general/constants/AppResource';
+import {ScreenNames} from '../../../general/constants/ScreenNames';
+import commonApi from '../../../libs/api/commonApi';
 import AppHeader from '../../components/AppHeader';
 import GlobalButton from '../../components/GlobalButton/index';
 import styles from './styles';
 
 export default function LoginScreen(props) {
-  const [username, checkUsername] = useState();
-  const [password, checkPassword] = useState();
+  const [username, setUserName] = useState();
+  const [password, setPassword] = useState();
   const [invalid, showInvalidMess] = useState(false);
   return (
     <SafeAreaView>
@@ -41,15 +43,16 @@ export default function LoginScreen(props) {
               onChangeText={text => {
                 showInvalidMess(false);
                 const regex = /([a-zA-Z0-9]){6,20}/g;
-                if (text.length == 0) {
-                  checkUsername(undefined);
-                  return;
-                }
-                if (text.match(regex)) {
-                  checkUsername(true);
-                } else {
-                  checkUsername(false);
-                }
+                setUserName(text);
+                // if (text.length == 0) {
+                //   setUserName(undefined);
+                //   return;
+                // }
+                // if (text.match(regex)) {
+                //   setUserName(true);
+                // } else {
+                //   setUserName(false);
+                // }
               }}></TextInput>
             {username === undefined ? null : username ? (
               <Image source={AppIcons.check} style={styles.check1} />
@@ -64,15 +67,16 @@ export default function LoginScreen(props) {
               onChangeText={text => {
                 showInvalidMess(false);
                 const regex = /([a-zA-Z0-9]){6,20}/g;
-                if (text.length == 0) {
-                  checkPassword(undefined);
-                  return;
-                }
-                if (text.match(regex)) {
-                  checkPassword(true);
-                } else {
-                  checkPassword(false);
-                }
+                // if (text.length == 0) {
+                //   checkPassword(undefined);
+                //   return;
+                // }
+                // if (text.match(regex)) {
+                //   checkPassword(true);
+                // } else {
+                //   checkPassword(false);
+                // }
+                setPassword(text);
               }}></TextInput>
             {password === undefined ? null : password ? (
               <Image source={AppIcons.check} style={styles.check2} />
@@ -98,10 +102,25 @@ export default function LoginScreen(props) {
           <GlobalButton
             actionText="LOGIN"
             marginTop={30}
-            action={() => {
-              if (username && password)
-                props.navigation.navigate(ScreenNames.mainTab);
-              else showInvalidMess(true);
+            action={async() => {
+              // if (username && password) {
+                let params = {
+                  username: username,
+                  password: password,
+                };
+                await commonApi.login(params).then(
+                  res => {
+                    console.log("res : ", res);
+                    if (res.status == 200) {
+                      props.navigation.navigate(ScreenNames.mainTab);
+                    } else if (res.status == 401) {
+                      // showInvalidMess(true);
+                      console.log("invalid!");
+                    }
+                  }
+                );
+         
+              // } else showInvalidMess(true);
             }}
           />
           <View style={{marginTop: 194}}>

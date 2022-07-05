@@ -29,7 +29,7 @@ function AppNavigator(props) {
   return (
     <NavigationContainer ref={appNavigation}>
       <Stack.Navigator
-        initialRouteName={ScreenNames.loginScreen}
+        initialRouteName={ScreenNames.signupScreen}
         screenOptions={{
           headerShown: false,
         }}>
