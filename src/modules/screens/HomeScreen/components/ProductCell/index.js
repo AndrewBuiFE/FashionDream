@@ -1,9 +1,9 @@
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { AppIcons } from '../../../../../general/constants/AppResource';
-import { ScreenNames } from '../../../../../general/constants/ScreenNames';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {AppIcons} from '../../../../../general/constants/AppResource';
+import {ScreenNames} from '../../../../../general/constants/ScreenNames';
 import Star from '../../../../components/Star/index';
 import styles from './styles';
 ProductCell.propTypes = {
@@ -19,6 +19,7 @@ ProductCell.defaultProps = {
 var discountPrice = 0;
 function ProductCell(props) {
   const {item, onItemClick, width} = props;
+  console.log("item: ", (item.image[0]).startsWith('http'));
   discountPrice = item.price - item.price * (item.discountPercent / 100);
   const navigation = useNavigation();
   return (
@@ -31,7 +32,10 @@ function ProductCell(props) {
         });
       }}>
       <View style={[styles.imageSection, {width: width}]}>
-        <Image source={item.image} style={styles.image} />
+        <Image
+          source={item.image[0].startsWith('http') ? {uri: item.image[0]} : item.image}
+          style={styles.image}
+        />
         <View style={styles.discountContainer}>
           <Text style={styles.discountText}>-{item.discountPercent}%</Text>
         </View>

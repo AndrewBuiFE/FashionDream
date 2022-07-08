@@ -1,4 +1,4 @@
-import { AppImages } from '../general/constants/AppResource';
+import {AppImages} from '../general/constants/AppResource';
 
 export const PRODUCT = [
   {
@@ -498,4 +498,16 @@ export const SIZES = [
     id: 5,
     title: 'XL',
   },
+];
+export const MINOR_CATEGORY = [
+  {id: 1, title: 'T-shirts'},
+  {id: 2, title: 'Crop tops'},
+  {id: 3, title: 'Sleeveless'},
+  {id: 4, title: 'Blouses'},
+  {id: 5, title: 'V-neck'},
+  {id: 6, title: 'Turtleneck'},
+  {id: 7, title: 'Peplum'},
+  {id: 8, title: 'Wrap Top'},
+  {id: 9, title: 'Sweatshirt'},
+  {id: 10, title: 'Sweater'},
 ];

@@ -13,7 +13,7 @@ export const PRODUCT = [
     storeQuantity: 3,
     noComment: 6,
     starCount: 3,
-    image: AppImages.black,
+    image: AppImages.black, (thay = http) 
   },
   {
     id: 2,
@@ -320,15 +320,15 @@ export const CART = {
   ],
 };
 
-export const PAYMENT_CARD = {
+export const PAYMENT_CARD = [{
   id: 1,
   cardNumber: '* * * * * * * * * * * * 3947',
   holderName: 'Hoang',
   exp: '05/23',
   cvv: 9348,
   isDefault: true,
-};
-export const SHIPPING_ADDRESS = {
+}];
+export const SHIPPING_ADDRESS = [{
   id: 1,
   customerName: 'Jane',
   address: 'United States',
@@ -338,7 +338,7 @@ export const SHIPPING_ADDRESS = {
   country: 'Viet Nam',
   isShowCheck: true,
   isCheck: false,
-};
+}];
 export const CHECKOUT = {
   shippingAddress: {
     id: 1,

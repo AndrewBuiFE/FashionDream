@@ -6,15 +6,14 @@ import axios from 'axios';
 // de xem chi tiet
 const axiosClient = axios.create({
   // baseURL: process.env.REACT_APP_API_URL,
-  baseURL: 'http://192.168.100.181:8000',
+  baseURL: 'http://20.2.129.191:8099',
   timeout: 30 * 1000,
   headers: {
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json;charset=utf-8',
   },
 });
 
 axiosClient.interceptors.request.use(async config => {
-  console.log("config", config);
   console.log(
     config.url,
     config.method,
@@ -25,17 +24,18 @@ axiosClient.interceptors.request.use(async config => {
 
 axiosClient.interceptors.response.use(
   response => {
-    console.log("Response: ", response);
     // if (response && response.data) {
     //   return response.data;
     // }
-
-    return response;
+    if (response) {
+      // console.log('Access Token: ', JSON.parse(JSON.stringify(response)).data.data.accessToken);
+    }
+    return JSON.parse(JSON.stringify(response));
   },
   error => {
     // Bat loi xay ra
     console.log(`[axiosClient.js] ${error}`);
-    throw error;
+    // throw error;
   },
 );
 

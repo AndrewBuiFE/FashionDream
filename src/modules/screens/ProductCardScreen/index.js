@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { Alert, Image, Text, TouchableOpacity, View } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppIcons } from '../../../general/constants/AppResource';
+import React, {useState} from 'react';
+import {Alert, Image, Text, TouchableOpacity, View} from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppIcons} from '../../../general/constants/AppResource';
 import AppHeaderNormal from '../../components/AppHeaderNormal/index';
 import GlobalButton from '../../components/GlobalButton/index';
 import Star from '../../components/Star/index';
 import SelectColorModal from '../../views/SelectColorModal';
 import SelectSizeModal from '../../views/SelectSizeModal/index';
-import { setCartNewThing } from '../CartScreen/CartSlice';
+import {setCartNewThing} from '../CartScreen/CartSlice';
 import CartUtils from '../CartScreen/CartUtils';
 import styles from './styles';
 ProductCardScreen.propTypes = {};
@@ -62,7 +62,14 @@ function ProductCardScreen(props) {
           }}
         />
         <View style={styles.imageSection}>
-          <Image source={document.image} style={styles.image} />
+          <Image
+            source={
+              document.image[0].startsWith('http')
+                ? {uri: document.image[0]}
+                : document.image
+            }
+            style={styles.image}
+          />
         </View>
         <View style={styles.selectionSection}>
           <TouchableOpacity
@@ -133,7 +140,7 @@ function ProductCardScreen(props) {
               };
               product.productId = product.id;
               product.id = Date.now();
-              console.log("product: ", product);
+              console.log('product: ', product);
               let isDuplicate = cartUtils.isDuplicateProduct(product, cartData);
               console.log(isDuplicate);
               if (!isDuplicate) {
@@ -142,9 +149,9 @@ function ProductCardScreen(props) {
                 dispatch(setCartNewThing(true));
               } else {
                 let oldItem = cartUtils.getCartItem(product, cartData);
-                console.log("Old item: ", oldItem);
+                console.log('Old item: ', oldItem);
                 oldItem.quantity = oldItem.quantity + 1;
-                console.log("Old item changed: ", oldItem);
+                console.log('Old item changed: ', oldItem);
                 cartUtils.updateCartItemQuantity(oldItem, cartData);
               }
 

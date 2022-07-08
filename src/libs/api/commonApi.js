@@ -1,27 +1,58 @@
 import axiosClient from './axiosClient';
-import axios from 'axios';
+// import axios from 'axios';
 import {HostName} from '../../general/constants/Global';
 const commonApi = {
-  getProduct: params => {
-    const url = 'http://20.247.114.145:8099/api/v1/products/';
-    return axiosClient.get(url, params);
-  },
   register: params => {
     const url = `${HostName}/api/auth/register`;
     return axiosClient.post(url, params);
   },
   login: params => {
-    const url = `${HostName}/api/auth/login`;
+    const url = `${HostName}/api/v1/signin`;
     return axiosClient.post(url, params);
   },
-  getUser: () => {
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzI0ZGFhYjFmYjRiZTc2NTdiMjQ5YyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NjkyOTkyNCwiZXhwIjoxNjU3MTAyNzI0fQ.UUXKMkySb9nxnoEnHzEulD1kEEr0Igeya0yfDtBp0U0';
-    const config = {
-      headers: {token: `Bearer ${token}`},
-    };
-    const url = `${HostName}/api/users/find/62c24daab1fb4be7657b249c`;
-    return axiosClient.get(url, config);
+  refreshToken: params => {
+    const url = `${HostName}/api/v1/refreshtoken`;
+    return axiosClient.post(url, params);
+  },
+  getProduct: params => {
+    const url = `${HostName}/api/v1/products`;
+    return axiosClient.get(url);
+  },
+  addProduct: params => {
+    const url = `${HostName}/api/admin/auth/v1/products`;
+    return axiosClient.post(url, params);
+  },
+  updateProduct: (params, productId) => {
+    const url = `${HostName}/api/admin/auth/v1/products/${productId}`;
+    return axiosClient.put(url, params);
+  },
+  addCategory: params => {
+    const url = `${HostName}/api/admin/auth/v1/categories`;
+    return axiosClient.post(url, params);
+  },
+  getCategory: params => {
+    const url = `${HostName}/api/v1/categories`;
+    return axiosClient.get(url);
+  },
+  addToCart: params => {
+    const url = `${HostName}/api/user/auth/v1/carts`;
+    return axiosClient.post(url, params);
+  },
+  deleteFromCart: params => {
+    const url = `${HostName}/api/user/auth/v1/carts`;
+    return axiosClient.delete(url, params);
+  },
+  getCartProduct: params => {
+    const url = `${HostName}/api/user/auth/v1/carts`;
+    return axiosClient.get(url);
+  },
+  orderInfo: params => {
+    const url = `${HostName}/api/user/auth/v1/checkout`;
+    return axiosClient.get(url, params);
+  },
+  makeOrder: params => {
+    const url = `${HostName}/api/user/auth/v1/checkout`;
+    return axiosClient.post(url, params);
   },
 };
 

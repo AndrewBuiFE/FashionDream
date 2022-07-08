@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { MINOR_CATEGORY } from '../../../data';
 import { AppIcons } from '../../../general/constants/AppResource';
 import AppHeader from '../../components/AppHeader/index';
 import FilterModal from '../../views/FilterModal';
@@ -27,6 +28,12 @@ function CatalogScreen(props) {
     />
   );
   const renderGridItem = ({item}) => <ProductCell item={item} width={164} />;
+  const renderCategory = ({item}) => 
+  (
+          <TouchableOpacity style={styles.typeContainer}>
+            <Text style={styles.typeText}>{item.title}</Text>
+          </TouchableOpacity>
+  )
   return (
     <SafeAreaProvider>
       <View style={styles.catalogContainer}>
@@ -102,7 +109,7 @@ function CatalogScreen(props) {
           }}
         />
         <View style={styles.clothesTypes}>
-          <TouchableOpacity style={[styles.typeContainer, {marginLeft: 16}]}>
+          {/* <TouchableOpacity style={[styles.typeContainer, {marginLeft: 16}]}>
             <Text style={styles.typeText}>T-shirts</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.typeContainer}>
@@ -113,7 +120,8 @@ function CatalogScreen(props) {
           </TouchableOpacity>
           <TouchableOpacity style={styles.typeContainer}>
             <Text style={styles.typeText}>Sleeve</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
+          <FlatList data = {MINOR_CATEGORY} renderItem = {renderCategory} horizontal={true} showsHorizontalScrollIndicator={false}/>
         </View>
         <View style={styles.productAction}>
           <TouchableOpacity

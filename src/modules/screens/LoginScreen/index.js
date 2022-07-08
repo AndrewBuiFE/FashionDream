@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppIcons} from '../../../general/constants/AppResource';
+import {AppConfig} from '../../../general/constants/Global';
 import {ScreenNames} from '../../../general/constants/ScreenNames';
 import commonApi from '../../../libs/api/commonApi';
 import AppHeader from '../../components/AppHeader';
@@ -102,25 +103,30 @@ export default function LoginScreen(props) {
           <GlobalButton
             actionText="LOGIN"
             marginTop={30}
-            action={async() => {
+            action={async () => {
+              props.navigation.navigate(ScreenNames.mainTab);
               // if (username && password) {
-                let params = {
-                  username: username,
-                  password: password,
-                };
-                await commonApi.login(params).then(
-                  res => {
-                    console.log("res : ", res);
-                    if (res.status == 200) {
-                      props.navigation.navigate(ScreenNames.mainTab);
-                    } else if (res.status == 401) {
-                      // showInvalidMess(true);
-                      console.log("invalid!");
-                    }
-                  }
-                );
-         
-              // } else showInvalidMess(true);
+              //   let params = {
+              //     username: username,
+              //     password: password,
+              //   };
+              //   await commonApi.login(params).then(res => {
+              //     console.log('res : ', res);
+              //     console.log('res status: ', res.status);
+              //     console.log('token: ', res.data.data.accessToken);
+              //     if (res) {
+              //       if (res.data.code == 200) {
+              //         AppConfig.token = res.data.data.accessToken;
+              //         props.navigation.navigate(ScreenNames.mainTab);
+              //       } else {
+              //         showInvalidMess(true);
+              //       }
+              //     } else {
+              //       showInvalidMess(true);
+              //       console.log('invalid!');
+              //     }
+              //   });
+              // }
             }}
           />
           <View style={{marginTop: 194}}>
