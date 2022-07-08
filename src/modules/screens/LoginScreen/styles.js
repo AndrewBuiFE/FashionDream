@@ -49,5 +49,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  check1: {
+    position: 'absolute',
+    right: 10,
+    top: 24,
+  },
+  check2: {
+    position: 'absolute',
+    right: 10,
+    top: 94,
+  },
 });
 export default styles;

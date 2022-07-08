@@ -73,10 +73,8 @@ function PaymentScreen(props) {
             setShowAddCard(false);
           }}
           onButtonClick={card => {
-            console.log("Card: ", card);
             let tempCardData = [...cardData];
             tempCardData.push(card);
-            console.log("Temp Card: ", tempCardData);
           }}
         />
         <View style={styles.contentContainer}>

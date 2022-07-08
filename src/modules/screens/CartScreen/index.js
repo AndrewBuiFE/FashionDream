@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { useDispatch, useSelector } from 'react-redux';
-import { CART } from '../../../data/index';
+import { useSelector } from 'react-redux';
 import { AppIcons } from '../../../general/constants/AppResource';
 import { ScreenNames } from '../../../general/constants/ScreenNames';
 import AppHeader from '../../components/AppHeader/index';
 import GlobalButton from '../../components/GlobalButton/index';
 import PromoCodeModal from '../../views/PromoCodeModal/index';
 import Success from '../../views/Success/index';
+import CartUtils from './CartUtils';
 import BagItem from './components/BagItem/index';
 import PromoCode from './components/PromoCode/index';
 import styles from './styles';
@@ -16,37 +16,57 @@ CartScreen.propTypes = {};
 CartScreen.defaultProps = {};
 let promoCodeValue = '';
 
-const calculateTotal = itemData => {
+const calculateTotal = cartItems => {
   let total = 0;
-  for (let item of itemData) {
-    let discountPrice = item.price - item.price * (item.discountPercent / 100);
+  let discountTotal = 0;
+  for (let item of cartItems) {
+    let discountPrice =
+      (item.price - item.price * (item.discountPercent / 100)) * item.quantity;
     total += discountPrice;
+    discountTotal += item.price * (item.discountPercent / 100) * item.quantity;
   }
-  return total;
+  return [total, discountTotal];
 };
+function sortProduct(a, b) {
+  if (a.name.localeCompare(b.name)) {
+    return a.name.localeCompare(b.name);
+  } else if (a.color.localeCompare(b.color)) {
+    return a.color.localeCompare(b.color);
+  } else if (a.size.localeCompare(b.size)) {
+    return a.size.localeCompare(b.size);
+  } else return 0;
+}
+const cartUtils = new CartUtils();
 function CartScreen(props) {
-  let totalMoney = calculateTotal(CART.listProduct);
   const [isShowPromoModal, setShowPromoModal] = useState(false);
   const [isShowSuccess, setShowSuccess] = useState(false);
   const [quantity, setQuantity] = useState(0);
-  const [total, setTotal] = useState(totalMoney);
   const {cartData} = useSelector(state => state.cart);
-  console.log('Cart data: ', cartData);
-  const dispatch = useDispatch();
+  let [tempTotal, tempDiscountTotal] = calculateTotal(cartData.listProduct);
+  const [total, setTotal] = useState(tempTotal);
+  const [discountTotal, setDiscountTotal] = useState(tempDiscountTotal);
+  console.log('cart data: ', cartData);
   const renderItem = ({item}) => {
-    console.log("Bag item: ", item);
     return (
       <BagItem
         item={item}
-        handleIncrement={(tempPrice, tempDiscountPrice) => {
+        handleIncrement={quantity => {
+          var newItem = item;
+          newItem.quantity = quantity;
+          cartUtils.updateCartItemQuantity(newItem, cartData);
+          let [total, discountTotal] = calculateTotal(cartData.listProduct);
+          setTotal(total);
+          setDiscountTotal(discountTotal);
           console.log('Increase!');
-          console.log('Temp price: ', tempPrice);
-          console.log('temp discountPrice: ', tempDiscountPrice);
         }}
-        handleDescreasement={(tempPrice, tempDiscountPrice) => {
+        handleDescreasement={quantity => {
           console.log('Descrease!');
-          console.log('Temp price: ', tempPrice);
-          console.log('temp discountPrice: ', tempDiscountPrice);
+          let newItem = {...item};
+          newItem.quantity = quantity;
+          cartUtils.updateCartItemQuantity(newItem, cartData);
+          let [total, discountTotal] = calculateTotal(cartData.listProduct);
+          setTotal(total);
+          setDiscountTotal(discountTotal);
         }}
       />
     );
@@ -74,28 +94,6 @@ function CartScreen(props) {
           onModalHidden={() => {
             setShowPromoModal(false);
           }}
-          onMenuClick={menu => {
-            switch (menu) {
-              case 0:
-                console.log('0');
-                break;
-              case 1:
-                console.log('1');
-                break;
-              case 2:
-                console.log('2');
-                break;
-              case 3:
-                console.log('3');
-                break;
-              case 4:
-                console.log('4');
-                break;
-              default:
-                console.log('-1');
-                break;
-            }
-          }}
           getPromoCode={promoCode => {
             promoCodeValue = promoCode;
           }}
@@ -106,7 +104,11 @@ function CartScreen(props) {
             setShowSuccess(false);
           }}
         />
-        <FlatList data={cartData.ListProduct} renderItem={renderItem} />
+        <FlatList
+          data={cartData.listProduct.sort(sortProduct)}
+          renderItem={renderItem}
+          extraData={cartData.listProduct}
+        />
         <PromoCode
           setShowPromoModal={setShowPromoModal}
           marginTop={25}
@@ -114,18 +116,18 @@ function CartScreen(props) {
         />
         <View style={styles.total}>
           <Text style={styles.totalText}>Discount:</Text>
-          <Text style={styles.priceText}>${total}</Text>
+          <Text style={styles.priceText}>${tempDiscountTotal}</Text>
         </View>
         <View style={styles.total}>
           <Text style={styles.totalText}>Total amount:</Text>
-          <Text style={styles.priceText}>${total}</Text>
+          <Text style={styles.priceText}>${tempTotal}</Text>
         </View>
         <GlobalButton
           actionText="CHECK OUT"
           marginTop={24}
           action={() => {
             props.navigation.navigate(ScreenNames.checkoutScreen, {
-              totalAmount: total,
+              totalAmount: tempTotal,
             });
           }}
         />

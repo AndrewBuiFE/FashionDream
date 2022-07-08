@@ -83,10 +83,8 @@ export default function ShippingScreen(props) {
             setAddShipAddress(false);
           }}
           onButtonClick={ship => {
-            console.log("ship: ", ship);
             let tempShipData = [...shipData];
             tempShipData.push(ship);
-            console.log("Temp ship: ", tempShipData);
             // setShipData(tempShipData);
           }}
         />

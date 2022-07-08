@@ -1,21 +1,19 @@
 import React from 'react';
-import { KeyboardAvoidingView, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import ReactNativeModal from 'react-native-modal';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import ShippingAddress from '../../../model/ShippingAddress/index';
+import ShippingAddress from '../../../model/ShippingAddress';
 import GlobalButton from '../../components/GlobalButton/index';
 import Modalheader from '../../components/ModalHeader/index';
 import InputSection from '../../screens/PaymentScreen/InputSection/index';
 import styles from './styles';
 ShippingModal.propTypes = {};
 ShippingModal.defaultProps = {};
-let newShip = new ShippingAddress();
+var newShip = new ShippingAddress();
+var changeData = false;
 export default function ShippingModal(props) {
   const {isVisible, onModalHidden, onButtonClick, item} = props;
-  console.log("ship item: ", item)
   const insets = useSafeAreaInsets();
-  const date = new Date().getTime();
-  newShip.Id = date;
   return (
     <ReactNativeModal
       isVisible={isVisible}
@@ -24,7 +22,19 @@ export default function ShippingModal(props) {
       }}
       onModalHide={() => {
         console.log('On modal hide');
-        // onButtonClick(newShip);
+        const date = new Date().getTime();
+        newShip.id = date;
+        if (newShip.address.length == 0) newShip.address = item.address;
+        if (newShip.city.length == 0) newShip.city = item.city;
+        if (newShip.country.length == 0)newShip.country = item.country;
+        if (newShip.customerName.length == 0) newShip.customerName = item.customerName;
+        if (newShip.state.length == 0) newShip.state = item.state;
+        if (newShip.zipcode.length == 0) newShip.zipcode = item.zipcode;
+        if(changeData) {
+          onButtonClick(newShip);
+          changeData = false;
+        }
+
       }}
       hasBackdrop={true}
       avoidKeyboard={true}
@@ -37,12 +47,11 @@ export default function ShippingModal(props) {
       coverScreen={true}
       style={{margin: 0}}>
       <View style={[styles.addCardContainer, {bottom: insets.bottom}]}>
-        <KeyboardAvoidingView behavior={'position'}>
-          <Modalheader />
-          <View style={styles.titleSection}>
-            <Text style={styles.titleText}>Shipping Addresses</Text>
-          </View>
-          {/* <View style={styles.inputContainer}>
+        <Modalheader />
+        <View style={styles.titleSection}>
+          <Text style={styles.titleText}>Shipping Addresses</Text>
+        </View>
+        {/* <View style={styles.inputContainer}>
             <TextInput
               placeholder="Full name"
               placeholderTextColor={'#ABB4BD'}
@@ -54,57 +63,105 @@ export default function ShippingModal(props) {
               }}
             />
           </View> */}
+        <ScrollView>
           <InputSection
             title={'Full name'}
             content={item.customerName}
             handleInput={value => {
-              newShip.CustomerName = value;
+              newShip.customerName = value;
+              const regex = /^[a-zA-Z]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
             }}
           />
           <InputSection
             title={'Address'}
             content={item.address}
             handleInput={value => {
-              newShip.Address = value;
+              newShip.address = value;
+              const regex = /^[a-zA-Z0-9]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
             }}
           />
           <InputSection
             title={'City'}
             content={item.city}
             handleInput={value => {
-              newShip.City = value;
+              newShip.city = value;
+              const regex = /^[a-zA-Z]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
             }}
           />
           <InputSection
             title={'State/Province/Region'}
             content={item.state}
             handleInput={value => {
-              newShip.State = value;
+              newShip.state = value;
+              const regex = /^[a-zA-Z]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
             }}
           />
           <InputSection
             title={'Zip code (Postal Code)'}
-            content={item.zipcode.toString()}
+            content={item.zipcode}
             handleInput={value => {
-              newShip.Zipcode = value;
+              newShip.zipcode = value;
+              const regex = /^[0-9]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
             }}
           />
           <InputSection
             title={'Country'}
             content={item.country}
             handleInput={value => {
-              newShip.Country = value;
+              newShip.country = value;
+              const regex = /^[a-zA-Z]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
             }}
           />
-          <GlobalButton
-            actionText="SAVE ADDRESS"
-            marginTop={40}
-            action={() => {
-              console.log(newShip);
-              onModalHidden();
-            }}
-          />
-        </KeyboardAvoidingView>
+        </ScrollView>
+        <GlobalButton
+          actionText="SAVE ADDRESS"
+          marginTop={40}
+          action={() => {
+            onModalHidden();
+          }}
+        />
       </View>
     </ReactNativeModal>
   );

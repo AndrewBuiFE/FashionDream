@@ -1,19 +1,19 @@
 export default class ShippingAddress {
-  Id: number;
-  Country: string;
-  Zipcode: string;
-  Address: string;
-  CustomerName: string;
-  City: string;
-  State: string;
+  id: number;
+  country: string;
+  zipcode: string;
+  address: string;
+  customerName: string;
+  city: string;
+  state: string;
   constructor(shipInfo = null) {
-    this.Id = shipInfo && shipInfo.Id ? shipInfo.Id : 1;
-    this.Country = shipInfo && shipInfo.Country ? shipInfo.Country : '';
-    this.Zipcode = shipInfo && shipInfo.Zipcode ? shipInfo.Zipcode : '';
-    this.Address = shipInfo && shipInfo.Address ? shipInfo.Address : '';
-    this.CustomerName =
-      shipInfo && shipInfo.CustomerName ? shipInfo.CustomerName : '';
-    this.City = shipInfo && shipInfo.City ? shipInfo.City : '';
-    this.State = shipInfo && shipInfo.State ? shipInfo.State : '';
+    this.id = shipInfo && shipInfo.id ? shipInfo.id : 1;
+    this.country = shipInfo && shipInfo.country ? shipInfo.country : '';
+    this.zipcode = shipInfo && shipInfo.zipcode ? shipInfo.zipcode : '';
+    this.address = shipInfo && shipInfo.address ? shipInfo.address : '';
+    this.customerName =
+      shipInfo && shipInfo.customerName ? shipInfo.customerName : '';
+    this.city = shipInfo && shipInfo.city ? shipInfo.city : '';
+    this.state = shipInfo && shipInfo.state ? shipInfo.state : '';
   }
 }

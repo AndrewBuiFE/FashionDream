@@ -11,6 +11,7 @@ export const AppIcons = {
   profile_active: require('../../../src/assets/icons/profile_active.png'),
   shopping_cart_active: require('../../../src/assets/icons/shopping_cart_active.png'),
   bag_active: require('../../../src/assets/icons/bag_active.png'),
+  sth_in_bag: require('../../../src/assets/icons/sth_in_bag.png'),
   heart_active: require('../../../src/assets/icons/heart_active.png'),
   heart_small: require('../../../src/assets/icons/heart_small.png'),
   heart_small_active: require('../../../src/assets/icons/heart_small_active.png'),
@@ -34,6 +35,8 @@ export const AppIcons = {
   pen: require('../../../src/assets/icons/pen.png'),
   photo_camera: require('../../../src/assets/icons/photo_camera.png'),
   promo_arrow: require('../../../src/assets/icons/promo_arrow.png'),
+  check: require('../../../src/assets/icons/check.png'),
+  close: require('../../../src/assets/icons/close.png'),
 };
 export const AppImages = {
   big_banner: require('../../../src/assets/images/big_banner.png'),

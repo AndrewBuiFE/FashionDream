@@ -1,6 +1,6 @@
 import {
-    createNavigationContainerRef,
-    NavigationContainer
+  createNavigationContainerRef,
+  NavigationContainer
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
@@ -29,7 +29,7 @@ function AppNavigator(props) {
   return (
     <NavigationContainer ref={appNavigation}>
       <Stack.Navigator
-        initialRouteName={ScreenNames.bagTab}
+        initialRouteName={ScreenNames.signupScreen}
         screenOptions={{
           headerShown: false,
         }}>
