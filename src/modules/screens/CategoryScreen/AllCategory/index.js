@@ -1,28 +1,37 @@
-import React from 'react';
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { CATEGORY } from '../../../../data/index';
-import { AppIcons } from '../../../../general/constants/AppResource';
-import { ScreenNames } from '../../../../general/constants/ScreenNames';
+import React, {useEffect, useState} from 'react';
+import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {AppIcons} from '../../../../general/constants/AppResource';
+import {ScreenNames} from '../../../../general/constants/ScreenNames';
+import commonApi from '../../../../libs/api/commonApi';
 import AppHeaderNormal from '../../../components/AppHeaderNormal';
 import GlobalButton from '../../../components/GlobalButton/index';
 import styles from './styles';
 AllCategory.propTypes = {};
 AllCategory.defaultProps = {};
-const CategoryItem = ({item, navigation}) => (
-  <TouchableOpacity
-    style={styles.categoryItem}
-    onPress={() => {
-      navigation.navigate(ScreenNames.catalogScreen, {item: item});
-    }}>
-    <Text style={styles.title}>{item.title}</Text>
-  </TouchableOpacity>
-);
+const CategoryItem = ({item, navigation}) => {
+  return (
+    <TouchableOpacity
+      style={styles.categoryItem}
+      onPress={() => {
+        navigation.navigate(ScreenNames.catalogScreen, {item: item});
+      }}>
+      <Text style={styles.title}>{item.name}</Text>
+    </TouchableOpacity>
+  );
+};
 const Divider = () => <View style={styles.divider}></View>;
 function AllCategory(props) {
-  const renderItem = ({item}) => (
-    <CategoryItem item={item} navigation={props.navigation} />
-  );
+  const [categoryData, setCategoryData] = useState([]);
+  useEffect(() => {
+    console.log('rendering....');
+    commonApi.getCategory().then(res => {
+      setCategoryData(res.data.data.categories);
+    });
+  }, []);
+  const renderItem = ({item}) => {
+    return <CategoryItem item={item} navigation={props.navigation} />;
+  };
   return (
     <SafeAreaProvider>
       <View style={styles.categoryContainer}>
@@ -41,10 +50,10 @@ function AllCategory(props) {
             </TouchableOpacity>
           </>
         </AppHeaderNormal>
-        <GlobalButton actionText='VIEW ALL ITEMS' marginTop={16} />
+        <GlobalButton actionText="VIEW ALL ITEMS" marginTop={16} />
         <Text style={styles.text}>Choose category</Text>
         <FlatList
-          data={CATEGORY}
+          data={categoryData}
           renderItem={renderItem}
           ItemSeparatorComponent={Divider}
           style={{marginTop: 15}}
