@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import React, {useState} from 'react';
-import {Alert, Image, Text, TouchableOpacity, View} from 'react-native';
-import {useSelector} from 'react-redux';
-import {AppIcons} from '../../../../../general/constants/AppResource';
+import React, { useState } from 'react';
+import { Alert, Image, Text, TouchableOpacity, View } from 'react-native';
+import { useSelector } from 'react-redux';
+import { AppIcons } from '../../../../../general/constants/AppResource';
 import CartUtils from '../../CartUtils';
 import styles from './styles';
 BagItem.propTypes = {
@@ -26,12 +26,7 @@ function BagItem(props) {
   return (
     <TouchableOpacity style={styles.bagItem}>
       <View style={styles.imageSection}>
-        <Image
-          source={
-            item.image[0].startsWith('http') ? {uri: item.image[0]} : item.image
-          }
-          style={styles.image}
-        />
+        <Image source={item.image} style={styles.image} />
       </View>
       <View style={styles.itemSection}>
         <View style={styles.itemName}>

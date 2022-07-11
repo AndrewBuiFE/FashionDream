@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  Alert,
-  Image,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Alert, Image, Text, TouchableOpacity, View} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppIcons} from '../../../general/constants/AppResource';
@@ -101,75 +94,71 @@ function ProductCardScreen(props) {
             <Image source={AppIcons.heart_small} />
           </TouchableOpacity>
         </View>
-        <ScrollView>
-          <View style={styles.itemContainer}>
-            <View style={styles.itemName}>
-              <Text style={styles.itemText}>{document.name}</Text>
-              <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={[
-                    styles.itemText,
-                    {
-                      textDecorationLine: 'line-through',
-                      textDecorationStyle: 'solid',
-                      marginRight: 10,
-                    },
-                  ]}>
-                  ${document.price}
-                </Text>
-                <Text style={[styles.itemText, {color: 'red'}]}>
-                  ${discountPrice}
-                </Text>
-              </View>
-            </View>
-            <View style={styles.brand}>
-              <Text style={styles.brandText}>{document.brand}</Text>
-            </View>
-            <View style={styles.starSection}>
-              <Star starCount={document.starCount} />
+        <View style={styles.itemContainer}>
+          <View style={styles.itemName}>
+            <Text style={styles.itemText}>{document.name}</Text>
+            <View style={{flexDirection: 'row'}}>
+              <Text
+                style={[
+                  styles.itemText,
+                  {
+                    textDecorationLine: 'line-through',
+                    textDecorationStyle: 'solid',
+                    marginRight: 10,
+                  },
+                ]}>
+                ${document.price}
+              </Text>
+              <Text style={[styles.itemText, {color: 'red'}]}>
+                ${discountPrice}
+              </Text>
             </View>
           </View>
-          <View style={styles.description}>
-            <Text style={styles.descriptionText}>{document.description}</Text>
+          <View style={styles.brand}>
+            <Text style={styles.brandText}>{document.brand}</Text>
           </View>
-          <GlobalButton
-            actionText="ADD TO CART"
-            marginTop={20}
-            action={() => {
-              if (productColor.length < 1 || productSize.length < 1)
-                Alert.alert('Failed!', 'Need to choose both size and color');
-              else {
-                let product = {
-                  ...document,
-                  color: productColor,
-                  size: productSize,
-                };
-                // console.log("Previous: ", product);
-                // product.productId = product.id;
-                product.id = Date.now();
-                // console.log('product: ', product);
-                let isDuplicate = cartUtils.isDuplicateProduct(
-                  product,
-                  cartData,
-                );
-                // console.log(isDuplicate);
-                if (!isDuplicate) {
-                  console.log('adding...');
-                  cartUtils.addCartItem(product, cartData);
-                  dispatch(setCartNewThing(true));
-                } else {
-                  let oldItem = cartUtils.getCartItem(product, cartData);
-                  console.log('Old item: ', oldItem);
-                  oldItem.quantity = oldItem.quantity + 1;
-                  console.log('Old item changed: ', oldItem);
-                  cartUtils.updateCartItemQuantity(oldItem, cartData);
-                }
-
-                props.navigation.goBack();
+          <View style={styles.starSection}>
+            <Star starCount={document.starCount} />
+          </View>
+        </View>
+        <View style={styles.description}>
+          <Text style={styles.descriptionText} numberOfLines={2}>
+            {document.description}
+          </Text>
+        </View>
+        <GlobalButton
+          actionText="ADD TO CART"
+          marginTop={20}
+          action={() => {
+            if (productColor.length < 1 || productSize.length < 1)
+              Alert.alert('Failed!', 'Need to choose both size and color');
+            else {
+              let product = {
+                ...document,
+                color: productColor,
+                size: productSize,
+              };
+              product.productId = product.id;
+              product.id = Date.now();
+              console.log('product: ', product);
+              let isDuplicate = cartUtils.isDuplicateProduct(product, cartData);
+              console.log(isDuplicate);
+              if (!isDuplicate) {
+                console.log('adding...');
+                cartUtils.addCartItem(product, cartData);
+                dispatch(setCartNewThing(true));
+              } else {
+                let oldItem = cartUtils.getCartItem(product, cartData);
+                console.log('Old item: ', oldItem);
+                oldItem.quantity = oldItem.quantity + 1;
+                console.log('Old item changed: ', oldItem);
+                cartUtils.updateCartItemQuantity(oldItem, cartData);
               }
-            }}
-          />
-        </ScrollView>
+
+              props.navigation.goBack();
+            }
+          }}
+        />
       </View>
     </SafeAreaProvider>
   );

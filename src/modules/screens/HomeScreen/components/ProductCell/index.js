@@ -19,6 +19,7 @@ ProductCell.defaultProps = {
 var discountPrice = 0;
 function ProductCell(props) {
   const {item, onItemClick, width} = props;
+  console.log("item: ", (item.image[0]).startsWith('http'));
   discountPrice = item.price - item.price * (item.discountPercent / 100);
   const navigation = useNavigation();
   return (
@@ -49,11 +50,11 @@ function ProductCell(props) {
             starType="small"
             width={item.starCount * 14}
           />
-          {/* <Text>({item.noComment})</Text> */}
+          <Text>({item.noComment})</Text>
         </View>
         <View style={styles.textSection}>
           <Text style={styles.brand}>{item.brand}</Text>
-          <Text style={styles.product} numberOfLines={1}>{item.name}</Text>
+          <Text style={styles.product}>{item.name}</Text>
           <View style={styles.priceSection}>
             <Text
               style={[

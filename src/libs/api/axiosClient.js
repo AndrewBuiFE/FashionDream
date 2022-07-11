@@ -28,7 +28,6 @@ axiosClient.interceptors.response.use(
     //   return response.data;
     // }
     if (response) {
-      // console.log("String", JSON.stringify(response));
       // console.log('Access Token: ', JSON.parse(JSON.stringify(response)).data.data.accessToken);
     }
     return JSON.parse(JSON.stringify(response));

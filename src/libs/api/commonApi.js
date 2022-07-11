@@ -1,6 +1,6 @@
 import axiosClient from './axiosClient';
 // import axios from 'axios';
-import {AppConfig, HostName} from '../../general/constants/Global';
+import {HostName} from '../../general/constants/Global';
 const commonApi = {
   register: params => {
     const url = `${HostName}/api/auth/register`;
@@ -18,62 +18,33 @@ const commonApi = {
     const url = `${HostName}/api/v1/products`;
     return axiosClient.get(url);
   },
-  getProductByCate: cateId => {
-    const url = `${HostName}/api/v1/products/cate-search?cateId=${cateId}`;
-    return axiosClient.get(url);
-  },
   addProduct: params => {
     const url = `${HostName}/api/admin/auth/v1/products`;
-    const config = {
-      headers: {Authorization: `Bearer ${AppConfig.token}`},
-    };
-    return axiosClient.post(url, params, config);
+    return axiosClient.post(url, params);
   },
   updateProduct: (params, productId) => {
     const url = `${HostName}/api/admin/auth/v1/products/${productId}`;
-    const config = {
-      headers: {Authorization: `Bearer ${AppConfig.token}`},
-    };
-    return axiosClient.put(url, params, config);
-  },
-  deleteProduct: productId => {
-    const url = `${HostName}/api/admin/auth/v1/products/${productId}`;
-    const config = {
-      headers: {Authorization: `Bearer ${AppConfig.token}`},
-    };
-    return axiosClient.delete(url, config);
+    return axiosClient.put(url, params);
   },
   addCategory: params => {
     const url = `${HostName}/api/admin/auth/v1/categories`;
-    const config = {
-      headers: {Authorization: `Bearer ${AppConfig.token}`},
-    };
-    return axiosClient.post(url, params, config);
+    return axiosClient.post(url, params);
   },
-  getCategory: () => {
+  getCategory: params => {
     const url = `${HostName}/api/v1/categories`;
     return axiosClient.get(url);
   },
   addToCart: params => {
     const url = `${HostName}/api/user/auth/v1/carts`;
-    const config = {
-      headers: {Authorization: `Bearer ${AppConfig.token}`},
-    };
-    return axiosClient.post(url, params, config);
+    return axiosClient.post(url, params);
   },
   deleteFromCart: params => {
     const url = `${HostName}/api/user/auth/v1/carts`;
-    const config = {
-      headers: {Authorization: `Bearer ${AppConfig.token}`},
-    };
-    return axiosClient.delete(url, params, config);
+    return axiosClient.delete(url, params);
   },
   getCartProduct: params => {
     const url = `${HostName}/api/user/auth/v1/carts`;
-    const config = {
-      headers: {Authorization: `Bearer ${AppConfig.token}`},
-    };
-    return axiosClient.get(url, config);
+    return axiosClient.get(url);
   },
   orderInfo: params => {
     const url = `${HostName}/api/user/auth/v1/checkout`;

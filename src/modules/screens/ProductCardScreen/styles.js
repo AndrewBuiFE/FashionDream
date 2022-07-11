@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     lineHeight: 28.8,
     color: '#F7F7F7',
-    width: '90%',
   },
   brand: {
     marginTop: 0,

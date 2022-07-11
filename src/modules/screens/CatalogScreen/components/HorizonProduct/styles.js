@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
   },
   infoSection: {
     marginLeft: 11,
-    flex: 1,
   },
   starSection: {
     marginTop: 8,
