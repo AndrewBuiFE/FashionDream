@@ -1,7 +1,9 @@
 import { Platform } from 'react-native';
-import { CART } from '../../data';
+import { CART, PAYMENT_CARD, SHIPPING_ADDRESS } from '../../data';
 import { getPreference, setPreference } from '../../libs/storage/PreferenceStorage';
 import Cart from '../../model/Cart';
+import PaymentCard from '../../model/PaymentCard';
+import ShippingAddress from '../../model/ShippingAddress';
 import { PreferenceKeys } from '../constants/Global';
 
 export const isAndroid = () => {
@@ -9,9 +11,19 @@ export const isAndroid = () => {
 };
 export const tempSetCartData = async () => {
   const cartData = new Cart();
-  cartData.Id = CART.id;
+  cartData.id = CART.id;
   cartData.ListProduct = [];
   setPreference(PreferenceKeys.CartData, JSON.stringify(cartData));
+}
+export const tempSetCarDData = async () => {
+  const cardData = new PaymentCard();
+  cardData.cardNumber = "943894898493"
+  cardData.cvv = 343;
+  cardData.exp = "12/06"
+  cardData.holderName = "Jane"
+  cardData.id = 1;
+  cardData.isDefault = false
+  setPreference(PreferenceKeys.PaymentCard, JSON.stringify(cardData));
 }
 export const loadCartData = async () => {
   try {
@@ -28,13 +40,55 @@ export const loadCartData = async () => {
     }
   } catch (error) {
     console.log(error);
-    var cartData = new Cart();
-    cartData.Id = CART.id;
-    cartData.ListProduct = CART.listProduct;
+    var cartData = new Cart(CART);
     return cartData;
   }
-  var cartData = new Cart();
-  cartData.Id = CART.id;
-  cartData.ListProduct = CART.listProduct;
+  var cartData = new Cart(CART);
   return cartData;
+};
+export const loadShipData = async () => {
+  try {
+    const shipData = await getPreference(PreferenceKeys.ShippingAddress);
+    // console.log('cartData', cartData)  ;
+    if (shipData != null) {
+      var jData = JSON.parse(shipData);
+      // console.log('jData', jData);
+      if (jData != null) {
+        var shipDoc = new ShippingAddress(jData);
+        // console.log('cartDoc', cartDoc);
+        return shipDoc;
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    var shipData = new ShippingAddress(SHIPPING_ADDRESS);
+    console.log("ship data: ", shipData);
+    return shipData;
+  }
+  var shipData = new ShippingAddress(SHIPPING_ADDRESS);
+  console.log("ship data: ", shipData);
+  return shipData;
+};
+export const loadCardData = async () => {
+  try {
+    const cardData = await getPreference(PreferenceKeys.PaymentCard);
+    // console.log('cartData', cartData)  ;
+    if (cardData != null) {
+      var jData = JSON.parse(cardData);
+      // console.log('jData', jData);
+      if (jData != null) {
+        var cardDoc = new PaymentCard(jData);
+        // console.log('cartDoc', cartDoc);
+        return cardDoc;
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    var cardData = new PaymentCard(PAYMENT_CARD);
+    console.log("card data: ", cardData);
+    return cardData;
+  }
+  var cardData = new PaymentCard(PAYMENT_CARD);
+  console.log("card data: ", cardData);
+  return cardData;
 };

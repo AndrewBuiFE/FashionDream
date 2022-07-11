@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import ReactNativeModal from 'react-native-modal';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PaymentCard from '../../../model/PaymentCard/index';
@@ -10,15 +10,12 @@ import InputSection from '../../screens/PaymentScreen/InputSection/index';
 import styles from './styles';
 AddCardModal.propTypes = {};
 AddCardModal.defaultProps = {};
-var isCheck = true;
+var changeData = false;
 let newCard = new PaymentCard();
 
 export default function AddCardModal(props) {
   const {isVisible, onModalHidden, onButtonClick, item} = props;
-  console.log('item: ', item);
   const insets = useSafeAreaInsets();
-  const date = new Date().getTime();
-  newCard.Id = date;
   return (
     <ReactNativeModal
       isVisible={isVisible}
@@ -27,7 +24,16 @@ export default function AddCardModal(props) {
       }}
       onModalHide={() => {
         console.log('On modal hide');
-        // onButtonClick(newCard);
+        const date = new Date().getTime();
+        newCard.id = date;
+        if (newCard.cardNumber.length == 0) newCard.cardNumber = item.cardNumber;
+        if (newCard.exp.length == 0) newCard.exp = item.exp;
+        if (newCard.cvv == 0) newCard.cvv = item.cvv;
+        if (newCard.holderName.length == 0) newCard.holderName = item.holderName;
+        if (changeData) {
+          onButtonClick(newCard);
+          changeData = false;
+        }
       }}
       hasBackdrop={true}
       avoidKeyboard={true}
@@ -44,7 +50,7 @@ export default function AddCardModal(props) {
         <View style={styles.titleSection}>
           <Text style={styles.titleText}>Payment Methods</Text>
         </View>
-        <View style = {{marginTop: 10}}>
+        <View style={{marginTop: 10}}>
           <Card item={item} />
         </View>
         {/* <View style={styles.inputContainer}>
@@ -54,34 +60,68 @@ export default function AddCardModal(props) {
             style={styles.textInput}
           />
         </View> */}
-        <InputSection
-          title={'Name on card'}
-          content={item.holderName}
-          handleInput={value => {
-            newCard.CardName = value;
-          }}
-        />
-        <InputSection
-          title={'Card number'}
-          content={item.cardNumber}
-          handleInput={value => {
-            newCard.CardNumber = value;
-          }}
-        />
-        <InputSection
-          title={'Expire date'}
-          content={item.exp}
-          handleInput={value => {
-            newCard.ExpDate = value;
-          }}
-        />
-        <InputSection
-          title={'CVV'}
-          content={item.cvv.toString()}
-          handleInput={value => {
-            newCard.CVV = value;
-          }}
-        />
+        <ScrollView>
+          <InputSection
+            title={'Name on card'}
+            content={item.holderName}
+            handleInput={value => {
+              newCard.holderName = value;
+              const regex = /^[a-zA-Z]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
+            }}
+          />
+          <InputSection
+            title={'Card number'}
+            content={item.cardNumber}
+            handleInput={value => {
+              newCard.cardNumber = value;
+              const regex = /^[0-9]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
+            }}
+          />
+          <InputSection
+            title={'Expire date'}
+            content={item.exp}
+            handleInput={value => {
+              newCard.exp = value;
+              const regex = /^[0-9/]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
+            }}
+          />
+          <InputSection
+            title={'CVV'}
+            content={item.cvv.toString()}
+            handleInput={value => {
+              newCard.cvv = value;
+              const regex = /^[0-9]*$/g
+              if (value.match(regex)) {
+                console.log("Ok");
+                changeData = true;
+              }
+              else {
+                console.log("invalid");
+              }
+            }}
+          />
+        </ScrollView>
         {/* <CheckBox
           isCheck={false}
           message={'Set as default payment method'}

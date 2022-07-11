@@ -1,25 +1,30 @@
 import React, { useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { PAYMENT_CARD, SHIPPING_ADDRESS } from '../../../data/index';
+import { useSelector } from 'react-redux';
+import { CHECKOUT } from '../../../data/index';
 import { AppIcons, AppImages } from '../../../general/constants/AppResource';
+import CheckOut from '../../../model/CheckOut';
 import AppHeaderNormal from '../../components/AppHeaderNormal/index';
 import GlobalButton from '../../components/GlobalButton/index';
 import AddCardModal from '../../views/AddCardModal/index';
 import ShippingModal from '../../views/ShippingModal/index';
 import Success from '../../views/Success/index';
+import CheckoutUtils from './CheckoutUtils';
 import InfoCell from './InfoCell/index';
 import styles from './styles';
 CheckOutScreen.propTypes = {};
 CheckOutScreen.defaultProps = {};
-let delivery = 20;
+var checkouUtils = new CheckoutUtils();
+var checkoutData = new CheckOut();
 function CheckOutScreen(props) {
   const [isShowSuccess, setShowSuccess] = useState(false);
   const [isAddShipAddress, setAddShipAddress] = useState(false);
   const [isShowAddCard, setShowAddCard] = useState(false);
-  const [cardData, setCardData] = useState(PAYMENT_CARD);
-  const [shipData, setShipData] = useState(SHIPPING_ADDRESS);
   const {totalAmount} = props.route.params;
+  const {cardData, shipData} = useSelector(state => state.checkout);
+  const [paymentCard, setPaymentCard] = useState(cardData);
+  const [shippingAddress, setShippingAddress] = useState(shipData);
   return (
     <SafeAreaProvider>
       <View style={styles.checkoutContainer}>
@@ -39,54 +44,27 @@ function CheckOutScreen(props) {
           onModalHidden={() => {
             setShowSuccess(false);
           }}
-          onMenuClick={menu => {
-            switch (menu) {
-              case 0:
-                console.log('0');
-                break;
-              case 1:
-                console.log('1');
-                break;
-              case 2:
-                console.log('2');
-                break;
-              case 3:
-                console.log('3');
-                break;
-              case 4:
-                console.log('4');
-                break;
-              default:
-                console.log('-1');
-                break;
-            }
-          }}
         />
         <ShippingModal
           isVisible={isAddShipAddress}
-          item = {shipData}
+          item = {shippingAddress}
           onModalHidden={() => {
             setAddShipAddress(false);
           }}
           onButtonClick={ship => {
-            console.log('ship: ', ship);
-            let tempShipData = [...shipData];
-            tempShipData.push(ship);
-            console.log('Temp ship: ', tempShipData);
-            // setShipData(tempShipData);
+            setShippingAddress(ship);
+            checkouUtils.saveShippingAddress(ship);
           }}
         />
         <AddCardModal
           isVisible={isShowAddCard}
-          item = {cardData}
+          item = {paymentCard}
           onModalHidden={() => {
             setShowAddCard(false);
           }}
           onButtonClick={card => {
-            console.log('Card: ', card);
-            let tempCardData = [...cardData];
-            tempCardData.push(card);
-            console.log('Temp Card: ', tempCardData);
+            setPaymentCard(card);
+            checkouUtils.saveCardData(card);
           }}
         />
         <View style={styles.contentContainer}>
@@ -94,9 +72,9 @@ function CheckOutScreen(props) {
             <Text style={styles.title}>Shipping address</Text>
           </View>
           <InfoCell
-            name={shipData.customerName}
+            name={shippingAddress.customerName}
             actionType={'Change'}
-            address={shipData.address}
+            address={shippingAddress.address}
             isShowCheck={false}
             action={() => {
               setAddShipAddress(true);
@@ -123,7 +101,7 @@ function CheckOutScreen(props) {
               <View style={styles.card}>
                 <Image source={AppImages.card} />
               </View>
-              <Text style={styles.text}>{cardData.cardNumber}</Text>
+              <Text style={styles.text}>{paymentCard.cardNumber}</Text>
             </View>
           </View>
           <View style={[styles.titleContainer, {marginTop: 51}]}>
@@ -141,14 +119,14 @@ function CheckOutScreen(props) {
             </View>
             <View style={styles.orderRow}>
               <Text style={styles.orderTitle}>Delivery: </Text>
-              <Text style={styles.price}>${delivery}</Text>
+              <Text style={styles.price}>${CHECKOUT.delivery}</Text>
             </View>
             <View style={[styles.orderRow, {marginBottom: 0}]}>
               <Text style={[styles.orderTitle, {fontSize: 16, lineHeight: 26}]}>
                 Summary:
               </Text>
               <Text style={[styles.price, {fontSize: 18, lineHeight: 22}]}>
-                ${totalAmount + delivery}
+                ${totalAmount + CHECKOUT.delivery}
               </Text>
             </View>
           </View>
@@ -157,6 +135,10 @@ function CheckOutScreen(props) {
           actionText="SUBMIT ORDER"
           marginTop={23}
           action={() => {
+            checkoutData.delivery = CHECKOUT.delivery;
+            checkoutData.paymentCard = paymentCard;
+            checkoutData.shippingAddress = shippingAddress;
+            checkouUtils.saveCheckout(checkoutData)
             setShowSuccess(true);
           }}
         />

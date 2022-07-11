@@ -1,17 +1,18 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   FlatList,
   Image,
   SectionList,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { connect } from 'react-redux';
-import { PRODUCT } from '../../../data/index';
-import { AppImages } from '../../../general/constants/AppResource';
-import { ScreenNames } from '../../../general/constants/ScreenNames';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {connect} from 'react-redux';
+import {PRODUCT} from '../../../data/index';
+import {AppImages} from '../../../general/constants/AppResource';
+import {ScreenNames} from '../../../general/constants/ScreenNames';
+import commonApi from '../../../libs/api/commonApi';
 import ProductCell from './components/ProductCell';
 import styles from './styles';
 HomeScreen.propTypes = {};
@@ -131,6 +132,27 @@ const renderSectionHeader = ({section}) => {
 };
 function HomeScreen(props) {
   const Header = renderHeader(props);
+  const [productData, setProductData] = useState([]);
+  useEffect(() => {
+    commonApi.getProduct().then(res => {
+      console.log('Product: ', res.data.data.products);
+      setProductData(res.data.data.products);
+    });
+  }, []);
+  let DATA = [
+    {
+      title: 'Sale',
+      horizontal: true,
+      description: 'Super summer sale',
+      data: productData,
+    },
+    {
+      title: 'New',
+      horizontal: true,
+      description: 'You’ve never seen it before!',
+      data: productData,
+    },
+  ];
   return (
     <SafeAreaProvider>
       <View style={styles.homeContainer}>

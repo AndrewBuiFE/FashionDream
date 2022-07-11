@@ -1,17 +1,15 @@
-import PaymentCard from '../PaymentCard/index';
-import ShippingAddress from '../ShippingAddress/index';
+import PaymentCard from "../PaymentCard";
+import ShippingAddress from "../ShippingAddress";
 
 export default class CheckOut {
-  ShippingAddress: ShippingAddress;
-  PaymentCard: PaymentCard;
-  Delivery: number;
-  TotalCost: number;
+  shippingAddress: ShippingAddress;
+  paymentCard: PaymentCard;
+  delivery: number;
   constructor(checkout = null) {
-    this.ShippingAddress =
-      checkout && checkout.ShippingAddress ? checkout.ShippingAddress : null;
-    this.PaymentCard =
-      checkout && checkout.PaymentCard ? checkout.PaymentCard : null;
-    this.Delivery = checkout && checkout.Delivery ? checkout.Delivery : 0;
-    this.TotalCost = checkout && checkout.TotalCost ? checkout.TotalCost : 0;
+    this.shippingAddress =
+      checkout && checkout.shippingAddress ? checkout.shippingAddress : null;
+    this.paymentCard =
+      checkout && checkout.paymentCard ? checkout.paymentCard : null;
+    this.delivery = checkout && checkout.delivery ? checkout.delivery : 0;
   }
 }
