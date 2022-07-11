@@ -1,9 +1,9 @@
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { AppIcons } from '../../../../../general/constants/AppResource';
-import { ScreenNames } from '../../../../../general/constants/ScreenNames';
+import React, {useState} from 'react';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {AppIcons} from '../../../../../general/constants/AppResource';
+import {ScreenNames} from '../../../../../general/constants/ScreenNames';
 import Star from '../../../../components/Star/index';
 import styles from './styles';
 HorizonProduct.propTypes = {
@@ -25,10 +25,17 @@ function HorizonProduct(props) {
         navigation.navigate(ScreenNames.productCardScreen, {document: item});
       }}>
       <View style={styles.imageSection}>
-        <Image source={item.image} style={styles.image} />
+        <Image
+          source={
+            item.image[0].startsWith('http') ? {uri: item.image[0]} : item.image
+          }
+          style={styles.image}
+        />
       </View>
       <View style={styles.infoSection}>
-        <Text style={styles.product}>{item.name}</Text>
+        <Text style={styles.product} numberOfLines={1}>
+          {item.name}
+        </Text>
         <Text style={styles.brand}>{item.brand}</Text>
         <View style={styles.starSection}>
           <Star
@@ -36,7 +43,7 @@ function HorizonProduct(props) {
             starType="small"
             width={item.starCount * 14}
           />
-          <Text>({item.noComment})</Text>
+          {/* <Text>({item.noComment})</Text> */}
         </View>
         <View style={styles.priceSection}>
           <Text
