@@ -40,7 +40,7 @@ function CatalogScreen(props) {
   return (
     <SafeAreaProvider>
       <View style={styles.catalogContainer}>
-        <AppHeader title={item.title}>
+        <AppHeader title={item.name}>
           <>
             <TouchableOpacity
               onPress={() => {

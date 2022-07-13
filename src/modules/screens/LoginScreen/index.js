@@ -21,6 +21,8 @@ export default function LoginScreen(props) {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
   const [invalid, showInvalidMess] = useState(false);
+  console.log('username: ', username);
+  console.log('password: ', password);
   return (
     <SafeAreaView>
       <AppHeader backgroundColor="black" title="Login">
@@ -86,9 +88,19 @@ export default function LoginScreen(props) {
             )}
           </View>
           {invalid ? (
-            <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
-              Invalid username or password!
-            </Text>
+            !username ? (
+              <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
+                Username must be filled
+              </Text>
+            ) : !password ? (
+              <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
+                Password must be filled
+              </Text>
+            ) : (
+              <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
+                Invalid username or password!
+              </Text>
+            )
           ) : (
             <View style={styles.forgotSuggestion}>
               <Text style={styles.text}>Forgot your password?</Text>
@@ -103,30 +115,34 @@ export default function LoginScreen(props) {
           <GlobalButton
             actionText="LOGIN"
             marginTop={30}
-            action={async () => {
-              props.navigation.navigate(ScreenNames.mainTab);
-              // if (username && password) {
-              //   let params = {
-              //     username: username,
-              //     password: password,
-              //   };
-              //   await commonApi.login(params).then(res => {
-              //     console.log('res : ', res);
-              //     console.log('res status: ', res.status);
-              //     console.log('token: ', res.data.data.accessToken);
-              //     if (res) {
-              //       if (res.data.code == 200) {
-              //         AppConfig.token = res.data.data.accessToken;
-              //         props.navigation.navigate(ScreenNames.mainTab);
-              //       } else {
-              //         showInvalidMess(true);
-              //       }
-              //     } else {
-              //       showInvalidMess(true);
-              //       console.log('invalid!');
-              //     }
-              //   });
-              // }
+            action={() => {
+              // props.navigation.navigate(ScreenNames.mainTab);
+              if (username && password) {
+                let params = {
+                  username: username,
+                  password: password,
+                };
+                commonApi.login(params).then(res => {
+                  console.log('res : ', res);
+                  // console.log('res status: ', res.status);
+                  // console.log('token: ', res.data.data.accessToken);
+                  if (res) {
+                    if (res.data.code == 200) {
+                      AppConfig.token = res.data.data.accessToken;
+                      props.navigation.navigate(ScreenNames.mainTab);
+                    } else {
+                      showInvalidMess(true);
+                      return;
+                    }
+                  } else {
+                    showInvalidMess(true);
+                    console.log('invalid!');
+                  }
+                });
+              } else {
+                showInvalidMess(true);
+                // return;
+              }
             }}
           />
           <View style={{marginTop: 194}}>

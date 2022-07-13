@@ -24,7 +24,7 @@ function BagItem(props) {
   const [discountPrice, setDiscountPrice] = useState(tempDiscountPrice);
   const {cartData} = useSelector(state => state.cart);
   return (
-    <TouchableOpacity style={styles.bagItem}>
+    <View style={styles.bagItem}>
       <View style={styles.imageSection}>
         <Image
           source={
@@ -97,7 +97,26 @@ function BagItem(props) {
         </View>
       </View>
       <View style={styles.moreSection}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            Alert.alert(
+              'Delete',
+              `Are you sure you want to delete this item ?`,
+              [
+                {
+                  text: 'Delete',
+                  onPress: () => {
+                    cartUtils.removeCartItem(item, cartData);
+                  },
+                },
+                {
+                  text: 'Cancel',
+                  onPress: () => console.log('Cancel Pressed'),
+                  style: 'cancel',
+                },
+              ],
+            );
+          }}>
           <Image source={AppIcons.more} />
         </TouchableOpacity>
         <Text
@@ -109,7 +128,7 @@ function BagItem(props) {
         </Text>
         <Text style={styles.priceText}>${discountPrice}</Text>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 }
 export default BagItem;
