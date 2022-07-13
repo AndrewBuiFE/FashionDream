@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { useSelector } from 'react-redux';
-import { AppIcons } from '../../../general/constants/AppResource';
-import { ScreenNames } from '../../../general/constants/ScreenNames';
+import React, {useState} from 'react';
+import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
+import {AppIcons} from '../../../general/constants/AppResource';
+import {ScreenNames} from '../../../general/constants/ScreenNames';
 import AppHeader from '../../components/AppHeader/index';
 import GlobalButton from '../../components/GlobalButton/index';
 import PromoCodeModal from '../../views/PromoCodeModal/index';
 import Success from '../../views/Success/index';
+import {setCartNewThing} from './CartSlice';
 import CartUtils from './CartUtils';
 import BagItem from './components/BagItem/index';
 import PromoCode from './components/PromoCode/index';
@@ -45,6 +47,7 @@ function CartScreen(props) {
   let [tempTotal, tempDiscountTotal] = calculateTotal(cartData.listProduct);
   const [total, setTotal] = useState(tempTotal);
   const [discountTotal, setDiscountTotal] = useState(tempDiscountTotal);
+  const dispatch = useDispatch();
   console.log('cart data: ', cartData);
   const renderItem = ({item}) => {
     return (
@@ -126,6 +129,7 @@ function CartScreen(props) {
           actionText="CHECK OUT"
           marginTop={24}
           action={() => {
+            dispatch(setCartNewThing(false));
             props.navigation.navigate(ScreenNames.checkoutScreen, {
               totalAmount: tempTotal,
             });

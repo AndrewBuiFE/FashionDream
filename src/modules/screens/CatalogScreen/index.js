@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { MINOR_CATEGORY } from '../../../data';
-import { AppIcons } from '../../../general/constants/AppResource';
+import React, {useEffect, useState} from 'react';
+import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {MINOR_CATEGORY} from '../../../data';
+import {AppIcons} from '../../../general/constants/AppResource';
+import commonApi from '../../../libs/api/commonApi';
 import AppHeader from '../../components/AppHeader/index';
 import FilterModal from '../../views/FilterModal';
 import SortModal from '../../views/SortModal';
@@ -22,22 +23,24 @@ function CatalogScreen(props) {
   const [isShowSortMenu, setShowSortMenu] = useState(false);
   const [isShowFilterMenu, setShowFilterMenu] = useState(false);
   const [isGridLayout, setGridLayout] = useState(false);
-  const renderItem = ({item}) => (
-    <HorizonProduct
-      item = {item}
-    />
-  );
+  const [cateProductData, setCateProductData] = useState([]);
+  const renderItem = ({item}) => <HorizonProduct item={item} />;
   const renderGridItem = ({item}) => <ProductCell item={item} width={164} />;
-  const renderCategory = ({item}) => 
-  (
-          <TouchableOpacity style={styles.typeContainer}>
-            <Text style={styles.typeText}>{item.title}</Text>
-          </TouchableOpacity>
-  )
+  const renderCategory = ({item}) => (
+    <TouchableOpacity style={styles.typeContainer}>
+      <Text style={styles.typeText}>{item.title}</Text>
+    </TouchableOpacity>
+  );
+  useEffect(() => {
+    commonApi.getProductByCate(item.categoryId).then(res => {
+      console.log(res.data.data.listProduct);
+      setCateProductData(res.data.data.listProduct);
+    });
+  }, []);
   return (
     <SafeAreaProvider>
       <View style={styles.catalogContainer}>
-        <AppHeader title={item.title}>
+        <AppHeader title={item.name}>
           <>
             <TouchableOpacity
               onPress={() => {
@@ -109,19 +112,12 @@ function CatalogScreen(props) {
           }}
         />
         <View style={styles.clothesTypes}>
-          {/* <TouchableOpacity style={[styles.typeContainer, {marginLeft: 16}]}>
-            <Text style={styles.typeText}>T-shirts</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.typeContainer}>
-            <Text style={styles.typeText}>Crop tops</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.typeContainer}>
-            <Text style={styles.typeText}>Sleeveless</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.typeContainer}>
-            <Text style={styles.typeText}>Sleeve</Text>
-          </TouchableOpacity> */}
-          <FlatList data = {MINOR_CATEGORY} renderItem = {renderCategory} horizontal={true} showsHorizontalScrollIndicator={false}/>
+          <FlatList
+            data={MINOR_CATEGORY}
+            renderItem={renderCategory}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          />
         </View>
         <View style={styles.productAction}>
           <TouchableOpacity
@@ -155,8 +151,8 @@ function CatalogScreen(props) {
         {isGridLayout ? (
           <FlatList
             key={'_'}
-            keyExtractor={item => '_' + item.id}
-            data={item.listProduct}
+            keyExtractor={item => '_' + item.productId}
+            data={cateProductData}
             renderItem={renderGridItem}
             showsVerticalScrollIndicator={false}
             numColumns={2}
@@ -167,8 +163,8 @@ function CatalogScreen(props) {
         ) : (
           <FlatList
             key={'#'}
-            keyExtractor={item => '#' + item.id}
-            data={item.listProduct}
+            keyExtractor={item => '#' + item.productId}
+            data={cateProductData}
             renderItem={renderItem}
             showsVerticalScrollIndicator={false}
           />

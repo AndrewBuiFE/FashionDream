@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { Alert, Image, Text, TouchableOpacity, View } from 'react-native';
-import { useSelector } from 'react-redux';
-import { AppIcons } from '../../../../../general/constants/AppResource';
+import React, {useState} from 'react';
+import {Alert, Image, Text, TouchableOpacity, View} from 'react-native';
+import {useSelector} from 'react-redux';
+import {AppIcons} from '../../../../../general/constants/AppResource';
 import CartUtils from '../../CartUtils';
 import styles from './styles';
 BagItem.propTypes = {
@@ -24,9 +24,14 @@ function BagItem(props) {
   const [discountPrice, setDiscountPrice] = useState(tempDiscountPrice);
   const {cartData} = useSelector(state => state.cart);
   return (
-    <TouchableOpacity style={styles.bagItem}>
+    <View style={styles.bagItem}>
       <View style={styles.imageSection}>
-        <Image source={item.image} style={styles.image} />
+        <Image
+          source={
+            item.image[0].startsWith('http') ? {uri: item.image[0]} : item.image
+          }
+          style={styles.image}
+        />
       </View>
       <View style={styles.itemSection}>
         <View style={styles.itemName}>
@@ -92,7 +97,26 @@ function BagItem(props) {
         </View>
       </View>
       <View style={styles.moreSection}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            Alert.alert(
+              'Delete',
+              `Are you sure you want to delete this item ?`,
+              [
+                {
+                  text: 'Delete',
+                  onPress: () => {
+                    cartUtils.removeCartItem(item, cartData);
+                  },
+                },
+                {
+                  text: 'Cancel',
+                  onPress: () => console.log('Cancel Pressed'),
+                  style: 'cancel',
+                },
+              ],
+            );
+          }}>
           <Image source={AppIcons.more} />
         </TouchableOpacity>
         <Text
@@ -104,7 +128,7 @@ function BagItem(props) {
         </Text>
         <Text style={styles.priceText}>${discountPrice}</Text>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 }
 export default BagItem;
