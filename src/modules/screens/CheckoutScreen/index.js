@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { useSelector } from 'react-redux';
-import { CHECKOUT } from '../../../data/index';
-import { AppIcons, AppImages } from '../../../general/constants/AppResource';
+import React, {useState} from 'react';
+import {Alert, Image, Text, TouchableOpacity, View} from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
+import {useSelector} from 'react-redux';
+import {CHECKOUT} from '../../../data/index';
+import {AppIcons, AppImages} from '../../../general/constants/AppResource';
 import CheckOut from '../../../model/CheckOut';
 import AppHeaderNormal from '../../components/AppHeaderNormal/index';
 import GlobalButton from '../../components/GlobalButton/index';
 import AddCardModal from '../../views/AddCardModal/index';
 import ShippingModal from '../../views/ShippingModal/index';
 import Success from '../../views/Success/index';
+import { setCartData } from '../CartScreen/CartSlice';
+import CartUtils from '../CartScreen/CartUtils';
+import { setCardData } from './CheckoutSlice';
 import CheckoutUtils from './CheckoutUtils';
 import InfoCell from './InfoCell/index';
 import styles from './styles';
@@ -17,14 +21,18 @@ CheckOutScreen.propTypes = {};
 CheckOutScreen.defaultProps = {};
 var checkouUtils = new CheckoutUtils();
 var checkoutData = new CheckOut();
+var cartUtils = new CartUtils();
 function CheckOutScreen(props) {
   const [isShowSuccess, setShowSuccess] = useState(false);
   const [isAddShipAddress, setAddShipAddress] = useState(false);
   const [isShowAddCard, setShowAddCard] = useState(false);
   const {totalAmount} = props.route.params;
   const {cardData, shipData} = useSelector(state => state.checkout);
+  const {cartData} = useSelector(state => state.cart);
   const [paymentCard, setPaymentCard] = useState(cardData);
   const [shippingAddress, setShippingAddress] = useState(shipData);
+  console.log("Cart data: checkout: ", cartData);
+  const dispatch = useDispatch();
   return (
     <SafeAreaProvider>
       <View style={styles.checkoutContainer}>
@@ -47,7 +55,7 @@ function CheckOutScreen(props) {
         />
         <ShippingModal
           isVisible={isAddShipAddress}
-          item = {shippingAddress}
+          item={shippingAddress}
           onModalHidden={() => {
             setAddShipAddress(false);
           }}
@@ -58,7 +66,7 @@ function CheckOutScreen(props) {
         />
         <AddCardModal
           isVisible={isShowAddCard}
-          item = {paymentCard}
+          item={paymentCard}
           onModalHidden={() => {
             setShowAddCard(false);
           }}
@@ -135,11 +143,30 @@ function CheckOutScreen(props) {
           actionText="SUBMIT ORDER"
           marginTop={23}
           action={() => {
-            checkoutData.delivery = CHECKOUT.delivery;
-            checkoutData.paymentCard = paymentCard;
-            checkoutData.shippingAddress = shippingAddress;
-            checkouUtils.saveCheckout(checkoutData)
-            setShowSuccess(true);
+            Alert.alert(
+              'Confirm checkout',
+              'Do you want to submit this order?',
+              [
+                {
+                  text: 'Submit',
+                  onPress: () => {
+                    checkoutData.delivery = CHECKOUT.delivery;
+                    checkoutData.paymentCard = paymentCard;
+                    checkoutData.shippingAddress = shippingAddress;
+                    checkouUtils.saveCheckout(checkoutData);
+                    cartData.listProduct = [];
+                    dispatch(setCartData(cartData));
+                    cartUtils.saveCartData(cartData);
+                    setShowSuccess(true);
+                  },
+                },
+                {
+                  text: 'Cancel',
+                  onPress: () => console.log('Cancel Pressed'),
+                  style: 'cancel',
+                },
+              ],
+            );
           }}
         />
       </View>

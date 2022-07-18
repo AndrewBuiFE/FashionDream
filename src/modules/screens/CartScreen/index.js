@@ -1,10 +1,20 @@
-import React, {useState} from 'react';
-import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  Alert,
+  FlatList,
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
+import {convertCompilerOptionsFromJson, isMetaProperty} from 'typescript';
 import {AppIcons} from '../../../general/constants/AppResource';
+import {AppConfig} from '../../../general/constants/Global';
 import {ScreenNames} from '../../../general/constants/ScreenNames';
+import commonApi from '../../../libs/api/commonApi';
 import AppHeader from '../../components/AppHeader/index';
 import GlobalButton from '../../components/GlobalButton/index';
 import PromoCodeModal from '../../views/PromoCodeModal/index';
@@ -23,15 +33,15 @@ const calculateTotal = cartItems => {
   let discountTotal = 0;
   for (let item of cartItems) {
     let discountPrice =
-      (item.price - item.price * (item.discountPercent / 100)) * item.quantity;
+      (item.productInfo.price - item.productInfo.price * (item.productInfo.discountPercent / 100)) * item.amount;
     total += discountPrice;
-    discountTotal += item.price * (item.discountPercent / 100) * item.quantity;
+    discountTotal += item.productInfo.price * (item.productInfo.discountPercent / 100) * item.amount;
   }
   return [total, discountTotal];
 };
 function sortProduct(a, b) {
-  if (a.name.localeCompare(b.name)) {
-    return a.name.localeCompare(b.name);
+  if (a.productInfo.name.localeCompare(b.productInfo.name)) {
+    return a.productInfo.name.localeCompare(b.productInfo.name);
   } else if (a.color.localeCompare(b.color)) {
     return a.color.localeCompare(b.color);
   } else if (a.size.localeCompare(b.size)) {
@@ -48,24 +58,23 @@ function CartScreen(props) {
   const [total, setTotal] = useState(tempTotal);
   const [discountTotal, setDiscountTotal] = useState(tempDiscountTotal);
   const dispatch = useDispatch();
-  console.log('cart data: ', cartData);
   const renderItem = ({item}) => {
     return (
       <BagItem
-        item={item}
-        handleIncrement={quantity => {
+        productItem={item}
+        handleIncrement={newAmount => {
           var newItem = item;
-          newItem.quantity = quantity;
+          newItem.amount = newAmount;  
           cartUtils.updateCartItemQuantity(newItem, cartData);
           let [total, discountTotal] = calculateTotal(cartData.listProduct);
           setTotal(total);
           setDiscountTotal(discountTotal);
           console.log('Increase!');
         }}
-        handleDescreasement={quantity => {
+        handleDescreasement={newAmount => {
           console.log('Descrease!');
-          let newItem = {...item};
-          newItem.quantity = quantity;
+          var newItem = item;
+          newItem.amount = newAmount;
           cartUtils.updateCartItemQuantity(newItem, cartData);
           let [total, discountTotal] = calculateTotal(cartData.listProduct);
           setTotal(total);
@@ -74,6 +83,11 @@ function CartScreen(props) {
       />
     );
   };
+  useEffect(() => {
+    commonApi.getCartProduct().then(res => {
+      console.log("Cart: ", res.data.data);
+    });
+  });
   return (
     <SafeAreaProvider>
       <View style={styles.cartContainer}>
@@ -130,9 +144,13 @@ function CartScreen(props) {
           marginTop={24}
           action={() => {
             dispatch(setCartNewThing(false));
-            props.navigation.navigate(ScreenNames.checkoutScreen, {
-              totalAmount: tempTotal,
-            });
+            if (cartData.listProduct.length === 0) {
+              Alert.alert('No Item', "Cart has no item. Can't check out");
+            } else {
+              props.navigation.navigate(ScreenNames.checkoutScreen, {
+                totalAmount: tempTotal,
+              });
+            }
           }}
         />
       </View>
