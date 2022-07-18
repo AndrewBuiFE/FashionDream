@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {connect} from 'react-redux';
-import {PRODUCT} from '../../../data/index';
 import {AppImages} from '../../../general/constants/AppResource';
 import {ScreenNames} from '../../../general/constants/ScreenNames';
 import commonApi from '../../../libs/api/commonApi';
@@ -17,21 +16,7 @@ import ProductCell from './components/ProductCell';
 import styles from './styles';
 HomeScreen.propTypes = {};
 HomeScreen.defaultProps = {};
-const DATA = [
-  {
-    title: 'Sale',
-    horizontal: true,
-    description: 'Super summer sale',
-    data: PRODUCT,
-  },
-  {
-    title: 'New',
-    horizontal: true,
-    description: 'You’ve never seen it before!',
-    data: PRODUCT,
-  },
-];
-const renderItem = ({item, section}) => {
+const renderItem = ({section}) => {
   if (section.horizontal) {
     return null;
   }
@@ -169,7 +154,7 @@ function HomeScreen(props) {
   );
 }
 const actions = {};
-export default connect(state => {
+export default connect(() => {
   return {};
 }, actions)(HomeScreen);
 // export default HomeScreen;

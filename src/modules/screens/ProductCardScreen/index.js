@@ -9,7 +9,8 @@ import {
 } from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppIcons} from '../../../general/constants/AppResource';
+import {AppIcons, AppImages} from '../../../general/constants/AppResource';
+import commonApi from '../../../libs/api/commonApi';
 import AppHeaderNormal from '../../components/AppHeaderNormal/index';
 import GlobalButton from '../../components/GlobalButton/index';
 import Star from '../../components/Star/index';
@@ -71,9 +72,13 @@ function ProductCardScreen(props) {
         <View style={styles.imageSection}>
           <Image
             source={
-              document.image[0].startsWith('http')
-                ? {uri: document.image[0]}
-                : document.image
+              Array.isArray(document.image)
+            ? {
+                uri: document.image[0].startsWith('http')
+                  ? document.image[0]
+                  : AppImages.black,
+              }
+            : AppImages.black
             }
             style={styles.image}
           />
@@ -139,33 +144,61 @@ function ProductCardScreen(props) {
               if (productColor.length < 1 || productSize.length < 1)
                 Alert.alert('Failed!', 'Need to choose both size and color');
               else {
-                let product = {
-                  ...document,
-                  color: productColor,
-                  size: productSize,
-                };
-                // console.log("Previous: ", product);
-                // product.productId = product.id;
-                product.id = Date.now();
-                // console.log('product: ', product);
-                let isDuplicate = cartUtils.isDuplicateProduct(
-                  product,
-                  cartData,
-                );
-                // console.log(isDuplicate);
-                if (!isDuplicate) {
-                  console.log('adding...');
-                  cartUtils.addCartItem(product, cartData);
-                  dispatch(setCartNewThing(true));
-                } else {
-                  let oldItem = cartUtils.getCartItem(product, cartData);
-                  console.log('Old item: ', oldItem);
-                  oldItem.quantity = oldItem.quantity + 1;
-                  console.log('Old item changed: ', oldItem);
-                  cartUtils.updateCartItemQuantity(oldItem, cartData);
-                }
+                Alert.alert(
+                  'Confirm',
+                  'Do you want to add this product to cart?',
+                  [
+                    {
+                      text: 'Add to cart',
+                      onPress: () => {
+                        let product = {
+                          productInfo: document,
+                          color: productColor,
+                          size: productSize,
+                          amount: 1,
+                        };
+                        let isDuplicate = cartUtils.isDuplicateProduct(
+                          product,
+                          cartData,
+                        );
+                        if (!isDuplicate) {
+                          console.log('adding...');
+                          cartUtils.addCartItem(product, cartData);
+                          dispatch(setCartNewThing(true));
+                          let params = {
+                            "productList":
+                            [
+                            {
+                                "productId": 1,
+                                "amount": 10
+                            }
+                            ]
+                        }
+                          commonApi.addCart(params).then(res => {
+                            console.log(res);
+                          });
+                        } else {
+                          let oldItem = cartUtils.getCartItem(
+                            product,
+                            cartData,
+                          );
+                          console.log('Old item: ', oldItem);
+                          oldItem.amount = oldItem.amount + 1;
+                          console.log('Old item changed: ', oldItem);
+                          cartUtils.updateCartItemQuantity(oldItem, cartData);
+                        }
 
-                props.navigation.goBack();
+                        props.navigation.goBack();
+                      },
+                    },
+                    {
+                      text: 'Cancel',
+                      onPress: () => {
+                        console.warn('Cancel');
+                      },
+                    },
+                  ],
+                );
               }
             }}
           />

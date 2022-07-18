@@ -14,7 +14,7 @@ const commonApi = {
     const url = `${HostName}/api/v1/refreshtoken`;
     return axiosClient.post(url, params);
   },
-  getProduct: params => {
+  getProduct: () => {
     const url = `${HostName}/api/v1/products`;
     return axiosClient.get(url);
   },
@@ -54,21 +54,21 @@ const commonApi = {
     const url = `${HostName}/api/v1/categories`;
     return axiosClient.get(url);
   },
-  addToCart: params => {
+  addCart: params => {
     const url = `${HostName}/api/user/auth/v1/carts`;
     const config = {
       headers: {Authorization: `Bearer ${AppConfig.token}`},
     };
     return axiosClient.post(url, params, config);
   },
-  deleteFromCart: params => {
+  deleteCart: params => {
     const url = `${HostName}/api/user/auth/v1/carts`;
     const config = {
       headers: {Authorization: `Bearer ${AppConfig.token}`},
     };
     return axiosClient.delete(url, params, config);
   },
-  getCartProduct: params => {
+  getCartProduct: () => {
     const url = `${HostName}/api/user/auth/v1/carts`;
     const config = {
       headers: {Authorization: `Bearer ${AppConfig.token}`},

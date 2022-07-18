@@ -1,14 +1,12 @@
-import { store } from '../../../libs/storage/AppStore';
-import { setCartData } from './CartSlice';
-
-const {PreferenceKeys} = require('../../../general/constants/Global');
-const {setPreference} = require('../../../libs/storage/PreferenceStorage');
+import {PreferenceKeys} from '../../../general/constants/Global';
+import {store} from '../../../libs/storage/AppStore';
+import {setPreference} from '../../../libs/storage/PreferenceStorage';
+import {setCartData} from './CartSlice';
 
 class CartUtils {
   constructor() {}
   async saveCartData(cartData) {
     try {
-      debugger;
       const stringifyData = JSON.stringify(cartData);
       await setPreference(PreferenceKeys.CartData, stringifyData);
     } catch (error) {
@@ -16,10 +14,9 @@ class CartUtils {
     }
   }
   getCartItem(item, cartData) {
-    debugger;
     for (let cartItem of cartData.listProduct) {
       if (
-        cartItem.productId == item.productId &&
+        cartItem.productInfo.productId == item.productInfo.productId &&
         item.color == cartItem.color &&
         item.size == cartItem.size
       ) {
@@ -42,17 +39,25 @@ class CartUtils {
     this.saveCartData(newData);
   }
   removeCartItem(item, cartData) {
-    var newData = cartData
-    newData.listProduct = newData.listProduct.filter(obj => obj.id != item.id);
+    var newData = cartData;
+    newData.listProduct = newData.listProduct.filter(
+      obj =>
+        obj.productInfo.productId != item.productInfo.productId ||
+        (obj.productInfo.productId == item.productInfo.productId &&
+          (obj.color != item.color || obj.size != item.size)),
+    );
     store.dispatch(setCartData(cartData));
     this.saveCartData(cartData);
   }
   isDuplicateProduct(product, cartData) {
-    debugger;
     let different = true;
     let productList = cartData.listProduct;
+    if (cartData.listProduct.length === 0) {
+      console.log('Cart is empty, able to add!');
+      return false;
+    }
     for (let item of productList) {
-      if (item.productId != product.productId) {
+      if (item.productInfo.productId != product.productInfo.productId) {
         continue;
       } else {
         different = false;

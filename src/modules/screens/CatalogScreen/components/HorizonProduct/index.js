@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import React, {useState} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
-import {AppIcons} from '../../../../../general/constants/AppResource';
+import {AppIcons, AppImages} from '../../../../../general/constants/AppResource';
 import {ScreenNames} from '../../../../../general/constants/ScreenNames';
 import Star from '../../../../components/Star/index';
 import styles from './styles';
@@ -27,7 +27,13 @@ function HorizonProduct(props) {
       <View style={styles.imageSection}>
         <Image
           source={
-            item.image[0].startsWith('http') ? {uri: item.image[0]} : item.image
+            Array.isArray(item.image)
+            ? {
+                uri: item.image[0].startsWith('http')
+                  ? item.image[0]
+                  : AppImages.black,
+              }
+            : AppImages.black
           }
           style={styles.image}
         />
