@@ -73,12 +73,12 @@ function ProductCardScreen(props) {
           <Image
             source={
               Array.isArray(document.image)
-            ? {
-                uri: document.image[0].startsWith('http')
-                  ? document.image[0]
-                  : AppImages.black,
-              }
-            : AppImages.black
+                ? {
+                    uri: document.image[0].startsWith('http')
+                      ? document.image[0]
+                      : AppImages.black,
+                  }
+                : AppImages.black
             }
             style={styles.image}
           />
@@ -162,20 +162,22 @@ function ProductCardScreen(props) {
                           cartData,
                         );
                         if (!isDuplicate) {
+                          let listProduct = cartUtils.getCartProduct(cartData);
+                          listProduct.push({
+                            productId: product.productInfo.productId,
+                            amount: product.amount,
+                            color: product.color,
+                            size: product.size,
+                          });
                           console.log('adding...');
                           cartUtils.addCartItem(product, cartData);
                           dispatch(setCartNewThing(true));
                           let params = {
-                            "productList":
-                            [
-                            {
-                                "productId": 1,
-                                "amount": 10
-                            }
-                            ]
-                        }
+                            productList: listProduct,
+                          };
+                          console.log('params: ', params);
                           commonApi.addCart(params).then(res => {
-                            console.log(res);
+                            console.log('Add cart? ', res);
                           });
                         } else {
                           let oldItem = cartUtils.getCartItem(
@@ -185,7 +187,23 @@ function ProductCardScreen(props) {
                           console.log('Old item: ', oldItem);
                           oldItem.amount = oldItem.amount + 1;
                           console.log('Old item changed: ', oldItem);
+                          let listProduct = cartUtils.getCartProduct(
+                            cartData,
+                          );
+                          listProduct.push({
+                            productId: oldItem.productInfo.productId,
+                            amount: oldItem.amount,
+                            color: oldItem.color,
+                            size: oldItem.size,
+                          });
                           cartUtils.updateCartItemQuantity(oldItem, cartData);
+                          let params = {
+                            productList: listProduct,
+                          };
+                          console.log('params: ', params);
+                          commonApi.addCart(params).then(res => {
+                            console.log('Add cart? ', res);
+                          });
                         }
 
                         props.navigation.goBack();

@@ -1,19 +1,21 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Alert, Image, Text, TouchableOpacity, View} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
 import {CHECKOUT} from '../../../data/index';
 import {AppIcons, AppImages} from '../../../general/constants/AppResource';
+import {AppConfig} from '../../../general/constants/Global';
+import commonApi from '../../../libs/api/commonApi';
 import CheckOut from '../../../model/CheckOut';
 import AppHeaderNormal from '../../components/AppHeaderNormal/index';
 import GlobalButton from '../../components/GlobalButton/index';
 import AddCardModal from '../../views/AddCardModal/index';
 import ShippingModal from '../../views/ShippingModal/index';
 import Success from '../../views/Success/index';
-import { setCartData } from '../CartScreen/CartSlice';
+import {setCartData} from '../CartScreen/CartSlice';
 import CartUtils from '../CartScreen/CartUtils';
-import { setCardData } from './CheckoutSlice';
+import {setCardData} from './CheckoutSlice';
 import CheckoutUtils from './CheckoutUtils';
 import InfoCell from './InfoCell/index';
 import styles from './styles';
@@ -22,6 +24,7 @@ CheckOutScreen.defaultProps = {};
 var checkouUtils = new CheckoutUtils();
 var checkoutData = new CheckOut();
 var cartUtils = new CartUtils();
+var userInfo = {};
 function CheckOutScreen(props) {
   const [isShowSuccess, setShowSuccess] = useState(false);
   const [isAddShipAddress, setAddShipAddress] = useState(false);
@@ -31,8 +34,15 @@ function CheckOutScreen(props) {
   const {cartData} = useSelector(state => state.cart);
   const [paymentCard, setPaymentCard] = useState(cardData);
   const [shippingAddress, setShippingAddress] = useState(shipData);
-  console.log("Cart data: checkout: ", cartData);
-  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log('Appconfig: ', AppConfig.token);
+    commonApi.getDefaultInfo().then(res => {
+      console.log('Default user: ', res.data.data);
+      if (res.data.code === 200) {
+        userInfo = res.data.data;
+      }
+    });
+  });
   return (
     <SafeAreaProvider>
       <View style={styles.checkoutContainer}>
@@ -89,7 +99,7 @@ function CheckOutScreen(props) {
               // props.navigation.navigate(ScreenNames.shippingScreen);
             }}
           />
-          <View style={styles.paymentContainer}>
+          {/* <View style={styles.paymentContainer}>
             <View
               style={{
                 flexDirection: 'row',
@@ -111,7 +121,7 @@ function CheckOutScreen(props) {
               </View>
               <Text style={styles.text}>{paymentCard.cardNumber}</Text>
             </View>
-          </View>
+          </View> */}
           <View style={[styles.titleContainer, {marginTop: 51}]}>
             <Text style={styles.title}>Delivery method</Text>
           </View>
@@ -150,14 +160,22 @@ function CheckOutScreen(props) {
                 {
                   text: 'Submit',
                   onPress: () => {
-                    checkoutData.delivery = CHECKOUT.delivery;
-                    checkoutData.paymentCard = paymentCard;
-                    checkoutData.shippingAddress = shippingAddress;
-                    checkouUtils.saveCheckout(checkoutData);
-                    cartData.listProduct = [];
-                    dispatch(setCartData(cartData));
-                    cartUtils.saveCartData(cartData);
-                    setShowSuccess(true);
+                    // checkoutData.delivery = CHECKOUT.delivery;
+                    // checkoutData.paymentCard = paymentCard;
+                    let checkoutData = shippingAddress;
+                    checkoutData.shippingPrice = CHECKOUT.delivery;
+                    checkoutData.phoneNumber = userInfo.phoneNumber;
+                    checkoutData.email = userInfo.email;
+                    console.log('Checkout: ', checkoutData);
+                    console.log('Token: ', AppConfig.token);
+                    commonApi.makeOrder(checkoutData).then(res => {
+                      console.log("Checkout? ", res);
+                    })
+                    // checkouUtils.saveCheckout(checkoutData);
+                    // cartData.listProduct = [];
+                    // dispatch(setCartData(cartData));
+                    // cartUtils.saveCartData(cartData);
+                    // setShowSuccess(true);
                   },
                 },
                 {

@@ -19,21 +19,21 @@ function OrderCell(props) {
   return (
     <View style={styles.orderCellContainer}>
       <View style={styles.firstRow}>
-        <Text style={styles.text}>{item.orderNo}</Text>
-        <Text style={styles.title}>{item.date}</Text>
+        <Text style={styles.text}>{item.id}</Text>
+        <Text style={styles.title}>{item.createdDate}</Text>
       </View>
       <View style={styles.secondRow}>
         <Text style={styles.title}>Tracking number: </Text>
-        <Text style={styles.text}>{item.trackingNo}</Text>
+        <Text style={styles.text}>{item.id}</Text>
       </View>
       <View style={styles.thirdRow}>
         <View style={styles.quantity}>
           <Text style={styles.title}>Quantity: </Text>
-          <Text style={styles.text}>{item.quantity}</Text>
+          <Text style={styles.text}>{item.listProductOrders.length}</Text>
         </View>
         <View style={styles.totalAmount}>
           <Text style={styles.title}>Total Amount: </Text>
-          <Text style={styles.text}>{item.totalAmount}$</Text>
+          <Text style={styles.text}>{item.price}$</Text>
         </View>
       </View>
       <View style = {styles.fourthRow}>

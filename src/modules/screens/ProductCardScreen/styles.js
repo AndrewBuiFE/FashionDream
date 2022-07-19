@@ -49,10 +49,12 @@ const styles = StyleSheet.create({
   itemContainer: {
     marginTop: 22,
     marginHorizontal: 16,
+    // backgroundColor: 'red',
   },
   itemName: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    // backgroundColor: 'yellow',
   },
   itemText: {
     fontFamily: 'Metropolis',
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     lineHeight: 28.8,
     color: '#F7F7F7',
-    width: '90%',
+    // width: '90%',
   },
   brand: {
     marginTop: 0,

@@ -10,6 +10,7 @@ import {
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {connect} from 'react-redux';
 import {AppImages} from '../../../general/constants/AppResource';
+import {AppConfig} from '../../../general/constants/Global';
 import {ScreenNames} from '../../../general/constants/ScreenNames';
 import commonApi from '../../../libs/api/commonApi';
 import ProductCell from './components/ProductCell';
@@ -120,7 +121,7 @@ function HomeScreen(props) {
   const [productData, setProductData] = useState([]);
   useEffect(() => {
     commonApi.getProduct().then(res => {
-      console.log('Product: ', res.data.data.products);
+      console.log('App token: ', AppConfig.token);
       setProductData(res.data.data.products);
     });
   }, []);

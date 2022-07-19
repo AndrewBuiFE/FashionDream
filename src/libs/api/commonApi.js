@@ -61,12 +61,12 @@ const commonApi = {
     };
     return axiosClient.post(url, params, config);
   },
-  deleteCart: params => {
+  deleteCart: () => {
     const url = `${HostName}/api/user/auth/v1/carts`;
     const config = {
       headers: {Authorization: `Bearer ${AppConfig.token}`},
     };
-    return axiosClient.delete(url, params, config);
+    return axiosClient.delete(url, config);
   },
   getCartProduct: () => {
     const url = `${HostName}/api/user/auth/v1/carts`;
@@ -75,13 +75,26 @@ const commonApi = {
     };
     return axiosClient.get(url, config);
   },
-  orderInfo: params => {
-    const url = `${HostName}/api/user/auth/v1/checkout`;
-    return axiosClient.get(url, params);
-  },
   makeOrder: params => {
     const url = `${HostName}/api/user/auth/v1/checkout`;
-    return axiosClient.post(url, params);
+    const config = {
+      headers: {Authorization: `Bearer ${AppConfig.token}`},
+    };
+    return axiosClient.post(url, params, config);
+  },
+  getDefaultInfo: () => {
+    const url = `${HostName}/api/user/auth/v1/checkout`;
+    const config = {
+      headers: {Authorization: `Bearer ${AppConfig.token}`},
+    };
+    return axiosClient.get(url, config);
+  },
+  getCheckoutHistory: () => {
+    const url = `${HostName}/api/user/auth/v1/order-history`;
+    const config = {
+      headers: {Authorization: `Bearer ${AppConfig.token}`},
+    };
+    return axiosClient.get(url, config);
   },
 };
 

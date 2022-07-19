@@ -4,7 +4,7 @@ import {
   SafeAreaProvider
 } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
-import { loadCardData, loadCartData, loadShipData } from './general/helpers/Utils';
+import { loadCardData, loadCartData, loadShipData, tempSetCartData } from './general/helpers/Utils';
 import { store } from './libs/storage/AppStore';
 import AppNavigator from './modules/navigator/AppNavigator';
 import { setCartData } from './modules/screens/CartScreen/CartSlice';
@@ -14,7 +14,7 @@ const App: () => Node = () => {
   useEffect(() => {
     (async () => {
       try {
-        // tempSetCarDData();
+        // tempSetCartData();
         let cartData = await loadCartData();
         let shipData = await loadShipData();
         let cardData = await loadCardData();

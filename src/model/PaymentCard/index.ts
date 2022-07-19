@@ -1,12 +1,12 @@
 export default class PaymentCard {
-  id: number;
+  // id: number;
   cardNumber: string;
   holderName: string;
   exp: string;
   cvv: number;
   isDefault: boolean;
   constructor(cardInfo = null) {
-    this.id = cardInfo && cardInfo.id ? cardInfo.id : 1;
+    // this.id = cardInfo && cardInfo.id ? cardInfo.id : 1;
     this.cardNumber = cardInfo && cardInfo.cardNumber ? cardInfo.cardNumber : '';
     this.holderName = cardInfo && cardInfo.holderName ? cardInfo.holderName : '';
     this.exp = cardInfo && cardInfo.exp ? cardInfo.exp : '';

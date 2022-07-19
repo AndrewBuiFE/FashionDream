@@ -73,5 +73,18 @@ class CartUtils {
     else console.log('Same product but not same color or size');
     return false;
   }
+  getCartProduct(cartData) {
+    let listProduct = [];
+    for (let cartProduct of cartData.listProduct) {
+      let cartProductInfo = {
+        productId: cartProduct.productInfo.productId,
+        amount: cartProduct.amount,
+        color: cartProduct.color,
+        size: cartProduct.size,
+      };
+      listProduct.push(cartProductInfo);
+    }
+    return listProduct;
+  }
 }
 export default CartUtils;

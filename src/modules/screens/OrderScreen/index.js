@@ -1,7 +1,8 @@
-import React from 'react';
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { AppIcons } from '../../../general/constants/AppResource';
+import React, {useEffect, useState} from 'react';
+import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {AppIcons} from '../../../general/constants/AppResource';
+import commonApi from '../../../libs/api/commonApi';
 import AppHeader from '../../components/AppHeader/index';
 import OrderCell from './OrderCell/index';
 import styles from './styles';
@@ -9,57 +10,59 @@ OrderScreen.propTypes = {};
 OrderScreen.defaultProps = {};
 const ORDER_DATA = [
   {
-    id: 1, 
+    id: 1,
     orderNo: '№1947034',
     date: '12-06-2000',
     quantity: 3,
-    trackingNo: "IW3475453455",
+    trackingNo: 'IW3475453455',
     totalAmount: 112,
-    status: "Delivered",
-  }
-  , {
-    id: 2, 
+    status: 'Delivered',
+  },
+  {
+    id: 2,
     orderNo: '№1947034',
     date: '12-07-2000',
     quantity: 3,
-    trackingNo: "IW3475453455",
+    trackingNo: 'IW3475453455',
     totalAmount: 112,
-    status: "Delivered",
-  }
-  , {
-    id: 3, 
+    status: 'Delivered',
+  },
+  {
+    id: 3,
     orderNo: '№1947034',
     date: '12-08-2000',
     quantity: 3,
-    trackingNo: "IW3475453455",
+    trackingNo: 'IW3475453455',
     totalAmount: 112,
-    status: "Delivered",
+    status: 'Delivered',
   },
   {
-    id: 4, 
+    id: 4,
     orderNo: '№1947034',
     date: '12-09-2000',
     quantity: 3,
-    trackingNo: "IW3475453455",
+    trackingNo: 'IW3475453455',
     totalAmount: 112,
-    status: "Delivered",
+    status: 'Delivered',
   },
-]
-const Divider = () => (
-  <View style = {{height: 24}}>
-
-  </View>
-)
+];
+const Divider = () => <View style={{height: 24}}></View>;
 function OrderScreen(props) {
-  const renderItem = ({item}) => (
-    <OrderCell 
-    item = {item}
-    />
-  )
+  const [orderData, setOrderData] = useState([]);
+  const renderItem = ({item}) => {
+    return <OrderCell item={item} />;
+  };
+  useEffect(() => {
+    commonApi.getCheckoutHistory().then(res => {
+      console.log('Checkout history? ', res.data.data);
+      setOrderData(res.data.data.orderList);
+      console.log("order data: ", orderData);
+    });
+  }, []);
   return (
     <SafeAreaProvider>
       <View style={styles.orderContainer}>
-        <AppHeader title='My orders'>
+        <AppHeader title="My orders">
           <>
             <TouchableOpacity
               onPress={() => {
@@ -85,9 +88,14 @@ function OrderScreen(props) {
             <Text style={styles.typeText}>Canceled</Text>
           </TouchableOpacity>
         </View>
-        <View
-         style = {{height: 30}}></View>
-        <FlatList data = {ORDER_DATA} renderItem = {renderItem} ItemSeparatorComponent={Divider} showsVerticalScrollIndicator={false}/>
+        <View style={{height: 30}}></View>
+        <FlatList
+          data={orderData}
+          renderItem={renderItem}
+          extraData={orderData}
+          ItemSeparatorComponent={Divider}
+          showsVerticalScrollIndicator={false}
+        />
       </View>
     </SafeAreaProvider>
   );

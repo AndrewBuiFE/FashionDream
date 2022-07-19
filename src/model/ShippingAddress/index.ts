@@ -1,5 +1,5 @@
 export default class ShippingAddress {
-  id: number;
+  // id: number;
   country: string;
   zipcode: string;
   address: string;
@@ -7,7 +7,7 @@ export default class ShippingAddress {
   city: string;
   state: string;
   constructor(shipInfo = null) {
-    this.id = shipInfo && shipInfo.id ? shipInfo.id : 1;
+    // this.id = shipInfo && shipInfo.id ? shipInfo.id : 1;
     this.country = shipInfo && shipInfo.country ? shipInfo.country : '';
     this.zipcode = shipInfo && shipInfo.zipcode ? shipInfo.zipcode : '';
     this.address = shipInfo && shipInfo.address ? shipInfo.address : '';

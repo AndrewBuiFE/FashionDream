@@ -123,7 +123,7 @@ export default function LoginScreen(props) {
                   password: password,
                 };
                 commonApi.login(params).then(res => {
-                  console.log('res : ', res);
+                  // console.log('res : ', res);
                   // console.log('res status: ', res.status);
                   // console.log('token: ', res.data.data.accessToken);
                   if (res) {

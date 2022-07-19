@@ -1,8 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
 const initAppState = {
   cartData: {},
   isCartNewThing: false,
+  totalAmount: 0,
 };
 
 const cartSlice = createSlice({
@@ -19,10 +20,16 @@ const cartSlice = createSlice({
       return {
         ...state,
         isCartNewThing: action.payload,
-      }
-    }
+      };
+    },
+    setTotalAmount(state, action) {
+      return {
+        ...state,
+        totalAmout: action.payload,
+      };
+    },
   },
 });
 
 export default cartSlice.reducer;
-export const {setCartData, setCartNewThing} = cartSlice.actions;
+export const {setCartData, setCartNewThing, setTotalAmount} = cartSlice.actions;

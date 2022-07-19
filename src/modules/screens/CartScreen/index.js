@@ -33,9 +33,14 @@ const calculateTotal = cartItems => {
   let discountTotal = 0;
   for (let item of cartItems) {
     let discountPrice =
-      (item.productInfo.price - item.productInfo.price * (item.productInfo.discountPercent / 100)) * item.amount;
+      (item.productInfo.price -
+        item.productInfo.price * (item.productInfo.discountPercent / 100)) *
+      item.amount;
     total += discountPrice;
-    discountTotal += item.productInfo.price * (item.productInfo.discountPercent / 100) * item.amount;
+    discountTotal +=
+      item.productInfo.price *
+      (item.productInfo.discountPercent / 100) *
+      item.amount;
   }
   return [total, discountTotal];
 };
@@ -52,23 +57,24 @@ const cartUtils = new CartUtils();
 function CartScreen(props) {
   const [isShowPromoModal, setShowPromoModal] = useState(false);
   const [isShowSuccess, setShowSuccess] = useState(false);
-  const [quantity, setQuantity] = useState(0);
+  // const [quantity, setQuantity] = useState(0);
   const {cartData} = useSelector(state => state.cart);
   let [tempTotal, tempDiscountTotal] = calculateTotal(cartData.listProduct);
-  const [total, setTotal] = useState(tempTotal);
-  const [discountTotal, setDiscountTotal] = useState(tempDiscountTotal);
+  // const [total, setTotal] = useState(tempTotal);
+  // const [discountTotal, setDiscountTotal] = useState(tempDiscountTotal);
   const dispatch = useDispatch();
+  console.log('Cart Data: ', cartData);
   const renderItem = ({item}) => {
     return (
       <BagItem
         productItem={item}
         handleIncrement={newAmount => {
           var newItem = item;
-          newItem.amount = newAmount;  
+          newItem.amount = newAmount;
           cartUtils.updateCartItemQuantity(newItem, cartData);
-          let [total, discountTotal] = calculateTotal(cartData.listProduct);
-          setTotal(total);
-          setDiscountTotal(discountTotal);
+          // let [total, discountTotal] = calculateTotal(cartData.listProduct);
+          // setTotal(total);
+          // setDiscountTotal(discountTotal);
           console.log('Increase!');
         }}
         handleDescreasement={newAmount => {
@@ -76,18 +82,29 @@ function CartScreen(props) {
           var newItem = item;
           newItem.amount = newAmount;
           cartUtils.updateCartItemQuantity(newItem, cartData);
-          let [total, discountTotal] = calculateTotal(cartData.listProduct);
-          setTotal(total);
-          setDiscountTotal(discountTotal);
+          // let [total, discountTotal] = calculateTotal(cartData.listProduct);
+          // setTotal(total);
+          // setDiscountTotal(discountTotal);
         }}
       />
     );
   };
   useEffect(() => {
-    commonApi.getCartProduct().then(res => {
-      console.log("Cart: ", res.data.data);
-    });
-  });
+    if (cartData.listProduct.length > 0) {
+      let listProduct = cartUtils.getCartProduct(cartData);
+      let params = {
+        productList: listProduct,
+      };
+      commonApi.addCart(params).then(res => {
+        console.log('Add cart? ', res);
+      });
+    }
+  }, []);
+  // useEffect(() => {
+  //   // commonApi.getCartProduct().then(res => {
+  //   //   console.log("Cart: ", res.data.data);
+  //   // });
+  // });
   return (
     <SafeAreaProvider>
       <View style={styles.cartContainer}>
