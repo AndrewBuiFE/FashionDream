@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, {useEffect, useState} from 'react';
 import {
   FlatList,
@@ -119,10 +120,18 @@ const renderSectionHeader = ({section}) => {
 function HomeScreen(props) {
   const Header = renderHeader(props);
   const [productData, setProductData] = useState([]);
+  const [newProductData, setNewProductData] = useState([]);
   useEffect(() => {
     commonApi.getProduct().then(res => {
       console.log('App token: ', AppConfig.token);
       setProductData(res.data.data.products);
+    });
+    let params = {
+      "size": 3,
+      "page": 1,
+    }
+    commonApi.getPageProduct(params).then(res => {
+      setNewProductData(res.data.data.products);
     });
   }, []);
   let DATA = [
@@ -136,7 +145,7 @@ function HomeScreen(props) {
       title: 'New',
       horizontal: true,
       description: 'You’ve never seen it before!',
-      data: productData,
+      data: newProductData,
     },
   ];
   return (

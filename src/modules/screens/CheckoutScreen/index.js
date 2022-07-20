@@ -34,6 +34,7 @@ function CheckOutScreen(props) {
   const {cartData} = useSelector(state => state.cart);
   const [paymentCard, setPaymentCard] = useState(cardData);
   const [shippingAddress, setShippingAddress] = useState(shipData);
+  const dispatch = useDispatch();
   useEffect(() => {
     console.log('Appconfig: ', AppConfig.token);
     commonApi.getDefaultInfo().then(res => {
@@ -99,7 +100,7 @@ function CheckOutScreen(props) {
               // props.navigation.navigate(ScreenNames.shippingScreen);
             }}
           />
-          {/* <View style={styles.paymentContainer}>
+          <View style={styles.paymentContainer}>
             <View
               style={{
                 flexDirection: 'row',
@@ -121,7 +122,7 @@ function CheckOutScreen(props) {
               </View>
               <Text style={styles.text}>{paymentCard.cardNumber}</Text>
             </View>
-          </View> */}
+          </View>
           <View style={[styles.titleContainer, {marginTop: 51}]}>
             <Text style={styles.title}>Delivery method</Text>
           </View>
@@ -169,13 +170,13 @@ function CheckOutScreen(props) {
                     console.log('Checkout: ', checkoutData);
                     console.log('Token: ', AppConfig.token);
                     commonApi.makeOrder(checkoutData).then(res => {
-                      console.log("Checkout? ", res);
-                    })
-                    // checkouUtils.saveCheckout(checkoutData);
-                    // cartData.listProduct = [];
-                    // dispatch(setCartData(cartData));
-                    // cartUtils.saveCartData(cartData);
-                    // setShowSuccess(true);
+                      console.log('Checkout? ', res);
+                    });
+                    checkouUtils.saveCheckout(checkoutData);
+                    cartData.listProduct = [];
+                    dispatch(setCartData(cartData));
+                    cartUtils.saveCartData(cartData);
+                    setShowSuccess(true);
                   },
                 },
                 {

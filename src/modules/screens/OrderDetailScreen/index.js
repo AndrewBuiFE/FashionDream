@@ -22,7 +22,7 @@ function OrderDetailScreen(props) {
   console.log('item: ', item);
   return (
     <SafeAreaProvider>
-      <ScrollView
+      <View
         style={styles.orderContainer}
         showsVerticalScrollIndicator={false}>
         <AppHeaderNormal title="Order Details">
@@ -65,7 +65,7 @@ function OrderDetailScreen(props) {
         <FlatList
           data={item.listProductOrders}
           renderItem={item => {
-            return <BagItem item={item} />;
+            // return <BagItem item={item} />;
           }}
         />
         <View style={[styles.titleSection, {marginTop: 34}]}>
@@ -78,7 +78,7 @@ function OrderDetailScreen(props) {
               style={[styles.text, {marginLeft: 10, flex: 1, flexWrap: 'wrap'}]}
               numberOfLines={2}>
               {/* 3 Newbridge Court ,Chino Hills, CA 91709, United States */}
-              {`${item.address}, ${item.state}, ${item.city} ${item.country}`}
+              {`${item.address}, ${item.state}, ${item.city}, ${item.country}`}
             </Text>
           </View>
           <View style={styles.infoCell}>
@@ -91,13 +91,13 @@ function OrderDetailScreen(props) {
           <View style={styles.infoCell}>
             <Text style={styles.title}>Delivery method</Text>
             <Text style={[styles.text, {marginLeft: 17}]}>
-              FedEx, 3 days, ${item.shippingPrice}$
+              FedEx, 3 days, ${item.shippingPrice}
             </Text>
           </View>
           <View style={styles.infoCell}>
             <Text style={styles.title}>Discount: </Text>
             <Text style={[styles.text, {marginLeft: 62}]}>
-              10%, Personal promo code
+              {item.listProductOrders[0].productOrderEntityMap.discountPercent}%
             </Text>
           </View>
           <View style={styles.infoCell}>
@@ -116,7 +116,7 @@ function OrderDetailScreen(props) {
             }}
           />
         </View>
-      </ScrollView>
+      </View>
     </SafeAreaProvider>
   );
 }

@@ -42,7 +42,7 @@ function ProfileScreen(props) {
                   <Text style = {styles.email}>matildabrown@mail.com</Text>
               </View>
         </View>
-            <ProfileCell title='My orders' suggestion='Already have 12 orders' marginTop = {28} screenName = {ScreenNames.orderScreen}/>
+            <ProfileCell title='My orders' suggestion='Already have orders' marginTop = {28} screenName = {ScreenNames.orderScreen}/>
             <Divider/>
             <ProfileCell title='Shipping addresses' suggestion='3 addresses' screenName={ScreenNames.shippingScreen}/>
             <Divider/>

@@ -18,6 +18,10 @@ const commonApi = {
     const url = `${HostName}/api/v1/products`;
     return axiosClient.get(url);
   },
+  getPageProduct: (params) => {
+    const url = `${HostName}/api/v1/products?size=${params.size}&page=${params.page}`;
+    return axiosClient.get(url);
+  },
   getProductByCate: cateId => {
     const url = `${HostName}/api/v1/products/cate-search?cateId=${cateId}`;
     return axiosClient.get(url);
