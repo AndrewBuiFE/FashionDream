@@ -14,6 +14,7 @@ class CartUtils {
     }
   }
   getCartItem(item, cartData) {
+    console.log("Item :", item);
     for (let cartItem of cartData.listProduct) {
       if (
         cartItem.productInfo.productId == item.productInfo.productId &&
@@ -52,6 +53,7 @@ class CartUtils {
   isDuplicateProduct(product, cartData) {
     let different = true;
     let productList = cartData.listProduct;
+    console.log("productlist: ", productList);
     if (cartData.listProduct.length === 0) {
       console.log('Cart is empty, able to add!');
       return false;

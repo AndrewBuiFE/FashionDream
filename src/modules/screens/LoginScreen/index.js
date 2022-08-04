@@ -123,13 +123,13 @@ export default function LoginScreen(props) {
                   password: password,
                 };
                 commonApi.login(params).then(res => {
-                  // console.log('res : ', res);
                   // console.log('res status: ', res.status);
                   // console.log('token: ', res.data.data.accessToken);
                   if (res) {
                     if (res.data.code == 200) {
                       AppConfig.token = res.data.data.accessToken;
-                      props.navigation.navigate(ScreenNames.mainTab);
+                      AppConfig.cartCreated = true;
+                      props.navigation.goBack();
                     } else {
                       showInvalidMess(true);
                       return;

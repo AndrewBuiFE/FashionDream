@@ -5,6 +5,7 @@ export const AppConfig = {
   maxItems: 100,
   token: '',
   refreshToken: '',
+  cartCreated: false,
 };
 export const HostName = 'http://20.2.129.191:8099';
 export const DeviceConstants = {

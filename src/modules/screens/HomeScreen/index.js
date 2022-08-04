@@ -124,6 +124,7 @@ function HomeScreen(props) {
   useEffect(() => {
     commonApi.getProduct().then(res => {
       console.log('App token: ', AppConfig.token);
+      console.log('Res data: ', res.data.data);
       setProductData(res.data.data.products);
     });
     let params = {

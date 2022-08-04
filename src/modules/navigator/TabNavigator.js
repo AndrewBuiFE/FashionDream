@@ -5,11 +5,14 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppIcons} from '../../general/constants/AppResource';
 import {AppColors, AppDimensions} from '../../general/constants/AppStyle';
+import { AppConfig } from '../../general/constants/Global';
 import {ScreenNames} from '../../general/constants/ScreenNames';
 import {isAndroid} from '../../general/helpers/Utils';
+import commonApi from '../../libs/api/commonApi';
 import CartScreen from '../screens/CartScreen/index';
 import DemoScreen from '../screens/DemoScreen';
 import HomeScreen from '../screens/HomeScreen';
+import LoginScreen from '../screens/LoginScreen';
 import ProfileScreen from '../screens/ProfileScreen/index';
 import SignupScreen from '../screens/SignupScreen/index';
 import NestedCategory from './NestedCategory';
@@ -111,11 +114,17 @@ function TabNavigator(props) {
         component={NestedCategory}
         options={{title: 'Shop'}}
       />
-      <Tab.Screen
-        name={ScreenNames.bagTab}
-        component={CartScreen}
-        options={{title: 'Bag'}}
-      />
+      {
+          AppConfig.cartCreated ? (      <Tab.Screen
+          name={ScreenNames.bagTab}
+          component={CartScreen}
+          options={{title: 'Bag'}}
+        />) : (      <Tab.Screen
+          name={ScreenNames.bagTab}
+          component={LoginScreen}
+          options={{title: 'Bag'}}
+        />)
+      }
       <Tab.Screen
         name={ScreenNames.favoriteTab}
         component={SignupScreen}

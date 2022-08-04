@@ -28,34 +28,34 @@ export const tempSetCarDData = async () => {
 export const loadCartData = async () => {
   try {
     const cartData = await getPreference(PreferenceKeys.CartData);
-    // console.log('cartData', cartData)  ;
     if (cartData != null) {
       var jData = JSON.parse(cartData);
       // console.log('jData', jData);
       if (jData != null) {
         var cartDoc = new Cart(jData);
-        // console.log('cartDoc', cartDoc);
+        console.log('cartDoc', cartDoc);
         return cartDoc;
       }
     }
   } catch (error) {
     console.log(error);
     var cartData = new Cart(CART);
+    // let cartData = [];
+    console.log("cart data: ", cartData);
     return cartData;
   }
   var cartData = new Cart(CART);
+  // let cartData = [];
+  console.log("cart data: ", cartData);
   return cartData;
 };
 export const loadShipData = async () => {
   try {
     const shipData = await getPreference(PreferenceKeys.ShippingAddress);
-    // console.log('cartData', cartData)  ;
     if (shipData != null) {
       var jData = JSON.parse(shipData);
-      // console.log('jData', jData);
       if (jData != null) {
         var shipDoc = new ShippingAddress(jData);
-        // console.log('cartDoc', cartDoc);
         return shipDoc;
       }
     }

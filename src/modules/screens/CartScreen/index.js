@@ -59,11 +59,10 @@ function CartScreen(props) {
   const [isShowSuccess, setShowSuccess] = useState(false);
   // const [quantity, setQuantity] = useState(0);
   const {cartData} = useSelector(state => state.cart);
-  let [tempTotal, tempDiscountTotal] = calculateTotal(cartData.listProduct);
+  let [tempTotal, tempDiscountTotal] = calculateTotal(cartData.listProduct); 
   // const [total, setTotal] = useState(tempTotal);
   // const [discountTotal, setDiscountTotal] = useState(tempDiscountTotal);
   const dispatch = useDispatch();
-  console.log('Cart Data: ', cartData);
   const renderItem = ({item}) => {
     return (
       <BagItem

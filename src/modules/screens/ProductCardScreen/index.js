@@ -10,6 +10,9 @@ import {
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppIcons, AppImages} from '../../../general/constants/AppResource';
+import { AppColors } from '../../../general/constants/AppStyle';
+import { AppConfig } from '../../../general/constants/Global';
+import { ScreenNames } from '../../../general/constants/ScreenNames';
 import commonApi from '../../../libs/api/commonApi';
 import AppHeaderNormal from '../../components/AppHeaderNormal/index';
 import GlobalButton from '../../components/GlobalButton/index';
@@ -143,6 +146,9 @@ function ProductCardScreen(props) {
             action={() => {
               if (productColor.length < 1 || productSize.length < 1)
                 Alert.alert('Failed!', 'Need to choose both size and color');
+              if (!AppConfig.token) {
+                props.navigation.navigate(ScreenNames.loginScreen);
+              }
               else {
                 Alert.alert(
                   'Confirm',
